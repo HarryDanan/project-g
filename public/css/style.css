@@ -1,0 +1,133 @@
+* {
+  box-sizing: border-box;
+}
+body {
+  font-family: 'Open Sans';
+  font-weight: 400;
+  text-align: center;
+}
+
+.bg2 {
+  background: url(../assets/icon/bg2.jpg) no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+
+}
+.papan{
+  position:absolute;
+  z-index:-1;
+  width: 600px;
+  height: 400px;
+
+}
+
+.bg3 {
+  background: url(../assets/icon/bg3.jpg) no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+
+}
+.icn {
+  height: 120px;
+  width: 200px;
+}
+.icn2{
+  height: 100px;
+  width: 100px;
+}
+
+
+main {
+  position: relative;
+  z-index: 1;
+  padding: 3vh 5vw;
+  height: 80vh;
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: center;
+  /* background: rgba(255, 160, 160, 0.85); */
+  background-image: url("./bg.jpg") no-repeat center center;
+  background-size: cover;
+}
+main h1 {
+  margin: 0;
+  font-weight: 300;
+  color: #38c5b9;
+}
+main h1 a {
+  font-size: 48px;
+}
+main p {
+  font-weight: 300;
+  font-size: 16px;
+  max-width: 340px;
+  margin: 7px auto;
+}
+main a {
+  text-decoration: none;
+  color: #38c5b9;
+  font-size: 30px;
+}
+main .plate {
+  position: absolute;
+  top: 50%;
+  left: 48%;
+  max-width: 500px;
+  width: 100%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  z-index: -1;
+}
+  .navbar {
+  overflow: hidden;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height: 20vh;
+}
+
+/* .sub_1{
+  background-color: #ff7c7c;
+}
+.sub_2{
+  background-color: #fffa7c;
+}
+.sub_3{
+  background-color: #7cffa5;
+}
+.sub_4{
+  background-color: #7ce9ff;
+}
+.sub_5{
+  background-color: #827cff;
+} */
+
+/* Style the links inside the navigation bar */
+.navbar a {
+  float: left;
+  display: block;
+  color: #3e3e3e;
+  text-align: center;
+  padding: 40px 16px;
+  text-decoration: none;
+  font-size: 45px;
+  height: 20vh;
+  width: 20%;
+}
+
+/* Change the color of links on hover */
+.navbar a:hover {
+  background-color: #ddd;
+  color: black;
+  height: 20vh;
+}
+
+/* Add a color to the active/current link */
+.navbar a.active {
+  background-color: #4CAF50;
+  color: white;
+}
