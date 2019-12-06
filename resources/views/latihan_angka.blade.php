@@ -7,8 +7,6 @@
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.0.0/dist/tf.min.js"></script>
     <script src="{{asset('js/imageProcessing/preProcessing.js')}}" type="text/javascript"></script>
     <script src="{{asset('js/imageProcessing/opencv.js')}}" type="text/javascript"></script>
-    <!-- <script src="{{asset('js/machineLearning/tf.min.js')}}" type="text/javascript"></script> -->
-    <!-- <script src="{{asset('js/machineLearning/makeData.js')}}" type="text/javascript"></script> -->
     <script
   src="https://code.jquery.com/jquery-3.4.1.js"
   integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
@@ -19,7 +17,7 @@
     <div class="d-flex justify-content-center">
         <!-- <button class="btn btn-primary" onclick="window.location.href = '/';">Menu</button> -->
         
-        <a href="/menu" onclick="play()"><img  class="icn2" src="{{asset('assets/icon/back.png')}}" alt=""></a>
+        <a href="/menu" onclick="bleep.play()"><img  class="icn2" src="{{asset('assets/icon/back.png')}}" alt=""></a>
         <br><img class="icn" src="{{asset('assets/icon/icon_latihan.png')}}" alt=""></h3>
     </div>
     <div class="d-flex justify-content-center">
@@ -95,6 +93,11 @@
     </div>
 </body>
 <script type="text/javascript">
+//click sound 
+    var bleep = new Audio();
+    bleep.src = '../assets/sound/touch.mp3';
+// 
+
     var input = document.getElementById("masuk").value;
     document.getElementById("srcImage2").src = "../../template/"+input+".jpg";  
 
