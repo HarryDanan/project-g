@@ -13,18 +13,24 @@
   <body class="bg2">
       <!-- Demo stuff-->
     <main style="">
-        <div class="d-flex justify-content-left">
-            <a href="/" onclick="bleep.play()"><img  class="icn2" src="{{asset('assets/icon/back.png')}}" alt=""></a>
+        <div class="d-flex flex-row bd-highlight mb-3">
+          <div class="p-2 bd-highlight">
+          <a href="/" onclick="bleep.play()"><img  class="icn2" src="{{asset('assets/icon/back.png')}}" alt=""></a>
+          </div>
         </div>
-      <img class="plate" src="{{asset('assets/icon/logo.png')}}" alt="">
-      
+
+        <div style="padding-top:15%;">
+        <center>
+          <a href="/latihan" onclick="bleep.play()"><img  class="icn" src="{{asset('assets/icon/icon_latihan.png')}}" alt=""></a>
+          <a href="/latihan_kecil" onclick="bleep.play()"><img class='icn' src="{{asset('assets/icon/icon_ujian.png')}}" alt=""></a>
+          <a href="/latihan_angka" onclick="bleep.play()"><img class="icn" src="{{asset('assets/icon/icon_tutorial.png')}}" alt=""></a>
+        </center>
+        </div>
+     
+    <!-- Modal -->      
     </main>
       <!-- Component starts here-->
-      <a href="/latihan" onclick="bleep.play()"><img  class="icn" src="{{asset('assets/icon/icon_latihan.png')}}" alt=""></a>
-      <a href="/latihan_kecil" onclick="bleep.play()"><img class='icn' src="{{asset('assets/icon/icon_ujian.png')}}" alt=""></a>
-      <a href="/latihan_angka" onclick="bleep.play()"><img class="icn" src="{{asset('assets/icon/icon_tutorial.png')}}" alt=""></a>
-      <a data-toggle="modal" data-target="#myModal" onclick="bleep.play()"><img class="icn" src="{{asset('assets/icon/icon_about.png')}}" alt=""></a>
-    <!-- Modal -->
+      
   <div class="modal fade" id="myModal" role="dialog">
     <div class="modal-dialog">
     

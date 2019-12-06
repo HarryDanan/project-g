@@ -4,11 +4,17 @@
 body {
   font-family: 'Open Sans';
   font-weight: 400;
-  text-align: center;
-}
 
+}
+.bgutama{
+  background: url(../assets/icon/bgutama.jpg) no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
 .bg2 {
-  background: url(../assets/icon/bg2.jpg) no-repeat center center fixed; 
+  background: url(../assets/icon/bgmenu.png) no-repeat center center fixed; 
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;

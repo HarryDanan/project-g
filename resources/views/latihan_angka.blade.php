@@ -7,6 +7,8 @@
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.0.0/dist/tf.min.js"></script>
     <script src="{{asset('js/imageProcessing/preProcessing.js')}}" type="text/javascript"></script>
     <script src="{{asset('js/imageProcessing/opencv.js')}}" type="text/javascript"></script>
+    <!-- <script src="{{asset('js/machineLearning/tf.min.js')}}" type="text/javascript"></script> -->
+    <!-- <script src="{{asset('js/machineLearning/makeData.js')}}" type="text/javascript"></script> -->
     <script
   src="https://code.jquery.com/jquery-3.4.1.js"
   integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
@@ -16,55 +18,69 @@
     
     <div class="d-flex justify-content-center">
         <!-- <button class="btn btn-primary" onclick="window.location.href = '/';">Menu</button> -->
-        
-        <a href="/menu" onclick="bleep.play()"><img  class="icn2" src="{{asset('assets/icon/back.png')}}" alt=""></a>
-        <br><img class="icn" src="{{asset('assets/icon/icon_latihan.png')}}" alt=""></h3>
-    </div>
-    <div class="d-flex justify-content-center">
-    <img class="papan" src="{{asset('assets/icon/papan.png')}}" alt="">
-      <canvas id="gambar" width="320" height="320" style="background : rgba(255, 255, 255, 0.1) outline : black 3px  solid
-  border-color: white"></canvas>
-     
+        <div style="padding-right:50%">
+            <a href="/menu" onclick="sound_click()"><img  class="icn2" src="{{asset('assets/icon/back.png')}}" alt=""></a> 
+        </div>
+        <div class="d-flex justify-content-center">
+            <br><img class="icn" src="{{asset('assets/icon/icon_latihan.png')}}" alt=""></h3>
+        </div>
         
     </div>
-    <center><h4>Ayo tuliskan huruf ini!</h4></center>
-      <div class="d-flex justify-content-center">
-        <select name="carlist" form="carform" id="masuk" onchange="inputan()">
-          <option value="#" selected>#</option>
-          <option value="a">A</option>
-          <option value="b">B</option>
-          <option value="c">C</option>
-          <option value="d">D</option>
-          <option value="e">E</option>
-          <option value="f">F</option>
-          <option value="g">G</option>
-          <option value="h">H</option>
-          <option value="i">I</option>
-          <option value="j">J</option>
-          <option value="k">K</option>
-          <option value="l">L</option>
-          <option value="m">M</option>
-          <option value="n">N</option>
-          <option value="o">O</option>
-          <option value="p">P</option>
-          <option value="q">Q</option>
-          <option value="r">R</option>
-          <option value="s">S</option>
-          <option value="t">T</option>
-          <option value="u">U</option>
-          <option value="v">V</option>
-          <option value="w">W</option>
-          <option value="x">X</option>
-          <option value="y">Y</option>
-          <option value="z">Z</option>
-        </select>
-    </div><br>
+    <div class="d-flex bd-highlight">
+      <div class="p-2 w-100 bd-highlight">
+ 
+          <div class="d-flex justify-content-center" style="padding-left:20%;">
+       
+                <img class="papan" src="{{asset('assets/icon/papan.png')}}" alt="">
+                <canvas id="gambar" width="320" height="320" style="background : rgba(255, 255, 255, 0.1); padding-top:2%;"></canvas>  
+    
+          </div>
+          
+      </div>
+          
+          <div class="p-2 bd-highlight" style="padding-right:10%;">
+          <h4>Ayo tuliskan huruf ini!</h4>
+          <div class="d-flex justify-content-center">
+              <select name="carlist" form="carform" id="masuk" onchange="inputan()">
+                <option value="#" selected>#</option>
+                <option value="a">A</option>
+                <option value="b">B</option>
+                <option value="c">C</option>
+                <option value="d">D</option>
+                <option value="e">E</option>
+                <option value="f">F</option>
+                <option value="g">G</option>
+                <option value="h">H</option>
+                <option value="i">I</option>
+                <option value="j">J</option>
+                <option value="k">K</option>
+                <option value="l">L</option>
+                <option value="m">M</option>
+                <option value="n">N</option>
+                <option value="o">O</option>
+                <option value="p">P</option>
+                <option value="q">Q</option>
+                <option value="r">R</option>
+                <option value="s">S</option>
+                <option value="t">T</option>
+                <option value="u">U</option>
+                <option value="v">V</option>
+                <option value="w">W</option>
+                <option value="x">X</option>
+                <option value="y">Y</option>
+                <option value="z">Z</option>
+              </select>
+          </div><br>
+          <div class="d-flex justify-content-end">
+              <img id="srcImage2" src="../../template/a.jpg" width="64" height="64">
+          </div><br>
+      </div>
+    </div><br><br>       
+  
+    
     <div class="d-flex justify-content-center">
-        <img id="srcImage2" src="../../template/a.jpg" width="64" height="64">
-    </div><br>
-    <div class="d-flex justify-content-center">
-    <a  onclick="periksa()"><img  class="icn" src="{{asset('assets/icon/icon_periksa.png')}}" alt=""></a>
-    <a  onclick="hapus()"><img  class="icn" src="{{asset('assets/icon/icon_hapus.png')}}" alt=""></a>
+    <a  onclick="sound_click();periksa()"><img  class="icn" src="{{asset('assets/icon/icon_periksa.png')}}" alt=""></a>
+    <a  onclick="sound_click();hapus()"><img  class="icn" src="{{asset('assets/icon/icon_hapus.png')}}" alt=""></a>
     
         <!-- <button class="btn-periksa" onclick="periksa()" style="margin-right: 10px;">Periksa</button>
         <button class="btn btn-warning" onclick="hapus()">Hapus</button> -->
@@ -93,10 +109,7 @@
     </div>
 </body>
 <script type="text/javascript">
-//click sound 
-    var bleep = new Audio();
-    bleep.src = '../assets/sound/touch.mp3';
-// 
+
 
     var input = document.getElementById("masuk").value;
     document.getElementById("srcImage2").src = "../../template/"+input+".jpg";  
@@ -116,6 +129,7 @@
 	}
 
   function periksa(){
+
 		let src = cv.imread(document.getElementById("gambar"));
     let dst = new cv.Mat();
     let dsize = new cv.Size(64,64);
@@ -154,6 +168,8 @@
         alert("Jawaban Salah");
     }
         src.delete(); dst.delete();
+
+    
 	}
 
     function inputan(){
@@ -163,7 +179,14 @@
         make_base();
     }
 
+    function sound_click(){
+      var bleep = new Audio();
+      bleep.src = '../assets/sound/touch.mp3';
+      bleep.play();
+    }
+
     function hapus(){
+      
         var c = document.getElementById("gambar");c.width = c.width;
         // var ctx = c.getContext("2d");
         // ctx.clearRect(0, 0, canvas.width, canvas.height);

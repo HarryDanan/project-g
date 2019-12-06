@@ -10,18 +10,19 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
   </head>
-  <body class="bg2">
+  <body class="bgutama">
       <!-- Demo stuff-->
     <main style="">
       <img class="plate" src="{{asset('assets/icon/logo.png')}}" alt="">
     </main>
+    <center>
       <!-- Component starts here-->
       <a href="/menu" onclick="bleep.play()"><img  class="icn" src="{{asset('assets/icon/icon_latihan.png')}}" alt=""></a>
       <a href="/ujian" onclick="bleep.play()"><img class='icn' src="{{asset('assets/icon/icon_ujian.png')}}" alt=""></a>
       <a href="/tutorial" onclick="bleep.play()"><img class="icn" src="{{asset('assets/icon/icon_tutorial.png')}}" alt=""></a>
       <a data-toggle="modal" data-target="#myModal" onclick="bleep.play()"><img class="icn" src="{{asset('assets/icon/icon_about.png')}}" alt=""></a>
       <a  href="JavaScript:window.close()" onclick="bleep.play()"><img class="icn" src="{{asset('assets/icon/icon_keluar.png')}}" alt=""></a>
-
+    </center>
     <!-- Modal -->
   <div class="modal fade" id="myModal" role="dialog">
     <div class="modal-dialog">
