@@ -90,14 +90,20 @@ body {
 
 
 main {
-  position: relative;
+  /* position: relative;
   z-index: 1;
   padding: 3vh 5vw;
   height: 80vh;
   display: flex;
   flex-flow: column wrap;
-  justify-content: center;
-  /* background: rgba(255, 160, 160, 0.85); */
+  justify-content: center; */
+ 
+}
+
+.icn_sw{
+  height: 75px;
+  width: 150px;
+  padding-top:25px;
 }
 .icn_menu{
   height: 250px;
@@ -110,6 +116,11 @@ main {
   width: 350px;
 }
 
+.icn_logo {
+  width: 200px;
+  height: 200px;
+  /* background: rgba(255, 160, 160, 0.85); */
+}
 .logo {
   width: 600px;
   height: 300px;

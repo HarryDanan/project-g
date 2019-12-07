@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Ayo Menulis</title>
     <link rel="stylesheet" type="text/css" href="{{asset('css/bootstrap.min.css')}}">
@@ -11,23 +12,31 @@
     <!-- <script src="{{asset('js/machineLearning/makeData.js')}}" type="text/javascript"></script> -->
     <script src="https://code.jquery.com/jquery-3.4.1.js"
         integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
-    </head>
+</head>
 
-    <body class="bg3">
-        <div class="loader-wrapper">
+<body class="bg3">
+
+    <main>
+
+        <div class="loader-wrapper" style="position:absolute;z-index:1;">
             <span class="loader"><span class="loader-inner"></span></span>
         </div>
+        <div>
 
-        <div class="d-flex justify-content-center">
-            <!-- <button class="btn btn-primary" onclick="window.location.href = '/';">Menu</button> -->
-            <div style="padding-right:50%">
-                <a href="/menu" onclick="btn_s()"><img class="icn2" src="{{asset('assets/icon/back.png')}}" alt=""></a>
-            </div>
-            <div class="d-flex justify-content-center">
-                <br><img class="icn" src="{{asset('assets/icon/logo_h_b.png')}}" alt=""></h3>
+            <a href="/menu" onclick="btn_s()"><img class="icn2" src="{{asset('assets/icon/back.png')}}" alt="" style="position:absolute;"></a> 
+            <div class="container-fluid" style="background : chocolate;  position:absolute; z-index:-1; height:100px;">
+                      
+                <a href="/menu" "><img class="icn_sw" src="{{asset('assets/icon/icon_skor.png')}}" alt=""></a>
+                <a href="/menu" "><img class="icn_sw" src="{{asset('assets/icon/icon_waktu.png')}}" alt=""></a>
             </div>
 
+            <div >
+                <center>
+                <img class="icn_logo" src="{{asset('assets/icon/logo_h_b.png')}}" alt=""></h3>
+                </center>
+            </div>
         </div>
+  
         <div class="d-flex bd-highlight">
             <div class="p-2 w-100 bd-highlight">
 
@@ -111,6 +120,9 @@
             </div>
         </div>
         <audio src="../assets/sound/touch.mp3" id="btn-s"></audio>
+    </main>
+
+
 </body>
 <script type="text/javascript">
     $(window).on("load", function () {
