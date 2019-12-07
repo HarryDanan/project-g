@@ -19,7 +19,7 @@
     <div class="d-flex justify-content-center">
         <!-- <button class="btn btn-primary" onclick="window.location.href = '/';">Menu</button> -->
         <div style="padding-right:50%">
-            <a href="/menu" onclick="sound_click()"><img  class="icn2" src="{{asset('assets/icon/back.png')}}" alt=""></a> 
+            <a href="/menu" onclick="btn_s()"><img  class="icn2" src="{{asset('assets/icon/back.png')}}" alt=""></a> 
         </div>
         <div class="d-flex justify-content-center">
             <br><img class="icn" src="{{asset('assets/icon/icon_latihan.png')}}" alt=""></h3>
@@ -79,8 +79,8 @@
   
     
     <div class="d-flex justify-content-center">
-    <a  onclick="sound_click();periksa()"><img  class="icn" src="{{asset('assets/icon/icon_periksa.png')}}" alt=""></a>
-    <a  onclick="sound_click();hapus()"><img  class="icn" src="{{asset('assets/icon/icon_hapus.png')}}" alt=""></a>
+    <a  onclick="btn_s();periksa()"><img  class="icn" src="{{asset('assets/icon/icon_periksa.png')}}" alt=""></a>
+    <a  onclick="btn_s();hapus()"><img  class="icn" src="{{asset('assets/icon/icon_hapus.png')}}" alt=""></a>
     
         <!-- <button class="btn-periksa" onclick="periksa()" style="margin-right: 10px;">Periksa</button>
         <button class="btn btn-warning" onclick="hapus()">Hapus</button> -->
@@ -107,9 +107,15 @@
             <canvas width="64" height="64" id='outputCanvas4'></canvas>
         </div>
     </div>
+    <audio src="../assets/sound/touch.mp3" id="btn-s"></audio>
 </body>
 <script type="text/javascript">
-
+    var sound = document.getElementById('btn-s');
+    function btn_s (){
+      sound.pause();
+      sound.currentTime = 0;
+      sound.play();
+    }
 
     var input = document.getElementById("masuk").value;
     document.getElementById("srcImage2").src = "../../template/"+input+".jpg";  
@@ -177,12 +183,6 @@
         document.getElementById("srcImage2").src = "../../template/"+input+".jpg";
         var c = document.getElementById("gambar");c.width = c.width;
         make_base();
-    }
-
-    function sound_click(){
-      var bleep = new Audio();
-      bleep.src = '../assets/sound/touch.mp3';
-      bleep.play();
     }
 
     function hapus(){

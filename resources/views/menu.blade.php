@@ -15,15 +15,15 @@
     <main style="">
         <div class="d-flex flex-row bd-highlight mb-3">
           <div class="p-2 bd-highlight">
-          <a href="/" onclick="bleep.play()"><img  class="icn2" src="{{asset('assets/icon/back.png')}}" alt=""></a>
+          <a href="/" onclick="btn_s()"><img  class="icn2" src="{{asset('assets/icon/back.png')}}" alt=""></a>
           </div>
         </div>
 
         <div style="padding-top:15%;">
         <center>
-          <a href="/latihan" onclick="bleep.play()"><img  class="icn" src="{{asset('assets/icon/icon_latihan.png')}}" alt=""></a>
-          <a href="/latihan_kecil" onclick="bleep.play()"><img class='icn' src="{{asset('assets/icon/icon_ujian.png')}}" alt=""></a>
-          <a href="/latihan_angka" onclick="bleep.play()"><img class="icn" src="{{asset('assets/icon/icon_tutorial.png')}}" alt=""></a>
+          <a href="/latihan" onclick="btn_s()"><img  class="icn" src="{{asset('assets/icon/icon_latihan.png')}}" alt=""></a>
+          <a href="/latihan_kecil" onclick="btn_s()"><img class='icn' src="{{asset('assets/icon/icon_ujian.png')}}" alt=""></a>
+          <a href="/latihan_angka" onclick="btn_s()"><img class="icn" src="{{asset('assets/icon/icon_tutorial.png')}}" alt=""></a>
         </center>
         </div>
      
@@ -50,12 +50,16 @@
       
     </div>
   </div>
-  
+  <audio src="../assets/sound/touch.mp3" id="btn-s"></audio>
   
   
   </body>
   <script type="text/javascript">
-    var bleep = new Audio();
-    bleep.src = '../assets/sound/touch.mp3';
+     var sound = document.getElementById('btn-s');
+      function btn_s (){
+      sound.pause();
+      sound.currentTime = 0;
+      sound.play();
+    }
   </script>
 </html>

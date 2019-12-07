@@ -17,12 +17,13 @@
     </main>
     <center>
       <!-- Component starts here-->
-      <a href="/menu" onclick="bleep.play()"><img  class="icn" src="{{asset('assets/icon/icon_latihan.png')}}" alt=""></a>
-      <a href="/ujian" onclick="bleep.play()"><img class='icn' src="{{asset('assets/icon/icon_ujian.png')}}" alt=""></a>
-      <a href="/tutorial" onclick="bleep.play()"><img class="icn" src="{{asset('assets/icon/icon_tutorial.png')}}" alt=""></a>
-      <a data-toggle="modal" data-target="#myModal" onclick="bleep.play()"><img class="icn" src="{{asset('assets/icon/icon_about.png')}}" alt=""></a>
-      <a  href="JavaScript:window.close()" onclick="bleep.play()"><img class="icn" src="{{asset('assets/icon/icon_keluar.png')}}" alt=""></a>
+      <a href="/menu" onclick="btn_s()"><img  class="icn" src="{{asset('assets/icon/icon_latihan.png')}}" alt=""></a>
+      <a href="/ujian" onclick="btn_s()"><img class='icn' src="{{asset('assets/icon/icon_ujian.png')}}" alt=""></a>
+      <a href="/tutorial" onclick="btn_s()"><img class="icn" src="{{asset('assets/icon/icon_tutorial.png')}}" alt=""></a>
+      <a data-toggle="modal" data-target="#myModal" onclick="btn_s()"><img class="icn" src="{{asset('assets/icon/icon_about.png')}}" alt=""></a>
+      <a  href="JavaScript:window.close()" onclick="btn_s()"><img class="icn" src="{{asset('assets/icon/icon_keluar.png')}}" alt=""></a>
     </center>
+
     <!-- Modal -->
   <div class="modal fade" id="myModal" role="dialog">
     <div class="modal-dialog">
@@ -43,12 +44,22 @@
       
     </div>
   </div>
-  
+  <audio src="../assets/sound/touch.mp3" id="btn-s"></audio>
+ 
   
   
   </body>
   <script>
-    var bleep = new Audio();
-    bleep.src = '../assets/sound/touch.mp3';
+  var sound = document.getElementById('btn-s');
+
+
+  function btn_s (){
+    sound.pause();
+    sound.currentTime = 0;
+    sound.play();
+  }
+
+    // var bleep = new Audio();
+    // bleep.src = '../assets/sound/touch.mp3';
   </script>
 </html>
