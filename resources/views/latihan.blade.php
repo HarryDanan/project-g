@@ -24,7 +24,7 @@
                 <a href="/menu" onclick="btn_s()"><img class="icn2" src="{{asset('assets/icon/back.png')}}" alt=""></a>
             </div>
             <div class="d-flex justify-content-center">
-                <br><img class="icn" src="{{asset('assets/icon/icon_latihan.png')}}" alt=""></h3>
+                <br><img class="icn" src="{{asset('assets/icon/logo_h_b.png')}}" alt=""></h3>
             </div>
 
         </div>

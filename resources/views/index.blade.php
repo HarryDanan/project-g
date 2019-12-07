@@ -15,7 +15,7 @@
       <!-- Demo stuff-->
 
       <div class="loader-wrapper">
-      <span class="loader"><span class="loader-inner"></span></span>
+        <span class="loader"><span class="loader-inner"></span></span>
       </div>
      
 
