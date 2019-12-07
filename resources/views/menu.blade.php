@@ -12,10 +12,13 @@
   </head>
   <body class="bg2">
       <!-- Demo stuff-->
-    <main style="">
+ >
+    <div class="loader-wrapper">
+        <span class="loader"><span class="loader-inner"></span></span>
+      </div>
         <div class="d-flex flex-row bd-highlight mb-3">
-          <div class="p-2 bd-highlight">
-          <a href="/" onclick="btn_s()"><img  class="icn2" src="{{asset('assets/icon/back.png')}}" alt=""></a>
+          <div class="p-2 bd-highlight" style="padding-left : 5%;">
+            <a href="/" onclick="btn_s()"><img  class="icn2" src="{{asset('assets/icon/back.png')}}" alt=""></a>
           </div>
         </div>
 
@@ -28,7 +31,7 @@
         </div>
      
     <!-- Modal -->      
-    </main>
+
       <!-- Component starts here-->
       
   <div class="modal fade" id="myModal" role="dialog">
@@ -55,6 +58,10 @@
   
   </body>
   <script type="text/javascript">
+      $(window).on("load",function(){
+          $(".loader-wrapper").fadeOut("slow");
+    });
+
      var sound = document.getElementById('btn-s');
       function btn_s (){
       sound.pause();

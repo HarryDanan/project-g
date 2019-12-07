@@ -11,17 +11,28 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
   </head>
   <body class="bgutama">
+  
       <!-- Demo stuff-->
-    <main style="">
-      <img class="plate" src="{{asset('assets/icon/logo.png')}}" alt="">
-    </main>
+
+      <div class="loader-wrapper">
+      <span class="loader"><span class="loader-inner"></span></span>
+      </div>
+     
+
     <center>
+      <div class="d-flex justify-content-center" style="padding-top :10%;">
+        <img class="logo" src="{{asset('assets/icon/logo.png')}}" alt="">
+      </div>
+      <div class="d-flex justify-content-center"style="padding-top :5%;">
+        <a href="/menu" onclick="btn_s()"><img  class="icn" src="{{asset('assets/icon/icon_latihan.png')}}" alt=""></a>
+        <a href="/ujian" onclick="btn_s()"><img class='icn' src="{{asset('assets/icon/icon_ujian.png')}}" alt=""></a>
+        <a href="/tutorial" onclick="btn_s()"><img class="icn" src="{{asset('assets/icon/icon_tutorial.png')}}" alt=""></a>
+        <a data-toggle="modal" data-target="#myModal" onclick="btn_s()"><img class="icn" src="{{asset('assets/icon/icon_about.png')}}" alt=""></a>
+        <a  href="JavaScript:window.close()" onclick="btn_s()"><img class="icn" src="{{asset('assets/icon/icon_keluar.png')}}" alt=""></a>
+      </div>
+    
       <!-- Component starts here-->
-      <a href="/menu" onclick="btn_s()"><img  class="icn" src="{{asset('assets/icon/icon_latihan.png')}}" alt=""></a>
-      <a href="/ujian" onclick="btn_s()"><img class='icn' src="{{asset('assets/icon/icon_ujian.png')}}" alt=""></a>
-      <a href="/tutorial" onclick="btn_s()"><img class="icn" src="{{asset('assets/icon/icon_tutorial.png')}}" alt=""></a>
-      <a data-toggle="modal" data-target="#myModal" onclick="btn_s()"><img class="icn" src="{{asset('assets/icon/icon_about.png')}}" alt=""></a>
-      <a  href="JavaScript:window.close()" onclick="btn_s()"><img class="icn" src="{{asset('assets/icon/icon_keluar.png')}}" alt=""></a>
+      
     </center>
 
     <!-- Modal -->
@@ -50,16 +61,17 @@
   
   </body>
   <script>
-  var sound = document.getElementById('btn-s');
+    $(window).on("load",function(){
+          $(".loader-wrapper").fadeOut("slow");
+    });
+
+    var sound = document.getElementById('btn-s');
 
 
-  function btn_s (){
-    sound.pause();
-    sound.currentTime = 0;
-    sound.play();
-  }
-
-    // var bleep = new Audio();
-    // bleep.src = '../assets/sound/touch.mp3';
+    function btn_s (){
+      sound.pause();
+      sound.currentTime = 0;
+      sound.play();
+    }
   </script>
 </html>
