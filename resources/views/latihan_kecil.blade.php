@@ -12,6 +12,8 @@
     <!-- <script src="{{asset('js/machineLearning/makeData.js')}}" type="text/javascript"></script> -->
     <script src="https://code.jquery.com/jquery-3.4.1.js"
         integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+        <script type="text/javascript" src="{{asset('js/Audio-HTML5.js')}}"></script>
+        
 </head>
 
 <body class="bg3">
@@ -26,8 +28,11 @@
             <a href="/menu" onclick="btn_s()"><img class="icn2" src="{{asset('assets/icon/back.png')}}" alt=""
                     style="position:absolute;"></a>
             <div class="container-fluid" style="background : chocolate;  position:absolute; z-index:-1; height:100px;">
-                <a href="/menu" "><img class=" icn_sw" src="{{asset('assets/icon/icon_skor.png')}}" alt=""></a>
+            <div class="menua">
+                 <a href="/menu" "><img class=" icn_sw" src="{{asset('assets/icon/icon_skor.png')}}" alt=""></a>
                 <a href="/menu" "><img class=" icn_sw" src="{{asset('assets/icon/icon_waktu.png')}}" alt=""></a>
+            </div>
+                
             </div>
 
             <div>
@@ -130,6 +135,8 @@
     });
     var sound = document.getElementById('btn-s');
 
+    var skor = 0;
+
     function btn_s() {
         sound.pause();
         sound.currentTime = 0;
@@ -173,6 +180,8 @@
         //template matching
         var batasAtas = 0;
         var nilai = 0;
+        
+
         for (var i = 0; i < imgData.data.length; i += 4) {
             if (templateData.data[i] == 0) {
                 // batasAtas++;
@@ -187,9 +196,12 @@
         //if(nilai>=(batasAtas*80/100)){
         // threshold
         if (nilai <= (batasAtas * 15 / 100)) {
+      
             alert("Jawaban Benar");
+
         } else {
             alert("Jawaban Salah");
+
         }
         src.delete();
         dst.delete();
@@ -350,4 +362,5 @@ function getTouchPos(canvasDom, touchEvent) {
 }
 
 </script>
+     
 </html>

@@ -145,6 +145,13 @@ main a {
   color: #38c5b9;
   font-size: 30px;
 }
+.menua{
+  text-decoration: none;
+  color: #38c5b9;
+  font-size: 30px;
+  position: absolute;
+  right: 16px;
+}
 main .plate {
   position: absolute;
   top: 50%;
