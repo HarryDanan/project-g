@@ -12,8 +12,8 @@
     <!-- <script src="{{asset('js/machineLearning/makeData.js')}}" type="text/javascript"></script> -->
     <script src="https://code.jquery.com/jquery-3.4.1.js"
         integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
-        <script type="text/javascript" src="{{asset('js/Audio-HTML5.js')}}"></script>
-        
+    <script type="text/javascript" src="{{asset('js/Audio-HTML5.js')}}"></script>
+
 </head>
 
 <body class="bg3">
@@ -28,11 +28,11 @@
             <a href="/menu" onclick="btn_s()"><img class="icn2" src="{{asset('assets/icon/back.png')}}" alt=""
                     style="position:absolute;"></a>
             <div class="container-fluid" style="background : chocolate;  position:absolute; z-index:-1; height:100px;">
-            <div class="menua">
-                 <a href="/menu" "><img class=" icn_sw" src="{{asset('assets/icon/icon_skor.png')}}" alt=""></a>
-                <a href="/menu" "><img class=" icn_sw" src="{{asset('assets/icon/icon_waktu.png')}}" alt=""></a>
-            </div>
-                
+                <div class="menua">
+                    <a href="/menu" "><img class=" icn_sw" src="{{asset('assets/icon/icon_skor.png')}}" alt=""></a>
+                    <a href="/menu" "><img class=" icn_sw" src="{{asset('assets/icon/icon_waktu.png')}}" alt=""></a>
+                </div>
+
             </div>
 
             <div>
@@ -54,6 +54,7 @@
                 </div>
 
             </div>
+            <div id="countdown"></div>
 
             <div class="p-2 bd-highlight" style="padding-right:10%;">
                 <h4>Ayo tuliskan huruf ini!</h4>
@@ -143,6 +144,7 @@
         sound.play();
     }
 
+    var score =0;
     var input = document.getElementById("masuk").value;
     document.getElementById("srcImage2").src = "../../template/" + input + ".jpg";
 
@@ -180,6 +182,8 @@
         //template matching
         var batasAtas = 0;
         var nilai = 0;
+
+
         
 
         for (var i = 0; i < imgData.data.length; i += 4) {
@@ -196,11 +200,14 @@
         //if(nilai>=(batasAtas*80/100)){
         // threshold
         if (nilai <= (batasAtas * 15 / 100)) {
-      
-            alert("Jawaban Benar");
+          
+        score = score + 10 ;
+            alert("Jawaban Benar "+score);
 
         } else {
-            alert("Jawaban Salah");
+            
+        //score = score - 10;
+            alert("Jawaban Salah"+score);
 
         }
         src.delete();
@@ -360,6 +367,22 @@ function getTouchPos(canvasDom, touchEvent) {
         y: touchEvent.touches[0].clientY - rect.top
     };
 }
+
+
+    var timeLeft = 30;
+    var elem = document.getElementById('countdown');
+    var timerId = setInterval(countdown, 1000);
+
+    function countdown() {
+        if (timeLeft == -1) {
+            clearTimeout(timerId);
+            alert("Waktu Habis");
+        } else {
+            elem.innerHTML = timeLeft + ' seconds remaining';
+            timeLeft--;
+        }
+    }
+
 
 </script>
      
