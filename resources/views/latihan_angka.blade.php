@@ -12,8 +12,8 @@
     <!-- <script src="{{asset('js/machineLearning/makeData.js')}}" type="text/javascript"></script> -->
     <script src="https://code.jquery.com/jquery-3.4.1.js"
         integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
-        <script type="text/javascript" src="{{asset('js/Audio-HTML5.js')}}"></script>
-        
+    <script type="text/javascript" src="{{asset('js/Audio-HTML5.js')}}"></script>
+
 </head>
 
 <body class="bg3">
@@ -27,14 +27,13 @@
 
             <a href="/menu" onclick="btn_s()"><img class="icn2" src="{{asset('assets/icon/back.png')}}" alt=""
                     style="position:absolute;"></a>
-            <div class="container-fluid" style="background : chocolate;  position:absolute; z-index:-1; height:100px;">
-            <div class="menua">
-                 <a href="/menu" "><img class=" icn_sw" src="{{asset('assets/icon/icon_skor.png')}}" alt=""></a>
-                <a href="/menu" "><img class=" icn_sw" src="{{asset('assets/icon/icon_waktu.png')}}" alt=""></a>
+            <div class="container-fluid"
+                style="background :url(../assets/icon/bgnav.png);  position:absolute; z-index:-1; height:100px;">
+                <div class="menua">
+                    <a href="/menu" "><img class=" icn_sw" src="{{asset('assets/icon/icon_skor.png')}}" alt=""></a>
+                    <a href="/menu" "><img class=" icn_sw" src="{{asset('assets/icon/icon_waktu.png')}}" alt=""></a>
+                </div>
             </div>
-                
-            </div>
-
             <div>
                 <center>
                     <img class="icn_logo" src="{{asset('assets/icon/logo_h_b.png')}}" alt=""></h3>
@@ -42,66 +41,65 @@
             </div>
         </div>
 
-        <div class="d-flex bd-highlight">
-            <div class="p-2 w-100 bd-highlight">
-
-                <div class="d-flex justify-content-center" style="padding-left:20%;">
-
-                    <img class="papan" src="{{asset('assets/icon/papan.png')}}" alt="">
-                    <canvas id="gambar" width="320" height="320"
-                        style="background : rgba(255, 255, 255, 0.1); padding-top:2%;"></canvas>
-
-                </div>
-
-            </div>
-
-            <div class="p-2 bd-highlight" style="padding-right:10%;">
-                <h4>Ayo tuliskan huruf ini!</h4>
-                <div class="d-flex justify-content-center">
-                    <select name="carlist" form="carform" id="masuk" onchange="inputan()">
-                        <option value="#" selected>#</option>
-                        <option value="a">A</option>
-                        <option value="b">B</option>
-                        <option value="c">C</option>
-                        <option value="d">D</option>
-                        <option value="e">E</option>
-                        <option value="f">F</option>
-                        <option value="g">G</option>
-                        <option value="h">H</option>
-                        <option value="i">I</option>
-                        <option value="j">J</option>
-                        <option value="k">K</option>
-                        <option value="l">L</option>
-                        <option value="m">M</option>
-                        <option value="n">N</option>
-                        <option value="o">O</option>
-                        <option value="p">P</option>
-                        <option value="q">Q</option>
-                        <option value="r">R</option>
-                        <option value="s">S</option>
-                        <option value="t">T</option>
-                        <option value="u">U</option>
-                        <option value="v">V</option>
-                        <option value="w">W</option>
-                        <option value="x">X</option>
-                        <option value="y">Y</option>
-                        <option value="z">Z</option>
-                    </select>
-                </div><br>
-                <div class="d-flex justify-content-end">
-                    <img id="srcImage2" src="../../template/a.jpg" width="64" height="64">
-                </div><br>
-            </div>
-        </div><br><br>
-
-
         <div class="d-flex justify-content-center">
+
+            <img class="papan" src="{{asset('assets/icon/papan.png')}}" alt="">
+            <canvas id="gambar" width="480" height="300"
+                style="background : rgba(255, 255, 255, 0.1); top :275px; position:absolute"></canvas>
+        </div>
+        <br><br>
+
+        <div class="bottom_left">
+            <div>
+                <img class="bubble" src="{{asset('assets/icon/bubble.png')}}" alt=""></h3>
+                <div style="padding-left:180px;padding-top:70px">
+                    <center>
+                        <h5>AYO TULIS HURUF INI !</h5>
+                        <select name="carlist" form="carform" id="masuk" onchange="inputan()">
+                            <option value="A" selected>A</option>
+                            <option value="B">B</option>
+                            <option value="C">C</option>
+                            <option value="D">D</option>
+                            <option value="E">E</option>
+                            <option value="F">F</option>
+                            <option value="G">G</option>
+                            <option value="H">H</option>
+                            <option value="I">I</option>
+                            <option value="J">J</option>
+                            <option value="K">K</option>
+                            <option value="L">L</option>
+                            <option value="M">M</option>
+                            <option value="N">N</option>
+                            <option value="O">O</option>
+                            <option value="P">P</option>
+                            <option value="Q">Q</option>
+                            <option value="R">R</option>
+                            <option value="S">S</option>
+                            <option value="T">T</option>
+                            <option value="U">U</option>
+                            <option value="V">V</option>
+                            <option value="W">W</option>
+                            <option value="X">X</option>
+                            <option value="Y">Y</option>
+                            <option value="Z">Z</option>
+                        </select>
+                        <div>
+                            <img id="srcImage2" src="../../template/A.jpg" width="64" height="64">
+                        </div>
+                    </center>
+                </div>
+            </div><br>
+            </center>
+            <br>
+            <img class="icn_anak" src="{{asset('assets/icon/anak.png')}}" alt=""></h3>
+        </div>
+
+
+        <div class="d-flex justify-content-center" style="padding-top:23%">
             <a onclick="btn_s();periksa()"><img class="icn" src="{{asset('assets/icon/icon_periksa.png')}}" alt=""></a>
             <a onclick="btn_s();hapus()"><img class="icn" src="{{asset('assets/icon/icon_hapus.png')}}" alt=""></a>
-
-            <!-- <button class="btn-periksa" onclick="periksa()" style="margin-right: 10px;">Periksa</button>
-        <button class="btn btn-warning" onclick="hapus()">Hapus</button> -->
         </div>
+
         <div hidden class="row">
             <div class="col-sm-3">
                 <h5>Gambar Template</h5>
@@ -125,6 +123,8 @@
             </div>
         </div>
         <audio src="../assets/sound/touch.mp3" id="btn-s"></audio>
+        <audio src="../assets/sound/benar.mp3" id="btn-benar"></audio>
+        <audio src="../assets/sound/salah.mp3" id="btn-salah"></audio>
     </main>
 
 
@@ -134,15 +134,26 @@
         $(".loader-wrapper").fadeOut("slow");
     });
     var sound = document.getElementById('btn-s');
-
-    var skor = 0;
+    var sound_b = document.getElementById('btn-benar');
+    var sound_s = document.getElementById('btn-salah');
 
     function btn_s() {
         sound.pause();
         sound.currentTime = 0;
         sound.play();
     }
+    function sound_salah(){
+        sound_s.pause();
+        sound_s.currentTime = 0;
+        sound_s.play();
+    }
+    function sound_benar(){
+        sound_b.pause();
+        sound_b.currentTime = 0;
+        sound_b.play();
+    }
 
+    // var score =0;
     var input = document.getElementById("masuk").value;
     document.getElementById("srcImage2").src = "../../template/" + input + ".jpg";
 
@@ -179,8 +190,7 @@
 
         //template matching
         var batasAtas = 0;
-        var nilai = 0;
-        
+        var nilai = 0; 
 
         for (var i = 0; i < imgData.data.length; i += 4) {
             if (templateData.data[i] == 0) {
@@ -196,17 +206,21 @@
         //if(nilai>=(batasAtas*80/100)){
         // threshold
         if (nilai <= (batasAtas * 15 / 100)) {
-      
-            alert("Jawaban Benar");
+          
+        // score = score + 10 ;
+            // alert("Jawaban Benar "+score);
+            alert("Jawaban Benar ");
+            sound_benar();
 
         } else {
+            
+        //score = score - 10;
             alert("Jawaban Salah");
+            sound_salah();
 
         }
         src.delete();
         dst.delete();
-
-
     }
 
     function inputan() {
@@ -267,99 +281,115 @@ canvas.addEventListener('mouseup', disengage);
 </script> -->
 
 <script type="text/javascript">
-var canvas = document.getElementById("gambar");
-var ctx = canvas.getContext("2d");
-ctx.strokeStyle = "#000000";
-ctx.lineWidth = 10;
+    var canvas = document.getElementById("gambar");
+    var ctx = canvas.getContext("2d");
+    ctx.strokeStyle = "#000000";
+    ctx.lineWidth = 10;
 
-// Set up mouse events for drawing
-var drawing = false;
-var mousePos = {
-    x: 0,
-    y: 0
-};
-var lastPos = mousePos;
-canvas.addEventListener("mousedown", function (e) {
-    drawing = true;
-    lastPos = getMousePos(canvas, e);
-}, false);
-canvas.addEventListener("mouseup", function (e) {
-    drawing = false;
-}, false);
-canvas.addEventListener("mousemove", function (e) {
-    mousePos = getMousePos(canvas, e);
-}, false);
-
-// Get the position of the mouse relative to the canvas
-function getMousePos(canvasDom, mouseEvent) {
-    var rect = canvasDom.getBoundingClientRect();
-    return {
-        x: mouseEvent.clientX - rect.left,
-        y: mouseEvent.clientY - rect.top
+    // Set up mouse events for drawing
+    var drawing = false;
+    var mousePos = {
+        x: 0,
+        y: 0
     };
-}
+    var lastPos = mousePos;
+    canvas.addEventListener("mousedown", function (e) {
+        drawing = true;
+        lastPos = getMousePos(canvas, e);
+    }, false);
+    canvas.addEventListener("mouseup", function (e) {
+        drawing = false;
+    }, false);
+    canvas.addEventListener("mousemove", function (e) {
+        mousePos = getMousePos(canvas, e);
+    }, false);
 
-// Get a regular interval for drawing to the screen
-window.requestAnimFrame = (function (callback) {
-    return window.requestAnimationFrame ||
-        window.webkitRequestAnimationFrame ||
-        window.mozRequestAnimationFrame ||
-        window.oRequestAnimationFrame ||
-        window.msRequestAnimaitonFrame ||
-        function (callback) {
-            window.setTimeout(callback, 1000 / 60);
+    // Get the position of the mouse relative to the canvas
+    function getMousePos(canvasDom, mouseEvent) {
+        var rect = canvasDom.getBoundingClientRect();
+        return {
+            x: mouseEvent.clientX - rect.left,
+            y: mouseEvent.clientY - rect.top
         };
-})();
-
-// Draw to the canvas
-function renderCanvas() {
-    if (drawing) {
-        ctx.strokeStyle = "#000000";
-        ctx.lineWidth = 10;
-        ctx.moveTo(lastPos.x, lastPos.y);
-        ctx.lineTo(mousePos.x, mousePos.y);
-        ctx.stroke();
-        lastPos = mousePos;
     }
-}
 
-// Allow for animation
-(function drawLoop() {
-    requestAnimFrame(drawLoop);
-    renderCanvas();
-})();
+    // Get a regular interval for drawing to the screen
+    window.requestAnimFrame = (function (callback) {
+        return window.requestAnimationFrame ||
+            window.webkitRequestAnimationFrame ||
+            window.mozRequestAnimationFrame ||
+            window.oRequestAnimationFrame ||
+            window.msRequestAnimaitonFrame ||
+            function (callback) {
+                window.setTimeout(callback, 1000 / 60);
+            };
+    })();
 
-// Set up touch events for mobile, etc
-canvas.addEventListener("touchstart", function (e) {
-    mousePos = getTouchPos(canvas, e);
-    var touch = e.touches[0];
-    var mouseEvent = new MouseEvent("mousedown", {
-        clientX: touch.clientX,
-        clientY: touch.clientY
-    });
-    canvas.dispatchEvent(mouseEvent);
-}, false);
-canvas.addEventListener("touchend", function (e) {
-    var mouseEvent = new MouseEvent("mouseup", {});
-    canvas.dispatchEvent(mouseEvent);
-}, false);
-canvas.addEventListener("touchmove", function (e) {
-    var touch = e.touches[0];
-    var mouseEvent = new MouseEvent("mousemove", {
-        clientX: touch.clientX,
-        clientY: touch.clientY
-    });
-    canvas.dispatchEvent(mouseEvent);
-}, false);
+    // Draw to the canvas
+    function renderCanvas() {
+        if (drawing) {
+            ctx.strokeStyle = "#000000";
+            ctx.lineWidth = 10;
+            ctx.moveTo(lastPos.x, lastPos.y);
+            ctx.lineTo(mousePos.x, mousePos.y);
+            ctx.stroke();
+            lastPos = mousePos;
+        }
+    }
 
-// Get the position of a touch relative to the canvas
-function getTouchPos(canvasDom, touchEvent) {
-    var rect = canvasDom.getBoundingClientRect();
-    return {
-        x: touchEvent.touches[0].clientX - rect.left,
-        y: touchEvent.touches[0].clientY - rect.top
-    };
-}
+    // Allow for animation
+    (function drawLoop() {
+        requestAnimFrame(drawLoop);
+        renderCanvas();
+    })();
+
+    // Set up touch events for mobile, etc
+    canvas.addEventListener("touchstart", function (e) {
+        mousePos = getTouchPos(canvas, e);
+        var touch = e.touches[0];
+        var mouseEvent = new MouseEvent("mousedown", {
+            clientX: touch.clientX,
+            clientY: touch.clientY
+        });
+        canvas.dispatchEvent(mouseEvent);
+    }, false);
+    canvas.addEventListener("touchend", function (e) {
+        var mouseEvent = new MouseEvent("mouseup", {});
+        canvas.dispatchEvent(mouseEvent);
+    }, false);
+    canvas.addEventListener("touchmove", function (e) {
+        var touch = e.touches[0];
+        var mouseEvent = new MouseEvent("mousemove", {
+            clientX: touch.clientX,
+            clientY: touch.clientY
+        });
+        canvas.dispatchEvent(mouseEvent);
+    }, false);
+
+    // Get the position of a touch relative to the canvas
+    function getTouchPos(canvasDom, touchEvent) {
+        var rect = canvasDom.getBoundingClientRect();
+        return {
+            x: touchEvent.touches[0].clientX - rect.left,
+            y: touchEvent.touches[0].clientY - rect.top
+        };
+    }
+
+
+    var timeLeft = 30;
+    var elem = document.getElementById('countdown');
+    var timerId = setInterval(countdown, 1000);
+
+    function countdown() {
+        if (timeLeft == -1) {
+            clearTimeout(timerId);
+            alert("Waktu Habis");
+        } else {
+            elem.innerHTML = timeLeft + ' seconds remaining';
+            timeLeft--;
+        }
+    }
+
 
 </script>
      
