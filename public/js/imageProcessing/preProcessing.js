@@ -364,3 +364,4 @@ function thinningTemplate2(gambar){
 		i++;
 	}
 }
+

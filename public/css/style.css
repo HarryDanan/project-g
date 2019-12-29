@@ -237,3 +237,10 @@ h5{
   font-family: Janda Manatee Solid;
   color: red;
 }
+
+.icn_ayo{
+  width: 150%;
+  height: 10%;
+  position : absolute;
+  z-index: 1;
+}
