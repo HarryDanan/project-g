@@ -30,6 +30,9 @@
             <div class="container-fluid"
                 style="background :url(../assets/icon/bgnav.png);  position:absolute; z-index:-1; height:100px;">
                 <div class="menua">
+                    <div id="livecount"></div>
+                    <div id="countdown"></div>
+                    <div id="score"></div>
                     <a href="/menu" "><img class=" icn_sw" src="{{asset('assets/icon/icon_skor.png')}}" alt=""></a>
                     <a href="/menu" "><img class=" icn_sw" src="{{asset('assets/icon/icon_waktu.png')}}" alt=""></a>
                 </div>
@@ -100,6 +103,7 @@
         <div class="d-flex justify-content-center" style="padding-top:23%">
             <a onclick="btn_s();periksa()"><img class="icn" src="{{asset('assets/icon/icon_periksa.png')}}" alt=""></a>
             <a onclick="btn_s();hapus()"><img class="icn" src="{{asset('assets/icon/icon_hapus.png')}}" alt=""></a>
+            <img src="" alt="">
         </div>
 
         <div hidden class="row">
@@ -227,6 +231,9 @@
     //     src.delete();
     //     dst.delete();
     // }
+    var timeLeft = 30;
+    var liveleft =3;
+    var point = 0;
 
     function periksa(){
 		let src = cv.imread(document.getElementById("gambar"));
@@ -242,7 +249,7 @@
     var kanvas3 = document.getElementById('outputCanvas4');
     var ctx = kanvas3.getContext('2d');
     var imgData = ctx.getImageData(0,0,64,64);
-     
+    var darah = 3;
     templateData = context.getImageData(0,0,64,64);
 
     var batasAtas=0; var nilai=0;
@@ -260,14 +267,53 @@
     //if(nilai>=(batasAtas*80/100)){
     if(nilai<=(batasAtas*20/100)){
         sound_benar();
+        point=point+10;
         alert("Jawaban Benar");
     }
     else{
         sound_salah();
+        liveleft--;
         alert("Jawaban Salah");
     }
         src.delete(); dst.delete();
 	}
+
+    //darah 
+    var liveelem = document.getElementById('livecount');
+    var liveid = setInterval(livecount, 0);
+
+    function livecount() {
+        if (liveleft == -1) {
+            clearTimeout(liveid);
+            alert("Darah Habis");
+            
+        } else {
+            liveelem.innerHTML ='Lives '+ liveleft + ' remaining';
+            
+            //timeLeft--;
+        }
+    }
+
+    // waktu
+    var elem = document.getElementById('countdown');
+    var timerId = setInterval(countdown, 1000);
+    function countdown() {
+        if (timeLeft == -1) {
+            clearTimeout(timerId);
+            alert("Waktu Habis");
+        } else {
+            elem.innerHTML = timeLeft + ' seconds remaining';
+            timeLeft--;
+        }
+    }
+
+    //score 
+    var selem = document.getElementById('score');
+    var scoreid = setInterval(score, 0);
+    function score(){
+        selem.innerHTML = 'Nilai ' + point;
+    }
+
 
     function inputan(){
         input = document.getElementById("masuk").value;
@@ -280,6 +326,8 @@
         input = document.getElementById("masuk").value;
         document.getElementById("srcImage3").src = "../../template/besar/"+input+".png";
     }
+    
+
 
     function hapus(){
         var c = document.getElementById("gambar");c.width = c.width;
@@ -421,20 +469,8 @@ function getTouchPos(canvasDom, touchEvent) {
 }
 
 </script>
-<!-- <script>
-    var timeLeft = 30;
-    var elem = document.getElementById('countdown');
-    var timerId = setInterval(countdown, 1000);
-
-    function countdown() {
-        if (timeLeft == -1) {
-            clearTimeout(timerId);
-            alert("Waktu Habis");
-        } else {
-            elem.innerHTML = timeLeft + ' seconds remaining';
-            timeLeft--;
-        }
-    }
-</script> -->
+<script>
+    
+</script>
      
 </html>
