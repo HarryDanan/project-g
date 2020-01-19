@@ -5,10 +5,12 @@
     <title>Ayo Menulis</title>
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,700' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.css">
     <link rel="stylesheet" href="{{asset('css/style.css')}}">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.js"></script>
     <script type="text/javascript" src="{{asset('js/Audio-HTML5.js')}}"></script>
   </head>
   <body class="bg2">
@@ -16,21 +18,35 @@
  >
     <div class="loader-wrapper">
         <span class="loader"><span class="loader-inner"></span></span>
-      </div>
+    </div>
         <div class="d-flex flex-row bd-highlight mb-3">
-          <div class="p-2 bd-highlight" style="padding-left : 5%;">
+          <div class="p-2 bd-highlight" style="padding-left : 20%;">
             <a href="/" onclick="btn_s()"><img  class="icn2" src="{{asset('assets/icon/back.png')}}" alt=""></a>
           </div>
         </div>
 
         <div style="padding-top:10%;">
         <center>
-          <a href="/latihan" onclick="btn_s()"><img  class="icn_menu" src="{{asset('assets/icon/logo_h_b.png')}}" alt=""></a>
-          <a href="/latihan_kecil" onclick="btn_s()"><img class='icn_menu' src="{{asset('assets/icon/logo_h_k.png')}}" alt=""></a>
-          <a href="/latihan_angka" onclick="btn_s()"><img class="icn_menu" src="{{asset('assets/icon/logo_ang.png')}}" alt=""></a>
+        <div>
+          <a href="hhttps://www.youtube.com/watch?v=BykRCC_kdgY" data-toggle="lightbox"  data-width="1280" data-gallery="youtubevideos" class="col-sm-4">
+            <img src="{{asset('assets/thumbnail/thumbnail_angka_2.png')}}" class="img-fluid">
+          </a>
+        </div>
+        <div>
+          <a href="https://www.youtube.com/watch?v=-Yh0WqCFmzs" data-toggle="lightbox" data-width="1280" data-gallery="youtubevideos" class="col-sm-4">
+            <img src="{{asset('assets/thumbnail/thumbnail_huruf_2.png')}}" class="img-fluid">
+          </a>
+        </div>
+        <div>
+          <a href="https://www.youtube.com/watch?v=aFvhRyIuBNQ&t=24s" data-toggle="lightbox" data-width="1280" data-gallery="youtubevideos" class="col-sm-4">
+            <img src="{{asset('assets/thumbnail/thumbnail_huruf2_2.png')}}" class="img-fluid">
+          </a>
+        </div>
+          
         </center>
         </div>
-     
+       
+            
     <!-- Modal -->      
 
       <!-- Component starts here-->
@@ -53,12 +69,21 @@
       </div>
       
     </div>
+    
   </div>
   <audio src="../assets/sound/touch.mp3" id="btn-s"></audio>
   
   
   </body>
+  
   <script type="text/javascript">
+	//   lightbox
+		$(document).on('click', '[data-toggle="lightbox"]', function(event) {
+						event.preventDefault();
+						$(this).ekkoLightbox();
+		});
+	// lightbox
+
       $(window).on("load",function(){
           $(".loader-wrapper").fadeOut("slow");
     });

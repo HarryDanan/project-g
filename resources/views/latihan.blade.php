@@ -3,16 +3,15 @@
 
 <head>
     <title>Ayo Menulis</title>
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"> -->
     <link rel="stylesheet" type="text/css" href="{{asset('css/bootstrap.min.css')}}">
     <link rel="stylesheet" href="{{asset('css/style.css')}}">
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.0.0/dist/tf.min.js"></script>
     <script src="{{asset('js/imageProcessing/preProcessing.js')}}" type="text/javascript"></script>
     <script src="{{asset('js/imageProcessing/opencv.js')}}" type="text/javascript"></script>
-    <!-- <script src="{{asset('js/machineLearning/tf.min.js')}}" type="text/javascript"></script> -->
-    <!-- <script src="{{asset('js/machineLearning/makeData.js')}}" type="text/javascript"></script> -->
-    <script src="https://code.jquery.com/jquery-3.4.1.js"
-        integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
     <script type="text/javascript" src="{{asset('js/Audio-HTML5.js')}}"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
 
 </head>
 
@@ -20,7 +19,7 @@
 
     <main>
 
-        <div class="loader-wrapper" style="position:absolute;z-index:1;">
+        <div class="loader-wrapper" style="position:absolute;z-index:2;">
             <span class="loader"><span class="loader-inner"></span></span>
         </div>
         <div>
@@ -28,13 +27,13 @@
             <a href="/menu" onclick="btn_s()"><img class="icn2" src="{{asset('assets/icon/back.png')}}" alt=""
                     style="position:absolute;"></a>
             <div class="container-fluid"
-                style="background :url(../assets/icon/bgnav.png);  position:absolute; z-index:-1; height:100px;">
+                style="background :url(../assets/icon/bgnav.png);  position:absolute; z-index:-1; height:13%;">
+            
                 <div class="menua">
-                    <div id="livecount"></div>
-                    <div id="countdown"></div>
-                    <div id="score"></div>
-                    <a href="/menu" "><img class=" icn_sw" src="{{asset('assets/icon/icon_skor.png')}}" alt=""></a>
-                    <a href="/menu" "><img class=" icn_sw" src="{{asset('assets/icon/icon_waktu.png')}}" alt=""></a>
+                                  
+                    <a href="" class ="score" id="livecount" style="color : white; padding-left : 8%;"></a><a href="" ><img class=" icn_darah" src="{{asset('assets/icon/darah.png')}}" alt=""></a>
+                    <a href="" class ="score" id="score" style="color : #00bfff;"></a><a href="" ><img class=" icn_sw" src="{{asset('assets/icon/icon_skor.png')}}" alt=""></a>
+                    <a href="" class ="score" id="countdown" style="color : red; padding-left : 18%;"></a><a href="" ><img class=" icn_sw" src="{{asset('assets/icon/icon_waktu.png')}}" alt=""></a>
                 </div>
             </div>
             <div>
@@ -47,61 +46,64 @@
         <div class="d-flex justify-content-center">
 
             <img class="papan" src="{{asset('assets/icon/papan.png')}}" alt="">
-            <canvas id="gambar" width="192" height="192" style="background-color: white; top :275px; position:absolute"></canvas>
+            <canvas id="gambar" width="192" height="192" style="background-color: white; top :40%; position:absolute; border:2px solid #000000;"></canvas>
         </div>
         <br><br>
 
         <div class="bottom_left">
             <div>
                 <img class="bubble" src="{{asset('assets/icon/bubble.png')}}" alt="">
-                <div style="padding-left:180px;padding-top:70px">
-                    <center>
-                    <img class="icn_ayo" src="{{asset('assets/icon/ayo.png')}}" alt="">
-                        <select name="carlist" form="carform" id="masuk" onchange="inputan()">
-                            <option value="a" selected>A</option>
-                            <option value="b">B</option>
-                            <option value="c">C</option>
-                            <option value="d">D</option>
-                            <option value="e">E</option>
-                            <option value="f">F</option>
-                            <option value="g">G</option>
-                            <option value="h">H</option>
-                            <option value="i">I</option>
-                            <option value="j">J</option>
-                            <option value="k">K</option>
-                            <option value="l">L</option>
-                            <option value="m">M</option>
-                            <option value="n">N</option>
-                            <option value="o">O</option>
-                            <option value="p">P</option>
-                            <option value="q">Q</option>
-                            <option value="r">R</option>
-                            <option value="s">S</option>
-                            <option value="t">T</option>
-                            <option value="u">U</option>
-                            <option value="v">V</option>
-                            <option value="w">W</option>
-                            <option value="x">X</option>
-                            <option value="y">Y</option>
-                            <option value="z">Z</option>
-                        </select>
-                        <div hidden>
-                            <img id="srcImage2" src="../../template/a.jpg" width="64" height="64">
-                        </div>
+                <div style="padding-left:180px;padding-top:30%">
+               
+                    <img class="icn_ayo" src="{{asset('assets/icon/ayo.png')}}" alt=""><br>
+                    <div style="left:10%;top:5%;">
                         <div>
-                            <img id="srcImage3" src="" width="64" height="64">
+                            <img id="srcImage2" src="" width="64" height="64">
                         </div>
-                    </center>
+                    
+                            <select class="selectpicker "name="carlist" form="carform" id="masuk" onchange="inputan()">
+                                <option value="a" selected>A</option>
+                                <option value="b">B</option>
+                                <option value="c">C</option>
+                                <option value="d">D</option>
+                                <option value="e">E</option>
+                                <option value="f">F</option>
+                                <option value="g">G</option>
+                                <option value="h">H</option>
+                                <option value="i">I</option>
+                                <option value="j">J</option>
+                                <option value="k">K</option>
+                                <option value="l">L</option>
+                                <option value="m">M</option>
+                                <option value="n">N</option>
+                                <option value="o">O</option>
+                                <option value="p">P</option>
+                                <option value="q">Q</option>
+                                <option value="r">R</option>
+                                <option value="s">S</option>
+                                <option value="t">T</option>
+                                <option value="u">U</option>
+                                <option value="v">V</option>
+                                <option value="w">W</option>
+                                <option value="x">X</option>
+                                <option value="y">Y</option>
+                                <option value="z">Z</option>
+                            </select>
+                        </div>
+                        <!-- <div>
+                            <img id="srcImage3" src="" width="120" height="120">
+                        </div> -->
+                   
                 </div>
             </div><br>
-            </center>
+            
             <br>
             <img class="icn_anak" src="{{asset('assets/icon/anak.png')}}" alt=""></h3>
         </div>
 
 
         <div class="d-flex justify-content-center" style="padding-top:23%">
-            <a onclick="btn_s();periksa()"><img class="icn" src="{{asset('assets/icon/icon_periksa.png')}}" alt=""></a>
+            <a id="check" onclick="btn_s()"><img class="icn" src="{{asset('assets/icon/icon_periksa.png')}}" alt=""></a>
             <a onclick="btn_s();hapus()"><img class="icn" src="{{asset('assets/icon/icon_hapus.png')}}" alt=""></a>
             <img src="" alt="">
         </div>
@@ -133,6 +135,75 @@
         <audio src="../assets/sound/salah.mp3" id="btn-salah"></audio>
     </main>
 
+    <!-- Modal benar -->
+    <div id="myModalbenar" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="">
+            <div >
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <img class="close_modal" src="{{asset('assets/icon/close_btn.png')}}" alt="">
+            </div>
+            <center>
+            <div>
+                <img class="logo" src="{{asset('assets/icon/modal_benar.png')}}" alt="">
+            </div>
+            <div>
+                <a href="/menu" onclick="btn_s()"><img  class="icn" src="{{asset('assets/icon/tombol_modal_next.png')}}" alt=""></a>
+                <a href="/ujian" onclick="btn_s()"><img class='icn' src="{{asset('assets/icon/tombol_modal_ulang.png')}}" alt=""></a>
+            </div>
+            </center>
+            </div>
+
+        </div>
+    </div> 
+    <!-- modal salah -->
+    <div id="myModalsalah" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="">
+            <div >
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <img class="icn2" src="{{asset('assets/icon/close_btn.png')}}" alt="">
+            </div>
+            <center>
+            <div>
+                <img class="logo" src="{{asset('assets/icon/modal_salah.png')}}" alt="">
+            </div>
+            <div>
+                <a href="/menu" onclick="btn_s()"><img  class="icn" src="{{asset('assets/icon/tombol_modal_next.png')}}" alt=""></a>
+                <a href="/ujian" onclick="btn_s()"><img class='icn' src="{{asset('assets/icon/tombol_modal_ulang.png')}}" alt=""></a>
+            </div>
+            </center>
+            </div>
+
+        </div>
+    </div> 
+    <!-- modal waktu -->
+    <div id="myModalwaktu" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="">
+        <div >
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <img class="icn2" src="{{asset('assets/icon/close_btn.png')}}" alt="">
+        </div>
+        <center>
+        <div>
+            <img class="logo" src="{{asset('assets/icon/modal_salah.png')}}" alt="">
+        </div>
+        <div>
+            <a href="/menu" onclick="btn_s()"><img  class="icn" src="{{asset('assets/icon/tombol_modal_next.png')}}" alt=""></a>
+            <a href="/ujian" onclick="btn_s()"><img class='icn' src="{{asset('assets/icon/tombol_modal_ulang.png')}}" alt=""></a>
+        </div>
+        </center>
+        </div>
+
+    </div>
+    </div> 
 
 </body>
 <script type="text/javascript">
@@ -163,7 +234,7 @@
     // var score =0;
     var input = document.getElementById("masuk").value;
     document.getElementById("srcImage2").src = "../../template/" + input + ".jpg";
-    document.getElementById("srcImage3").src = "../../template/bewarna/" + input + ".png";
+    // document.getElementById("srcImage3").src = "../../template/bewarna/" + input + ".png";
 
     var canvasTemplate = document.getElementById('outputTemplate');
     var context = canvasTemplate.getContext('2d');
@@ -179,64 +250,56 @@
         }
     }
 
-    // function periksa() {
-
-    //     let src = cv.imread(document.getElementById("gambar"));
-    //     let dst = new cv.Mat();
-    //     let dsize = new cv.Size(64, 64);
-    //     cv.resize(src, dst, dsize, 0, 0, cv.INTER_AREA);
-    //     cv.imshow('outputCanvas', dst);
-    //     colorImage(cv.imread('outputCanvas'), dst); //blackandwhite
-    //     var kanvas = document.getElementById('outputCanvas2');
-    //     thinningImage2(kanvas); //skeltonize
-    //     var kanvas2 = document.getElementById('outputCanvas3');
-    //     tepi(kanvas2); //segmentasi
-    //     var kanvas3 = document.getElementById('outputCanvas4');
-    //     var ctx = kanvas3.getContext('2d');
-    //     var imgData = ctx.getImageData(0, 0, 64, 64);
-
-    //     templateData = context.getImageData(0, 0, 64, 64);
-
-    //     //template matching
-    //     var batasAtas = 0;
-    //     var nilai = 0; 
-
-    //     for (var i = 0; i < imgData.data.length; i += 4) {
-    //         if (templateData.data[i] == 0) {
-    //             // batasAtas++;
-    //             batasAtas = 64 * 64;
-    //         }
-    //         // nilai = nilai + ((1-Math.round(templateData.data[i]/255)) * (1-Math.round(imgData.data[i]/255)));
-    //         nilai = nilai + Math.pow(((1 - Math.round(templateData.data[i] / 255)) - (1 - Math.round(imgData.data[i] / 255))), 2);
-    //     }
-
-    //     console.log(batasAtas);
-    //     console.log(nilai);
-    //     //if(nilai>=(batasAtas*80/100)){
-    //     // threshold
-    //     if (nilai <= (batasAtas * 13 / 100)) {
-          
-    //     // score = score + 10 ;
-    //         // alert("Jawaban Benar "+score);
-    //         alert("Jawaban Benar ");
-    //         sound_benar();
-
-    //     } else {
-            
-    //     //score = score - 10;
-    //         alert("Jawaban Salah");
-    //         sound_salah();
-
-    //     }
-    //     src.delete();
-    //     dst.delete();
-    // }
     var timeLeft = 30;
     var liveleft =3;
     var point = 0;
 
+    // check kanvas kosong
+    function isCanvasBlank(canvas) {
+        const context = canvas.getContext('2d');
+
+        const pixelBuffer = new Uint32Array(
+            context.getImageData(0, 0, canvas.width, canvas.height).data.buffer
+        );
+
+        return !pixelBuffer.some(color => color !== 0);
+    }
+
+    modal_waktu  = null;
+
+    // //jquery 
+    // $(function() { 
+
+    //         function modal_waktu_(){ 
+    //             $("#myModalwaktu").modal("show");
+    //         }  
+    //         modal_waktu = modal_waktu_;
+    // })
+
+    // function call_modal_waktu() {
+    //     modal_waktu();
+    // } 
+
+    // //just js 
+    // function js_fun () {  
+    //     my_function(); //== call jquery function - just Reference is globally defined not function itself
+    // }
+
+    document.getElementById('check').addEventListener('click', function() {
+        const blank = isCanvasBlank(document.getElementById('gambar'));
+        if(blank){
+           
+            sound_salah();
+        }else{
+            periksa();
+        }
+        
+    });
+
+    // periksa
     function periksa(){
-		let src = cv.imread(document.getElementById("gambar"));
+   
+    let src = cv.imread(document.getElementById("gambar"));
     let dst = new cv.Mat();
     let dsize = new cv.Size(64,64);
     cv.resize(src, dst, dsize, 0, 0, cv.INTER_AREA);
@@ -268,15 +331,19 @@
     if(nilai<=(batasAtas*20/100)){
         sound_benar();
         point=point+10;
-        alert("Jawaban Benar");
+        alert("Benar");
     }
     else{
         sound_salah();
         liveleft--;
-        alert("Jawaban Salah");
+        alert("Salah");
     }
         src.delete(); dst.delete();
 	}
+
+    // periksa
+
+    
 
     //darah 
     var liveelem = document.getElementById('livecount');
@@ -288,7 +355,7 @@
             alert("Darah Habis");
             
         } else {
-            liveelem.innerHTML ='Lives '+ liveleft + ' remaining';
+            liveelem.innerHTML = liveleft;
             
             //timeLeft--;
         }
@@ -296,177 +363,145 @@
 
     // waktu
     var elem = document.getElementById('countdown');
-    var timerId = setInterval(countdown, 1000);
+    var timerId = setInterval(countdown, 10000);
     function countdown() {
         if (timeLeft == -1) {
             clearTimeout(timerId);
             alert("Waktu Habis");
+            // call_modal_waktu();
+            
         } else {
-            elem.innerHTML = timeLeft + ' seconds remaining';
+            elem.innerHTML = timeLeft;
             timeLeft--;
         }
     }
+
 
     //score 
     var selem = document.getElementById('score');
     var scoreid = setInterval(score, 0);
     function score(){
-        selem.innerHTML = 'Nilai ' + point;
+        selem.innerHTML = point;
     }
 
 
     function inputan(){
         input = document.getElementById("masuk").value;
         document.getElementById("srcImage2").src = "../../template/"+input+".jpg";
+        // document.getElementById("srcImage3").src = "../../template/bewarna/"+input+".png";
         var c = document.getElementById("gambar");c.width = c.width;
         make_base();
     }
-
-    function inputan2(){
-        input = document.getElementById("masuk").value;
-        document.getElementById("srcImage3").src = "../../template/besar/"+input+".png";
-    }
-    
-
 
     function hapus(){
         var c = document.getElementById("gambar");c.width = c.width;
         // var ctx = c.getContext("2d");
         // ctx.clearRect(0, 0, canvas.width, canvas.height);
     }
+    function modal_benar(){
+
+    }
+    function modal_salah(){
+
+    }
+    function modal_waktu(){
+        $('#myModalbenar').modal();
+    }
+    
+
 </script>
 
-<!-- <script type="text/javascript">
-var canvas = document.getElementById('gambar');
-var context = canvas.getContext('2d');
-
-var radius = 5; 
-var start = 0;
-var end = Math.PI * 2;
-var dragging = false;
-
-// canvas.width = 64; 
-// canvas.height = 64; 
-context.lineWidth = radius * 2;  
-
-var putPoint = function(e){
-    if(dragging){
-        context.lineTo(e.offsetX, e.offsetY);
-        context.stroke();
-        context.beginPath(); 
-        context.arc(e.offsetX, e.offsetY, radius, start, end);
-        context.fill();  
-        context.beginPath();
-        context.moveTo(e.offsetX, e.offsetY);
-    }
-}
-
-var engage = function(e){
-    dragging = true;
-    putPoint(e);
-}
-
-var disengage = function(){
-    dragging = false;
-    context.beginPath();
-}
-
-canvas.addEventListener('mousedown', engage);
-canvas.addEventListener('mousemove', putPoint);
-canvas.addEventListener('mouseup', disengage);
-</script> -->
-
 <script type="text/javascript">
-var canvas = document.getElementById("gambar");
-var ctx = canvas.getContext("2d");
-ctx.strokeStyle = "#000000";
-ctx.lineWidth = 10;
-
-// Set up mouse events for drawing
-var drawing = false;
-var mousePos = { x:0, y:0 };
-var lastPos = mousePos;
-canvas.addEventListener("mousedown", function (e) {
-        drawing = true;
-  lastPos = getMousePos(canvas, e);
-}, false);
-canvas.addEventListener("mouseup", function (e) {
-  drawing = false;
-}, false);
-canvas.addEventListener("mousemove", function (e) {
-  mousePos = getMousePos(canvas, e);
-}, false);
-
-// Get the position of the mouse relative to the canvas
-function getMousePos(canvasDom, mouseEvent) {
-  var rect = canvasDom.getBoundingClientRect();
-  return {
-    x: mouseEvent.clientX - rect.left,
-    y: mouseEvent.clientY - rect.top
-  };
-}
-
-// Get a regular interval for drawing to the screen
-window.requestAnimFrame = (function (callback) {
-        return window.requestAnimationFrame || 
-           window.webkitRequestAnimationFrame ||
-           window.mozRequestAnimationFrame ||
-           window.oRequestAnimationFrame ||
-           window.msRequestAnimaitonFrame ||
-           function (callback) {
-        window.setTimeout(callback, 1000/60);
-           };
-})();
-
-// Draw to the canvas
-function renderCanvas() {
-  if (drawing) {
+    var canvas = document.getElementById("gambar");
+    var ctx = canvas.getContext("2d");
     ctx.strokeStyle = "#000000";
     ctx.lineWidth = 10;
-    ctx.moveTo(lastPos.x, lastPos.y);
-    ctx.lineTo(mousePos.x, mousePos.y);
-    ctx.stroke();
-    lastPos = mousePos;
-  }
-}
 
-// Allow for animation
-(function drawLoop () {
-  requestAnimFrame(drawLoop);
-  renderCanvas();
-})();
+    // Set up mouse events for drawing
+    var drawing = false;
+    var mousePos = { x:0, y:0 };
+    var lastPos = mousePos;
+    canvas.addEventListener("mousedown", function (e) {
+            drawing = true;
+    lastPos = getMousePos(canvas, e);
+    }, false);
+    canvas.addEventListener("mouseup", function (e) {
+    drawing = false;
+    }, false);
+    canvas.addEventListener("mousemove", function (e) {
+    mousePos = getMousePos(canvas, e);
+    }, false);
 
-// Set up touch events for mobile, etc
-canvas.addEventListener("touchstart", function (e) {
-        mousePos = getTouchPos(canvas, e);
-  var touch = e.touches[0];
-  var mouseEvent = new MouseEvent("mousedown", {
-    clientX: touch.clientX,
-    clientY: touch.clientY
-  });
-  canvas.dispatchEvent(mouseEvent);
-}, false);
-canvas.addEventListener("touchend", function (e) {
-  var mouseEvent = new MouseEvent("mouseup", {});
-  canvas.dispatchEvent(mouseEvent);
-}, false);
-canvas.addEventListener("touchmove", function (e) {
-  var touch = e.touches[0];
-  var mouseEvent = new MouseEvent("mousemove", {
-    clientX: touch.clientX,
-    clientY: touch.clientY
-  });
-  canvas.dispatchEvent(mouseEvent);
-}, false);
+    // Get the position of the mouse relative to the canvas
+    function getMousePos(canvasDom, mouseEvent) {
+    var rect = canvasDom.getBoundingClientRect();
+    return {
+        x: mouseEvent.clientX - rect.left,
+        y: mouseEvent.clientY - rect.top
+    };
+    }
 
-// Get the position of a touch relative to the canvas
-function getTouchPos(canvasDom, touchEvent) {
-  var rect = canvasDom.getBoundingClientRect();
-  return {
-    x: touchEvent.touches[0].clientX - rect.left,
-    y: touchEvent.touches[0].clientY - rect.top
-  };
-}
+    // Get a regular interval for drawing to the screen
+    window.requestAnimFrame = (function (callback) {
+            return window.requestAnimationFrame || 
+            window.webkitRequestAnimationFrame ||
+            window.mozRequestAnimationFrame ||
+            window.oRequestAnimationFrame ||
+            window.msRequestAnimaitonFrame ||
+            function (callback) {
+            window.setTimeout(callback, 1000/60);
+            };
+    })();
+
+    // Draw to the canvas
+    function renderCanvas() {
+    if (drawing) {
+        ctx.strokeStyle = "#000000";
+        ctx.lineWidth = 10;
+        ctx.moveTo(lastPos.x, lastPos.y);
+        ctx.lineTo(mousePos.x, mousePos.y);
+        ctx.stroke();
+        lastPos = mousePos;
+    }
+    }
+
+    // Allow for animation
+    (function drawLoop () {
+    requestAnimFrame(drawLoop);
+    renderCanvas();
+    })();
+
+    // Set up touch events for mobile, etc
+    canvas.addEventListener("touchstart", function (e) {
+            mousePos = getTouchPos(canvas, e);
+    var touch = e.touches[0];
+    var mouseEvent = new MouseEvent("mousedown", {
+        clientX: touch.clientX,
+        clientY: touch.clientY
+    });
+    canvas.dispatchEvent(mouseEvent);
+    }, false);
+    canvas.addEventListener("touchend", function (e) {
+    var mouseEvent = new MouseEvent("mouseup", {});
+    canvas.dispatchEvent(mouseEvent);
+    }, false);
+    canvas.addEventListener("touchmove", function (e) {
+    var touch = e.touches[0];
+    var mouseEvent = new MouseEvent("mousemove", {
+        clientX: touch.clientX,
+        clientY: touch.clientY
+    });
+    canvas.dispatchEvent(mouseEvent);
+    }, false);
+
+    // Get the position of a touch relative to the canvas
+    function getTouchPos(canvasDom, touchEvent) {
+    var rect = canvasDom.getBoundingClientRect();
+    return {
+        x: touchEvent.touches[0].clientX - rect.left,
+        y: touchEvent.touches[0].clientY - rect.top
+    };
+    }
 
 </script>
 <script>

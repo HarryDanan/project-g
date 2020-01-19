@@ -37,25 +37,24 @@
     </center>
 
     <!-- Modal -->
-  <div class="modal fade" id="myModal" role="dialog">
-    <div class="modal-dialog">
-    
-      <!-- Modal content-->
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">Tentang Ayo Menulis</h4>
+    <div id="myModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="">
+            <div >
+                <!-- <button type="button" class="close" data-dismiss="modal">&times;</button> -->
+                <img onclick="btn_s()"class="close_modal" src="{{asset('assets/icon/close_btn.png')}}" data-dismiss="modal" alt="">&times;</img>
+            </div>
+            <center>
+            <div>
+                <img class="about_bill" src="{{asset('assets/icon/about_bill.png')}}" alt="">
+            </div>
+            </center>
+            </div>
+
         </div>
-        <div class="modal-body">
-          <p>Aplikasi Permainan "Ayo Menulis" merupakan permainan edukasi. Edukasi yang diberikan berupa pembelajaran menulis huruf. Keunggulan dari aplikasi ini adalah terdapat asisten virtual yang dapat mengetahui benar atau tidaknya pemain menjawab</p>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        </div>
-      </div>
-      
-    </div>
-  </div>
+    </div> 
   <audio src="../assets/sound/touch.mp3" id="btn-s"></audio>
  
   

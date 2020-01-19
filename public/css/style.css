@@ -6,45 +6,7 @@ body {
   font-weight: 400;
 
 }
-.bgutama{
-  background: url(../assets/icon/bgutama.jpg) no-repeat center center fixed; 
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
-}
-.bg2 {
-  background: url(../assets/icon/bgmenu.png) no-repeat center center fixed; 
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
 
-}
-.papan{
-  position:absolute;
-  z-index:-1;
-  width: 600px;
-  height: 450px;
-
-}
-
-.bg3 {
-  background: url(../assets/icon/bg3.jpg) no-repeat center center fixed; 
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
-
-}
-.icn {
-  height: 120px;
-  width: 200px;
-}
-.icn2{
-  height: 100px;
-  width: 100px;
-}
 
 .loader-wrapper {
   width: 100%;
@@ -66,6 +28,7 @@ body {
   border: 4px solid #Fff;
   animation: loader 2s infinite ease;
 }
+
 .loader-inner {
   vertical-align: top;
   display: inline-block;
@@ -99,55 +62,7 @@ main {
   justify-content: center; */
  
 }
-.bottom_left{
 
-    position: absolute;
-    bottom: 8px;
-    left: 16px;
-  
-}
-
-.icn_sw{
-  height: 75px;
-  width: 150px;
-  padding-top:25px;
-}
-.icn_menu{
-  height: 250px;
-  width: 350px;
-  padding-left:50px;
-  padding-right:50px;
-}
-
-.logo_latihan{
-  height: 250px;
-  width: 350px;
-}
-
-.icn_logo {
-  width: 200px;
-  height: 200px;
-  
-}
-.icn_anak {
-  width: 200px;
-  height: 300px;
-  
-}
-.bubble {
-  position: absolute;
-  z-index: -1;
-  width: 400PX;
-  height: 300px;
-  left: 95px;
- 
-}
-
-.logo {
-  width: 600px;
-  height: 300px;
-
-}
 main h1 {
   margin: 0;
   font-weight: 300;
@@ -174,6 +89,7 @@ main a {
   position: absolute;
   right: 16px;
 }
+
 main .plate {
   position: absolute;
   top: 50%;
@@ -191,6 +107,11 @@ main .plate {
   width: 100%;
   height: 20vh;
 }
+
+/* h5{
+  font-family: Janda Manatee Solid;
+  color: red;
+} */
 
 /* .sub_1{
   background-color: #ff7c7c;
@@ -233,14 +154,140 @@ main .plate {
   background-color: #4CAF50;
   color: white;
 }
-h5{
-  font-family: Janda Manatee Solid;
-  color: red;
-}
+
 
 .icn_ayo{
-  width: 150%;
+  width: 100%;
   height: 10%;
   position : absolute;
-  z-index: 1;
+  /* z-index: 1; */
 }
+
+.score{
+  padding-top: 9%;
+  padding-left: 14%;
+  font-family: Janda Manatee Solid;
+  font-size :20px;
+  position : absolute;
+  z-index: 2;
+  
+  
+}
+
+.bottom_left {
+
+  position: absolute;
+  bottom: 8px;
+  left: 16px;
+
+}
+
+.icn_sw {
+height: 75px;
+width: 150px;
+padding-top:25px;
+}
+
+.icn_darah {
+height: 75px;
+width: 75px;
+padding-top:25px;
+}
+
+.icn_menu{
+height: 250px;
+width: 350px;
+padding-left:50px;
+padding-right:50px;
+}
+
+.logo_latihan{
+height: 250px;
+width: 350px;
+}
+
+.icn_logo {
+width: 200px;
+height: 200px;
+
+}
+.icn_anak {
+width: 200px;
+height: 300px;
+
+}
+.bubble {
+position: absolute;
+z-index: -1;
+width: 400PX;
+height: 300px;
+left: 95px;
+
+}
+
+.logo {
+width: 600px;
+height: 300px;
+
+}
+
+.bgutama{
+  background: url(../assets/icon/bgutama.jpg) no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+.bg2 {
+  background: url(../assets/icon/bgmenu.png) no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+
+}
+.papan{
+  position:absolute;
+  z-index:-1;
+  width: 600px;
+  height: 450px;
+
+}
+
+.bg3 {
+  background: url(../assets/icon/bg3.jpg) no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+
+}
+.icn {
+  height: 120px;
+  width: 200px;
+}
+.icn2{
+  height: 100px;
+  width: 100px;
+}
+
+.about_bill{
+  height: 100%;
+  width: 100%;
+  /* position: absolute;
+  z-index: -1; */
+}
+
+.close_modal{
+  height: 15%;
+  width: 12%;
+  position: absolute;
+  z-index: 2;
+  top: 8px;
+  right: 16px;
+}
+
+
+/* navbar */
+
+/*  */
