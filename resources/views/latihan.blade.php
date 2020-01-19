@@ -3,15 +3,17 @@
 
 <head>
     <title>Ayo Menulis</title>
-    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"> -->
-    <link rel="stylesheet" type="text/css" href="{{asset('css/bootstrap.min.css')}}">
+    <link rel="stylesheet" href="{{asset('css/bootstrap.css')}}">
     <link rel="stylesheet" href="{{asset('css/style.css')}}">
-    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.0.0/dist/tf.min.js"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.0.0/dist/tf.min.js"></script> -->
     <script src="{{asset('js/imageProcessing/preProcessing.js')}}" type="text/javascript"></script>
-    <script src="{{asset('js/imageProcessing/opencv.js')}}" type="text/javascript"></script>
-    <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+    <script src="{{asset('js/imageProcessing/opencv.js')}}" type="text/javascript"></script> 
     <script type="text/javascript" src="{{asset('js/Audio-HTML5.js')}}"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 
 </head>
 
@@ -25,9 +27,9 @@
         <div>
 
             <a href="/menu" onclick="btn_s()"><img class="icn2" src="{{asset('assets/icon/back.png')}}" alt=""
-                    style="position:absolute;"></a>
+                    style="position:fixed;"></a>
             <div class="container-fluid"
-                style="background :url(../assets/icon/bgnav.png);  position:absolute; z-index:-1; height:13%;">
+                style="background :url(../assets/icon/bgnav.png);  position:fixed; z-index:-1; height:13%;">
             
                 <div class="menua">
                                   
@@ -46,7 +48,7 @@
         <div class="d-flex justify-content-center">
 
             <img class="papan" src="{{asset('assets/icon/papan.png')}}" alt="">
-            <canvas id="gambar" width="192" height="192" style="background-color: white; top :40%; position:absolute; border:2px solid #000000;"></canvas>
+            <canvas id="gambar" width="192" height="192" style="background-color: white; top :40%; position:fixed; border:2px solid #000000;"></canvas>
         </div>
         <br><br>
 
@@ -103,6 +105,7 @@
 
 
         <div class="d-flex justify-content-center" style="padding-top:23%">
+        <a data-toggle="modal" data-target="#myModal" onclick="btn_s()"><img class="icn" src="{{asset('assets/icon/icon_about.png')}}" alt=""></a>
             <a id="check" onclick="btn_s()"><img class="icn" src="{{asset('assets/icon/icon_periksa.png')}}" alt=""></a>
             <a onclick="btn_s();hapus()"><img class="icn" src="{{asset('assets/icon/icon_hapus.png')}}" alt=""></a>
             <img src="" alt="">
@@ -136,81 +139,97 @@
     </main>
 
     <!-- Modal benar -->
-    <div id="myModalbenar" class="modal fade" role="dialog">
+    <div id="Modal_benar" class="modal fade" role="dialog">
         <div class="modal-dialog">
 
             <!-- Modal content-->
             <div class="">
             <div >
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <img class="close_modal" src="{{asset('assets/icon/close_btn.png')}}" alt="">
+                <!-- <button type="button" class="close" data-dismiss="modal">&times;</button> -->
+                <img onclick="btn_s()"class="close_modal" src="{{asset('assets/icon/close_btn.png')}}" data-dismiss="modal" alt="">&times;</img>
             </div>
             <center>
             <div>
-                <img class="logo" src="{{asset('assets/icon/modal_benar.png')}}" alt="">
-            </div>
-            <div>
-                <a href="/menu" onclick="btn_s()"><img  class="icn" src="{{asset('assets/icon/tombol_modal_next.png')}}" alt=""></a>
-                <a href="/ujian" onclick="btn_s()"><img class='icn' src="{{asset('assets/icon/tombol_modal_ulang.png')}}" alt=""></a>
+                <img class="about_bill" src="{{asset('assets/icon/about_bill.png')}}" alt="">
             </div>
             </center>
             </div>
 
         </div>
     </div> 
-    <!-- modal salah -->
-    <div id="myModalsalah" class="modal fade" role="dialog">
+    <!-- Modal salah -->
+    <div id="Modal_salah" class="modal fade" role="dialog">
         <div class="modal-dialog">
 
             <!-- Modal content-->
             <div class="">
             <div >
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <img class="icn2" src="{{asset('assets/icon/close_btn.png')}}" alt="">
+                <!-- <button type="button" class="close" data-dismiss="modal">&times;</button> -->
+                <img onclick="btn_s()"class="close_modal" src="{{asset('assets/icon/close_btn.png')}}" data-dismiss="modal" alt="">&times;</img>
             </div>
             <center>
             <div>
-                <img class="logo" src="{{asset('assets/icon/modal_salah.png')}}" alt="">
-            </div>
-            <div>
-                <a href="/menu" onclick="btn_s()"><img  class="icn" src="{{asset('assets/icon/tombol_modal_next.png')}}" alt=""></a>
-                <a href="/ujian" onclick="btn_s()"><img class='icn' src="{{asset('assets/icon/tombol_modal_ulang.png')}}" alt=""></a>
+                <img class="about_bill" src="{{asset('assets/icon/about_bill.png')}}" alt="">
             </div>
             </center>
             </div>
 
         </div>
     </div> 
-    <!-- modal waktu -->
-    <div id="myModalwaktu" class="modal fade" role="dialog">
-    <div class="modal-dialog">
+    <!-- Modal waktu -->
+    <div id="Modal_waktu" class="modal fade" role="dialog">
+        <div class="modal-dialog">
 
-        <!-- Modal content-->
-        <div class="">
-        <div >
-            <button type="button" class="close" data-dismiss="modal">&times;</button>
-            <img class="icn2" src="{{asset('assets/icon/close_btn.png')}}" alt="">
-        </div>
-        <center>
-        <div>
-            <img class="logo" src="{{asset('assets/icon/modal_salah.png')}}" alt="">
-        </div>
-        <div>
-            <a href="/menu" onclick="btn_s()"><img  class="icn" src="{{asset('assets/icon/tombol_modal_next.png')}}" alt=""></a>
-            <a href="/ujian" onclick="btn_s()"><img class='icn' src="{{asset('assets/icon/tombol_modal_ulang.png')}}" alt=""></a>
-        </div>
-        </center>
-        </div>
+            <!-- Modal content-->
+            <div class="">
+            <div>
+                <!-- <button type="button" class="close" data-dismiss="modal">&times;</button> -->
+                <img onclick="btn_s()"class="close_modal" src="{{asset('assets/icon/close_btn.png')}}" data-dismiss="modal" alt="">&times;</img>
+            </div>
+            <center>
+            <div>
+                <img class="about_bill" src="{{asset('assets/icon/about_bill.png')}}" alt="">
+            </div>
+            </center>
+            </div>
 
+        </div>
     </div>
+
+        <!-- modal skor -->
+        <div id="myModal" class="modal fade" role="dialog" data-backdrop="false">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="">
+            <div >
+                <!-- <button type="button" class="close" data-dismiss="modal">&times;</button> -->
+                <img onclick="btn_s()"class="close_modal" src="{{asset('assets/icon/close_btn.png')}}" data-dismiss="modal" alt="">&times;</img>
+            </div>
+            <center>
+            <div>
+                <img class="about_bill" src="{{asset('assets/icon/about_bill.png')}}" alt="">
+            </div>
+            </center>
+            </div>
+
+        </div>
     </div> 
+
+     <!-- carousel -->
 
 </body>
+
+     
 <script type="text/javascript">
 
     $(window).on("load", function () {
         $(".loader-wrapper").fadeOut("slow");
     });
+
+   
+    // $('#Modal_skor').modal({backdrop: 'static', keyboard: false})  
+
     var sound = document.getElementById('btn-s');
     var sound_b = document.getElementById('btn-benar');
     var sound_s = document.getElementById('btn-salah');
@@ -250,7 +269,7 @@
         }
     }
 
-    var timeLeft = 30;
+    var timeLeft = 120;
     var liveleft =3;
     var point = 0;
 
@@ -265,31 +284,15 @@
         return !pixelBuffer.some(color => color !== 0);
     }
 
-    modal_waktu  = null;
-
-    // //jquery 
-    // $(function() { 
-
-    //         function modal_waktu_(){ 
-    //             $("#myModalwaktu").modal("show");
-    //         }  
-    //         modal_waktu = modal_waktu_;
-    // })
-
-    // function call_modal_waktu() {
-    //     modal_waktu();
-    // } 
-
-    // //just js 
-    // function js_fun () {  
-    //     my_function(); //== call jquery function - just Reference is globally defined not function itself
-    // }
+  
 
     document.getElementById('check').addEventListener('click', function() {
         const blank = isCanvasBlank(document.getElementById('gambar'));
         if(blank){
            
             sound_salah();
+            $('#myModal').modal({backdrop: 'static', keyboard: false})  
+            $("#myModal").modal('show');
         }else{
             periksa();
         }
@@ -332,6 +335,8 @@
         sound_benar();
         point=point+10;
         alert("Benar");
+
+
     }
     else{
         sound_salah();
@@ -363,11 +368,11 @@
 
     // waktu
     var elem = document.getElementById('countdown');
-    var timerId = setInterval(countdown, 10000);
+    var timerId = setInterval(countdown, 100);
     function countdown() {
         if (timeLeft == -1) {
             clearTimeout(timerId);
-            alert("Waktu Habis");
+            // alert("Waktu Habis");
             // call_modal_waktu();
             
         } else {
@@ -398,16 +403,6 @@
         // var ctx = c.getContext("2d");
         // ctx.clearRect(0, 0, canvas.width, canvas.height);
     }
-    function modal_benar(){
-
-    }
-    function modal_salah(){
-
-    }
-    function modal_waktu(){
-        $('#myModalbenar').modal();
-    }
-    
 
 </script>
 
@@ -504,8 +499,6 @@
     }
 
 </script>
-<script>
-    
-</script>
+
      
 </html>

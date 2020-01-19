@@ -18,6 +18,10 @@ Route::get('/', function () {
 Route::get('/latihan', function () {
     return view('latihan');
 });
+Route::get('/latihanbesar', function () {
+    return view('latihanbesar');
+});
+
 Route::get('/latihan_kecil', function () {
     return view('latihan_kecil');
 });
@@ -34,4 +38,8 @@ Route::get('/ujian', function () {
 
 Route::get('/tutorial', function () {
     return view('tutorial');
+});
+
+Route::get('/instruksi', function () {
+    return view('instruksi');
 });

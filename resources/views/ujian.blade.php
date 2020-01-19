@@ -4,6 +4,7 @@
     <title>Ayo Menulis</title>
     <link rel="stylesheet" type="text/css" href="{{asset('css/bootstrap.min.css')}}">
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.0.0/dist/tf.min.js"></script>
+    <link rel="stylesheet" href="{{asset('css/style.css')}}">
     <script src="{{asset('js/imageProcessing/preProcessing.js')}}" type="text/javascript"></script>
     <script src="{{asset('js/imageProcessing/opencv.js')}}" type="text/javascript"></script>
     <!-- <script src="{{asset('js/machineLearning/tf.min.js')}}" type="text/javascript"></script> -->
@@ -22,7 +23,11 @@
         <img id="srcImage2" src="../../template/a.jpg" width="64" height="64">
     </div><br>
     <div class="d-flex justify-content-center">
+    <a data-toggle="modal" data-target="#myModal" onclick="btn_s()"><img class="icn" src="{{asset('assets/icon/icon_about.png')}}" alt=""></a>
+
         <button class="btn btn-success" onclick="periksa()" style="margin-right: 10px;">Selanjutnya</button>
+
+        <button data-toggle="modal" data-target="#myModal"  class="btn btn-success"  style="margin-right: 10px;">Se</button>
         <button class="btn btn-warning" onclick="hapus()">Hapus</button>
     </div>
     <div class="row" style="visibility: hidden;">
@@ -43,6 +48,28 @@
             <canvas width="64" height="64" id='outputCanvas4'></canvas>
         </div>
     </div>
+    <div id="myModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="">
+            <div >
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <img class="close_modal" src="{{asset('assets/icon/close_btn.png')}}" alt="">
+            </div>
+            <center>
+            <div>
+                <img class="logo" src="{{asset('assets/icon/modal_benar.png')}}" alt="">
+            </div>
+            <div>
+                <a href="/menu" onclick="btn_s()"><img  class="icn" src="{{asset('assets/icon/tombol_modal_next.png')}}" alt=""></a>
+                <a href="/ujian" onclick="btn_s()"><img class='icn' src="{{asset('assets/icon/tombol_modal_ulang.png')}}" alt=""></a>
+            </div>
+            </center>
+            </div>
+
+        </div>
+    </div> 
 </body>
 <script type="text/javascript">
     var huruf = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"];

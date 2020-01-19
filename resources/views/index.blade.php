@@ -64,7 +64,7 @@
     $(window).on("load",function(){
           $(".loader-wrapper").fadeOut("slow");
     });
-
+    
     var sound = document.getElementById('btn-s');
 
 

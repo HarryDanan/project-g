@@ -2,6 +2,7 @@
   box-sizing: border-box;
 }
 body {
+
   font-family: 'Open Sans';
   font-weight: 400;
 
@@ -50,18 +51,21 @@ body {
   75% { height: 100%;}
   100% { height: 0%;}
 }
+.modal-backdrop {
+  z-index: -1;
+}
 
 
-main {
+/* main {
   /* position: relative;
   z-index: 1;
   padding: 3vh 5vw;
   height: 80vh;
   display: flex;
   flex-flow: column wrap;
-  justify-content: center; */
+  justify-content: center;
  
-}
+} */
 
 main h1 {
   margin: 0;
@@ -211,11 +215,21 @@ width: 200px;
 height: 200px;
 
 }
+
 .icn_anak {
 width: 200px;
 height: 300px;
 
 }
+
+/* .icn_anak2 {
+width: 10%;
+height: 30%;
+position: absolute;
+z-index: 1;
+
+} */
+
 .bubble {
 position: absolute;
 z-index: -1;
@@ -262,6 +276,14 @@ height: 300px;
   background-size: cover;
 
 }
+.bginstruksi {
+  background: url(../assets/icon/bginstruksi.png) no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+
+}
 .icn {
   height: 120px;
   width: 200px;
@@ -288,6 +310,46 @@ height: 300px;
 }
 
 
-/* navbar */
+/* carousel */
+/** TIPS: 
+1. The carousel shouldn't be in any other div, like for example div with class container. 
+2. You can align image position in classes bg1, bg2, bg3 using css background-position.
+*/
 
-/*  */
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content/Box */
+.modal-content {
+  background-color: #fefefe;
+  margin: 15% auto; /* 15% from the top and centered */
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%; /* Could be more or less, depending on screen size */
+}
+
+/* The Close Button */
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
