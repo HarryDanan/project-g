@@ -3,17 +3,15 @@
 
 <head>
     <title>Ayo Menulis</title>
-    <link rel="stylesheet" href="{{asset('css/bootstrap.css')}}">
     <link rel="stylesheet" href="{{asset('css/style.css')}}">
     <!-- <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.0.0/dist/tf.min.js"></script> -->
     <script src="{{asset('js/imageProcessing/preProcessing.js')}}" type="text/javascript"></script>
     <script src="{{asset('js/imageProcessing/opencv.js')}}" type="text/javascript"></script> 
     <script type="text/javascript" src="{{asset('js/Audio-HTML5.js')}}"></script>
-
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 
 </head>
 
@@ -28,6 +26,7 @@
 
             <a href="/menu" onclick="btn_s()"><img class="icn2" src="{{asset('assets/icon/back.png')}}" alt=""
                     style="position:fixed;"></a>
+
             <div class="container-fluid"
                 style="background :url(../assets/icon/bgnav.png);  position:fixed; z-index:-1; height:13%;">
             
@@ -46,6 +45,11 @@
         </div>
 
         <div class="d-flex justify-content-center">
+        <!-- pop up benar dan salah -->
+            <img  id="pop_benar" style="display:none; position:fixed" class="pop_bs" src="{{asset('assets/icon/pop_benar.png')}}" alt="">
+            <img  id="pop_salah" style="display:none; position:fixed" class="pop_bs" src="{{asset('assets/icon/pop_salah.png')}}" alt="">
+            <img  id="pop_kanvas" style="display:none; position:fixed" class="pop_bs" src="{{asset('assets/icon/pop_kanvas.png')}}" alt="">
+        <!-- pop up benar dan salah end -->
 
             <img class="papan" src="{{asset('assets/icon/papan.png')}}" alt="">
             <canvas id="gambar" width="192" height="192" style="background-color: white; top :40%; position:fixed; border:2px solid #000000;"></canvas>
@@ -103,13 +107,13 @@
             <img class="icn_anak" src="{{asset('assets/icon/anak.png')}}" alt=""></h3>
         </div>
 
-
-        <div class="d-flex justify-content-center" style="padding-top:23%">
-        <a data-toggle="modal" data-target="#myModal" onclick="btn_s()"><img class="icn" src="{{asset('assets/icon/icon_about.png')}}" alt=""></a>
-            <a id="check" onclick="btn_s()"><img class="icn" src="{{asset('assets/icon/icon_periksa.png')}}" alt=""></a>
-            <a onclick="btn_s();hapus()"><img class="icn" src="{{asset('assets/icon/icon_hapus.png')}}" alt=""></a>
+        <center>
+        <div  style="padding-top:23%">
+            <a id="check" onclick="btn_s()"><img class="icn" src="{{asset('assets/icon/btn_periksa.png')}}" alt=""></a>
+            <a onclick="btn_s();hapus()"><img class="icn" src="{{asset('assets/icon/btn_hapus.png')}}" alt=""></a>
             <img src="" alt="">
         </div>
+        </center>
 
         <div hidden class="row">
             <div class="col-sm-3">
@@ -138,101 +142,63 @@
         <audio src="../assets/sound/salah.mp3" id="btn-salah"></audio>
     </main>
 
-    <!-- Modal benar -->
-    <div id="Modal_benar" class="modal fade" role="dialog">
-        <div class="modal-dialog">
-
-            <!-- Modal content-->
-            <div class="">
-            <div >
-                <!-- <button type="button" class="close" data-dismiss="modal">&times;</button> -->
-                <img onclick="btn_s()"class="close_modal" src="{{asset('assets/icon/close_btn.png')}}" data-dismiss="modal" alt="">&times;</img>
-            </div>
-            <center>
-            <div>
-                <img class="about_bill" src="{{asset('assets/icon/about_bill.png')}}" alt="">
-            </div>
-            </center>
-            </div>
-
-        </div>
-    </div> 
-    <!-- Modal salah -->
-    <div id="Modal_salah" class="modal fade" role="dialog">
-        <div class="modal-dialog">
-
-            <!-- Modal content-->
-            <div class="">
-            <div >
-                <!-- <button type="button" class="close" data-dismiss="modal">&times;</button> -->
-                <img onclick="btn_s()"class="close_modal" src="{{asset('assets/icon/close_btn.png')}}" data-dismiss="modal" alt="">&times;</img>
-            </div>
-            <center>
-            <div>
-                <img class="about_bill" src="{{asset('assets/icon/about_bill.png')}}" alt="">
-            </div>
-            </center>
-            </div>
-
-        </div>
-    </div> 
     <!-- Modal waktu -->
-    <div id="Modal_waktu" class="modal fade" role="dialog">
+    <div id="myModal_waktu" class="modal fade" role="dialog" data-backdrop="false">
         <div class="modal-dialog">
 
             <!-- Modal content-->
             <div class="">
-            <div>
-                <!-- <button type="button" class="close" data-dismiss="modal">&times;</button> -->
-                <img onclick="btn_s()"class="close_modal" src="{{asset('assets/icon/close_btn.png')}}" data-dismiss="modal" alt="">&times;</img>
-            </div>
             <center>
             <div>
-                <img class="about_bill" src="{{asset('assets/icon/about_bill.png')}}" alt="">
+                <img class="about_modal" src="{{asset('assets/icon/waktu_habis_popup.png')}}" alt="">
+                <a href="/menu" onclick="btn_s()"><img  style ="width:45%;" src="{{asset('assets/icon/btn_lihat_skor.png')}}" alt=""></a>
             </div>
             </center>
             </div>
-
         </div>
-    </div>
+    </div> 
 
         <!-- modal skor -->
-        <div id="myModal" class="modal fade" role="dialog" data-backdrop="false">
+    <div id="myModal_skor" class="modal fade" role="dialog" style="margin: 0 auto">
         <div class="modal-dialog">
-
             <!-- Modal content-->
             <div class="">
-            <div >
-                <!-- <button type="button" class="close" data-dismiss="modal">&times;</button> -->
-                <img onclick="btn_s()"class="close_modal" src="{{asset('assets/icon/close_btn.png')}}" data-dismiss="modal" alt="">&times;</img>
-            </div>
+                <div >
+                    <!-- <button type="button" class="close" data-dismiss="modal">&times;</button> -->
+                    <img onclick="btn_s()"class="close_modal" src="{{asset('assets/icon/close_btn.png')}}" data-dismiss="modal" alt="">&times;</img>
+                </div>
             <center>
-            <div>
-                <img class="about_bill" src="{{asset('assets/icon/about_bill.png')}}" alt="">
-            </div>
+                <div>
+                    <img class="skor_modal" src="{{asset('assets/icon/skor_modal.png')}}" alt="">
+                    <a href="/menu" onclick="btn_s()"><img  style ="width:45%;" src="{{asset('assets/icon/btn_ulang.png')}}" alt=""></a>
+                    <a href="/" onclick="btn_s()"><img style ="width:45%;" src="{{asset('assets/icon/btn_keluar.png')}}" alt=""></a>
+
+                </div>
             </center>
             </div>
-
         </div>
     </div> 
-
      <!-- carousel -->
-
 </body>
 
      
 <script type="text/javascript">
+    // loading
 
     $(window).on("load", function () {
         $(".loader-wrapper").fadeOut("slow");
     });
 
-   
-    // $('#Modal_skor').modal({backdrop: 'static', keyboard: false})  
+    // loading end
+    // sound
 
     var sound = document.getElementById('btn-s');
     var sound_b = document.getElementById('btn-benar');
     var sound_s = document.getElementById('btn-salah');
+
+    // sound end
+
+    // sound click
 
     function btn_s() {
         sound.pause();
@@ -250,11 +216,11 @@
         sound_b.play();
     }
 
+    //sound click end
+
     // var score =0;
     var input = document.getElementById("masuk").value;
     document.getElementById("srcImage2").src = "../../template/" + input + ".jpg";
-    // document.getElementById("srcImage3").src = "../../template/bewarna/" + input + ".png";
-
     var canvasTemplate = document.getElementById('outputTemplate');
     var context = canvasTemplate.getContext('2d');
 
@@ -269,9 +235,9 @@
         }
     }
 
-    var timeLeft = 120;
-    var liveleft =3;
-    var point = 0;
+    var timeLeft = 120; //setting timer
+    var liveleft =3; //setting jumlah nyawa
+    var point = 0; //skor
 
     // check kanvas kosong
     function isCanvasBlank(canvas) {
@@ -284,21 +250,20 @@
         return !pixelBuffer.some(color => color !== 0);
     }
 
-  
-
     document.getElementById('check').addEventListener('click', function() {
         const blank = isCanvasBlank(document.getElementById('gambar'));
         if(blank){
            
             sound_salah();
-            $('#myModal').modal({backdrop: 'static', keyboard: false})  
-            $("#myModal").modal('show');
+            $("#pop_kanvas").fadeIn();
+            $("#pop_kanvas").fadeOut('slow');
         }else{
             periksa();
         }
         
     });
 
+    // check end
     // periksa
     function periksa(){
    
@@ -334,14 +299,16 @@
     if(nilai<=(batasAtas*20/100)){
         sound_benar();
         point=point+10;
-        alert("Benar");
-
-
+       
+        $("#pop_benar").fadeIn();
+        $("#pop_benar").fadeOut('slow');
     }
     else{
         sound_salah();
         liveleft--;
-        alert("Salah");
+        // alert("Salah");
+        $("#pop_salah").fadeIn();
+        $("#pop_salah").fadeOut('slow');
     }
         src.delete(); dst.delete();
 	}
@@ -357,7 +324,9 @@
     function livecount() {
         if (liveleft == -1) {
             clearTimeout(liveid);
-            alert("Darah Habis");
+            // alert("Darah Habis");
+            $('#myModal_skor').modal({backdrop: 'static', keyboard: false})  
+            $("#myModal_skor").modal('show');
             
         } else {
             liveelem.innerHTML = liveleft;
@@ -374,6 +343,8 @@
             clearTimeout(timerId);
             // alert("Waktu Habis");
             // call_modal_waktu();
+            $('#myModal_skor').modal({backdrop: 'static', keyboard: false})  
+            $("#myModal_skor").modal('show');
             
         } else {
             elem.innerHTML = timeLeft;

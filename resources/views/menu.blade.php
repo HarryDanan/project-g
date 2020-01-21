@@ -7,21 +7,26 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
     <link rel="stylesheet" href="{{asset('css/style.css')}}">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    
     <script type="text/javascript" src="{{asset('js/Audio-HTML5.js')}}"></script>
   </head>
   <body class="bg2">
       <!-- Demo stuff-->
- >
+  <!-- loading -->
+
     <div class="loader-wrapper">
         <span class="loader"><span class="loader-inner"></span></span>
-      </div>
-        <div class="d-flex flex-row bd-highlight mb-3">
+    </div>
+
+    <!-- loading end -->
+      <div>
           <div class="p-2 bd-highlight" style="padding-left : 5%;">
             <a href="/" onclick="btn_s()"><img  class="icn2" src="{{asset('assets/icon/back.png')}}" alt=""></a>
           </div>
-        </div>
+      </div>
 
         <div style="padding-top:10%;">
         <center>

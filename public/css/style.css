@@ -285,71 +285,65 @@ height: 300px;
 
 }
 .icn {
-  height: 120px;
-  width: 200px;
-}
-.icn2{
-  height: 100px;
-  width: 100px;
+  width: 17%;
 }
 
-.about_bill{
+.icn2 {
+  width: 7%;
+}
+
+.close_modal{
+  z-index: 2;
+  right: 1%;
+  position: fixed;
+  width: 15%;
+}
+
+
+.skor_modal{
+  height: 110%;
+  width: 110%;
+
+}
+
+.Waktu_modal{
+  height: 100%;
+  width: 100%;
+
+}
+
+.about_modal{
   height: 100%;
   width: 100%;
   /* position: absolute;
   z-index: -1; */
 }
 
-.close_modal{
-  height: 15%;
-  width: 12%;
-  position: absolute;
-  z-index: 2;
-  top: 8px;
-  right: 16px;
+.pop_bs {
+  height: 10%;
+  width: 10%;
+  
 }
 
-
-/* carousel */
-/** TIPS: 
-1. The carousel shouldn't be in any other div, like for example div with class container. 
-2. You can align image position in classes bg1, bg2, bg3 using css background-position.
-*/
-
-/* The Modal (background) */
-.modal {
-  display: none; /* Hidden by default */
-  position: fixed; /* Stay in place */
-  z-index: 1; /* Sit on top */
-  left: 0;
-  top: 0;
-  width: 100%; /* Full width */
-  height: 100%; /* Full height */
-  overflow: auto; /* Enable scroll if needed */
-  background-color: rgb(0,0,0); /* Fallback color */
-  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+/* animation fade in out*/
+/* #pop_benar{
+  opacity: 0;
+  transition: opacity 1s; 
 }
 
-/* Modal Content/Box */
-.modal-content {
-  background-color: #fefefe;
-  margin: 15% auto; /* 15% from the top and centered */
-  padding: 20px;
-  border: 1px solid #888;
-  width: 80%; /* Could be more or less, depending on screen size */
+#pop_
+
+#pop_benar.fade{
+  opacity: 0;
 }
 
-/* The Close Button */
-.close {
-  color: #aaa;
-  float: right;
-  font-size: 28px;
-  font-weight: bold;
+#pop_salah{
+  opacity: ;
+  transition: opacity 1s; 
 }
 
-.close:hover,
-.close:focus {
-  color: black;
-  text-decoration: none;
-  cursor: pointer;
-}
+#pop_salah.fade{
+  opacity: 0;
+} */
+
+/* pop up end */
