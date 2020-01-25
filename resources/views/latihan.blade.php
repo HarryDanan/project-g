@@ -22,20 +22,21 @@
         <div class="loader-wrapper" style="position:absolute;z-index:2;">
             <span class="loader"><span class="loader-inner"></span></span>
         </div>
+
         <div>
 
-            <a href="/menu" onclick="btn_s()"><img class="icn2" src="{{asset('assets/icon/back.png')}}" alt=""
-                    style="position:fixed;"></a>
+            <a href="/menu" onclick="btn_s()"><img class="icn2" src="{{asset('assets/icon/back.png')}}" alt="" style="position:fixed;"></a>
 
-            <div class="container-fluid"
-                style="background :url(../assets/icon/bgnav.png);  position:fixed; z-index:-1; height:13%;">
+            <div class="container-fluid" style="background :url(../assets/icon/bgnav.png);  position:fixed; z-index:-1; height:13%;"></div>     
             
-                <div class="menua">
-                                  
-                    <a href="" class ="score" id="livecount" style="color : white; padding-left : 8%;"></a><a href="" ><img class=" icn_darah" src="{{asset('assets/icon/darah.png')}}" alt=""></a>
-                    <a href="" class ="score" id="score" style="color : #00bfff;"></a><a href="" ><img class=" icn_sw" src="{{asset('assets/icon/icon_skor.png')}}" alt=""></a>
-                    <a href="" class ="score" id="countdown" style="color : red; padding-left : 18%;"></a><a href="" ><img class=" icn_sw" src="{{asset('assets/icon/icon_waktu.png')}}" alt=""></a>
-                </div>
+            <div class="menua">
+                <a href="" class ="score" id="livecount" style="color : white; padding-top:2.2%; padding-left:2.2%"></a>
+                <a href="" class ="score" id="score" style="color : #00bfff; padding-top:2.2%; padding-left:10%"></a>
+                <a href="" class ="score" id="countdown" style="color : red; padding-top:2.2%; padding-left:22%"></a>
+
+                <a href="" ><img class=" icn_darah" src="{{asset('assets/icon/darah.png')}}" alt=""></a>
+                <a href="" ><img class=" icn_sw" src="{{asset('assets/icon/icon_skor.png')}}" alt=""></a>
+                <a href="" ><img class=" icn_sw" src="{{asset('assets/icon/icon_waktu.png')}}" alt=""></a>
             </div>
             <div>
                 <center>
@@ -50,7 +51,6 @@
             <img  id="pop_salah" style="display:none; position:fixed" class="pop_bs" src="{{asset('assets/icon/pop_salah.png')}}" alt="">
             <img  id="pop_kanvas" style="display:none; position:fixed" class="pop_bs" src="{{asset('assets/icon/pop_kanvas.png')}}" alt="">
         <!-- pop up benar dan salah end -->
-
             <img class="papan" src="{{asset('assets/icon/papan.png')}}" alt="">
             <canvas id="gambar" width="192" height="192" style="background-color: white; top :40%; position:fixed; border:2px solid #000000;"></canvas>
         </div>
@@ -59,10 +59,9 @@
         <div class="bottom_left">
             <div>
                 <img class="bubble" src="{{asset('assets/icon/bubble.png')}}" alt="">
-                <div style="padding-left:180px;padding-top:30%">
-               
                     <img class="icn_ayo" src="{{asset('assets/icon/ayo.png')}}" alt=""><br>
-                    <div style="left:10%;top:5%;">
+                    <div class="isi_bubble">
+                        <center>
                         <div>
                             <img id="srcImage2" src="" width="64" height="64">
                         </div>
@@ -95,13 +94,13 @@
                                 <option value="y">Y</option>
                                 <option value="z">Z</option>
                             </select>
+                        </center>
                         </div>
                         <!-- <div>
                             <img id="srcImage3" src="" width="120" height="120">
                         </div> -->
-                   
-                </div>
-            </div><br>
+                
+            </div>
             
             <br>
             <img class="icn_anak" src="{{asset('assets/icon/anak.png')}}" alt=""></h3>
@@ -143,38 +142,37 @@
     </main>
 
     <!-- Modal waktu -->
-    <div id="myModal_waktu" class="modal fade" role="dialog" data-backdrop="false">
-        <div class="modal-dialog">
-
+    <div id="myModal_waktu" class="modal fade" role="dialog">
+        <div class="modal-dialog  modal-lg modal-dialog-centered">
             <!-- Modal content-->
-            <div class="">
-            <center>
-            <div>
-                <img class="about_modal" src="{{asset('assets/icon/waktu_habis_popup.png')}}" alt="">
-                <a href="/menu" onclick="btn_s()"><img  style ="width:45%;" src="{{asset('assets/icon/btn_lihat_skor.png')}}" alt=""></a>
-            </div>
-            </center>
+            <div class="modal-content">
+                <div class="container">
+                    <img class="about_modal" style="width:100%;height:100%;" src="{{asset('assets/icon/waktu_habis_popup.png')}}" alt="">
+                    
+                </div>
+                <div class="container" style="padding-left:10%;">
+                     <a href="/menu" onclick="btn_s()"><img  style ="width:45%;" src="{{asset('assets/icon/btn_lihat_skor.png')}}" alt=""></a>
+                </div>
             </div>
         </div>
     </div> 
 
         <!-- modal skor -->
-    <div id="myModal_skor" class="modal fade" role="dialog" style="margin: 0 auto">
-        <div class="modal-dialog">
+    <div id="myModal_skor" class="modal fade" role="dialog" >
+        <div class="modal-dialog modal-lg modal-dialog-centered">
             <!-- Modal content-->
-            <div class="">
-                <div >
+            <div class="modal-content">
+                <div class="container">
                     <!-- <button type="button" class="close" data-dismiss="modal">&times;</button> -->
                     <img onclick="btn_s()"class="close_modal" src="{{asset('assets/icon/close_btn.png')}}" data-dismiss="modal" alt="">&times;</img>
                 </div>
-            <center>
-                <div>
-                    <img class="skor_modal" src="{{asset('assets/icon/skor_modal.png')}}" alt="">
+                <div class="container" style="">
+                    <img class="skor_modal" style="width:100%;height:100%;"src="{{asset('assets/icon/skor_modal.png')}}" alt="">
+                </div>
+                <div class="container" style="padding-left:10%;">
                     <a href="/menu" onclick="btn_s()"><img  style ="width:45%;" src="{{asset('assets/icon/btn_ulang.png')}}" alt=""></a>
                     <a href="/" onclick="btn_s()"><img style ="width:45%;" src="{{asset('assets/icon/btn_keluar.png')}}" alt=""></a>
-
                 </div>
-            </center>
             </div>
         </div>
     </div> 
@@ -253,15 +251,14 @@
     document.getElementById('check').addEventListener('click', function() {
         const blank = isCanvasBlank(document.getElementById('gambar'));
         if(blank){
-           
+
             sound_salah();
             $("#pop_kanvas").fadeIn();
             $("#pop_kanvas").fadeOut('slow');
-        }else{
-            periksa();
         }
         
     });
+
 
     // check end
     // periksa
@@ -337,7 +334,7 @@
 
     // waktu
     var elem = document.getElementById('countdown');
-    var timerId = setInterval(countdown, 100);
+    var timerId = setInterval(countdown, 10);
     function countdown() {
         if (timeLeft == -1) {
             clearTimeout(timerId);
@@ -359,6 +356,12 @@
     function score(){
         selem.innerHTML = point;
     }
+
+    // var selem_m = document.getElementById('score_m');
+    // var scoreid_m = setInterval(score_m, 0);
+    // function score_m(){
+    //     selem_m.innerHTML = point;
+    // }
 
 
     function inputan(){

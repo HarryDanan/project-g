@@ -42,20 +42,22 @@
     </center>
 
     <!-- Modal  -->    
-    <div id="myModal" class="modal fade" role="dialog">
-        <div class="modal-dialog">
-            <div class="">
+    <div id="myModal" class="modal fade" role="dialog" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content">
             <div >
-                <img onclick="btn_s() "class="close_modal" src="{{asset('assets/icon/close_btn.png')}}" data-dismiss="modal" alt="">&times;</img>
+                <img onclick="btn_s()"class="close_modal" src="{{asset('assets/icon/close_btn.png')}}" data-dismiss="modal" alt="">&times;</img>
             </div>
             <center>
             <div>
-                <img class="about_modal" src="{{asset('assets/icon/about_bill.png')}}" alt="">
+                <img class="about_modal" style="width:100%;height:100%;" src="{{asset('assets/icon/about_bill.png')}}" alt="">
             </div>
             </center>
             </div>
         </div>
     </div> 
+    <!-- Modal -->
+    <audio src="../assets/sound/touch.mp3" id="btn-s"></audio>
   </body>
 
   <script>

@@ -86,13 +86,7 @@ main a {
   color: #38c5b9;
   font-size: 30px;
 }
-.menua{
-  text-decoration: none;
-  color: #38c5b9;
-  font-size: 30px;
-  position: absolute;
-  right: 16px;
-}
+
 
 main .plate {
   position: absolute;
@@ -161,64 +155,80 @@ main .plate {
 
 
 .icn_ayo{
-  width: 100%;
-  height: 10%;
-  position : absolute;
+  width: 15%;
+  height: 3%;
+  position : fixed;
+  bottom:58%;
+  left: 15%;
   /* z-index: 1; */
 }
 
-.score{
-  padding-top: 9%;
-  padding-left: 14%;
-  font-family: Janda Manatee Solid;
-  font-size :20px;
-  position : absolute;
-  z-index: 2;
-  
-  
-}
+
 
 .bottom_left {
 
-  position: absolute;
-  bottom: 8px;
-  left: 16px;
+  position: fixed;
+  bottom: 2%;
+  left: 2%;
 
+}
+
+/* score */
+
+.score{
+  /* padding-top: 9%;
+  padding-left: 14%; */
+  font-family: Janda Manatee Solid;
+  font-size :20px;
+  position : fixed;
+  z-index: 2;
+}
+
+.menua{
+  text-decoration: none;
+  color: #38c5b9;
+  font-size: 30px;
+  position: absolute;
+  left:65%;
 }
 
 .icn_sw {
-height: 75px;
-width: 150px;
-padding-top:25px;
+  z-index: 1;;
+  height: 70px;
+  width: 30%;
+  padding-top:2%;
+
 }
 
 .icn_darah {
-height: 75px;
-width: 75px;
-padding-top:25px;
+  height: 15%;
+  width: 15%;
+  padding-top:2%;
+
 }
+/* score end */
 
 .icn_menu{
-height: 250px;
-width: 350px;
-padding-left:50px;
-padding-right:50px;
+  height: 250px;
+  width: 350px;
+  padding-left:50px;
+  padding-right:50px;
 }
 
 .logo_latihan{
-height: 250px;
-width: 350px;
+  height: 30%;
+  width: 15%;
 }
 
 .icn_logo {
-width: 200px;
-height: 200px;
+  width: 15%;
+  height: 15%;
 
 }
 
 .icn_anak {
-width: 200px;
-height: 300px;
+  width: 120%;
+  height: 120%;
 
 }
 
@@ -231,17 +241,25 @@ z-index: 1;
 } */
 
 .bubble {
-position: absolute;
-z-index: -1;
-width: 400PX;
-height: 300px;
-left: 95px;
+  position: fixed;
+  z-index: -1;
+  width: 25%;
+  height: 30%;
+  bottom: 37%;
+  left: 10%;
+
+}
+.isi_bubble {
+  position: fixed;
+  z-index: 1;
+  bottom: 45%;
+  left: 20%;
 
 }
 
 .logo {
-width: 600px;
-height: 300px;
+  width: 50%;
+  height: 15%;
 
 }
 
@@ -252,19 +270,13 @@ height: 300px;
   -o-background-size: cover;
   background-size: cover;
 }
+
 .bg2 {
   background: url(../assets/icon/bgmenu.png) no-repeat center center fixed; 
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
-
-}
-.papan{
-  position:absolute;
-  z-index:-1;
-  width: 600px;
-  height: 450px;
 
 }
 
@@ -276,14 +288,26 @@ height: 300px;
   background-size: cover;
 
 }
-.bginstruksi {
-  background: url(../assets/icon/bginstruksi.png) no-repeat center center fixed; 
+.bg4 {
+  background: url(../assets/icon/bg3.jpg) no-repeat center center fixed; 
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
 
 }
+
+
+.papan{
+  z-index:-1;
+  position: fixed;
+  width: 40%;
+  height: 50%;
+  top:27%;
+  padding-left:1%;
+
+}
+
 .icn {
   width: 17%;
 }
@@ -295,8 +319,8 @@ height: 300px;
 .close_modal{
   z-index: 2;
   right: 1%;
-  position: fixed;
-  width: 15%;
+  position: absolute;
+  width: 10%;
 }
 
 
@@ -323,6 +347,16 @@ height: 300px;
   height: 10%;
   width: 10%;
   
+}
+
+div.modal-content{
+  background:none;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  -o-box-shadow: none;
+  box-shadow: none;
+  border:0px;
+    
 }
 
 /* animation fade in out*/
