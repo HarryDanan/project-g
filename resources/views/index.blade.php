@@ -62,6 +62,53 @@
         </div>
     </div> 
     <!-- Modal -->
+    <!-- <button class="btn btn-default" data-toggle="modal" data-target=".bs-example-modal-lg">Large modal</button> -->
+
+    <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+          <div id="demo" class="carousel slide" data-interval="false" data-ride="carousel">
+
+            <!-- Indicators -->
+            <ul class="carousel-indicators">
+              <li data-target="#demo" data-slide-to="0" class="active"></li>
+              <li data-target="#demo" data-slide-to="1"></li>
+              <li data-target="#demo" data-slide-to="2"></li>
+            </ul>
+            <center>
+            <!-- The slideshow -->
+              <div class="carousel-inner">
+                <div class="carousel-item active">
+                  <img src="{{asset('assets/icon/back.png')}}" alt="Los Angeles">
+                </div>
+                <div class="carousel-item">
+                  <img src="{{asset('assets/icon/back.png')}}" alt="Chicago">
+                </div>
+                <div class="carousel-item">
+                  <img src="{{asset('assets/icon/back.png')}}" alt="New York"><br>
+                  <a href="/latihan" onclick="btn_s()"><img  class="icn" src="{{asset('assets/icon/btn_mulai.png')}}" alt=""></a>
+                </div>
+              </div>
+
+              <!-- Left and right controls -->
+              <a class="carousel-control-prev" href="#demo" data-slide="prev">
+                <img style="width:25%;"src="{{asset('assets/icon/btn_back.png')}}">
+              </a>
+              <a class="carousel-control-next" href="#demo" data-slide="next">
+                <img style="width:25%;"src="{{asset('assets/icon/btn_next.png')}}">
+              </a>
+            </center>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+
+
+
+
     <audio src="../assets/sound/touch.mp3" id="btn-s"></audio>
   </body>
 

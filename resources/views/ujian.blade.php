@@ -30,7 +30,7 @@
         <button data-toggle="modal" data-target="#myModal"  class="btn btn-success"  style="margin-right: 10px;">Se</button>
         <button class="btn btn-warning" onclick="hapus()">Hapus</button>
     </div>
-    <div class="row" style="visibility: hidden;">
+    <div class="row">
         <div class="col-sm-3">
             <h5>Gambar Resize</h5>
             <canvas width="64" height="64" id='outputCanvas'></canvas>
@@ -48,28 +48,7 @@
             <canvas width="64" height="64" id='outputCanvas4'></canvas>
         </div>
     </div>
-    <div id="myModal" class="modal fade" role="dialog">
-        <div class="modal-dialog">
-
-            <!-- Modal content-->
-            <div class="">
-            <div >
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <img class="close_modal" src="{{asset('assets/icon/close_btn.png')}}" alt="">
-            </div>
-            <center>
-            <div>
-                <img class="logo" src="{{asset('assets/icon/modal_benar.png')}}" alt="">
-            </div>
-            <div>
-                <a href="/menu" onclick="btn_s()"><img  class="icn" src="{{asset('assets/icon/tombol_modal_next.png')}}" alt=""></a>
-                <a href="/ujian" onclick="btn_s()"><img class='icn' src="{{asset('assets/icon/tombol_modal_ulang.png')}}" alt=""></a>
-            </div>
-            </center>
-            </div>
-
-        </div>
-    </div> 
+    
 </body>
 <script type="text/javascript">
     var huruf = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"];
@@ -77,33 +56,97 @@
     var input = huruf[Math.floor(Math.random() * 26)];
     var poin = 0;
     var soal = 0;
-    document.getElementById("srcImage2").src = "../../template/"+input+".jpg";  
+    // document.getElementById("srcImage2").src = "../../template/"+input+".jpg";  
+
+    document.getElementById("srcImage2").src = "../../template/" + input + ".jpg";
+    var canvasTemplate = document.getElementById('outputTemplate');
+    var context = canvasTemplate.getContext('2d');
+
+    make_base();
+
+    function make_base() { //membuat inputgambar template
+        base_image = new Image();
+        base_image.src = document.getElementById("srcImage2").src;
+    
+        base_image.onload = function () {
+            context.drawImage(base_image, 0, 0);
+        }
+    }
+
+    function make_base() { //membuat inputgambar template
+        base_image = new Image();
+        base_image.src = document.getElementById("srcImage2").src;
+    
+        base_image.onload = function () {
+            context.drawImage(base_image, 0, 0);
+        }
+    }
 
     function periksa(){
-        let src = cv.imread('gambar');
+        // let src = cv.imread('gambar');
+        let src = cv.imread(document.getElementById("gambar"));
         let dst = new cv.Mat();
         let dsize = new cv.Size(64,64);
         cv.resize(src, dst, dsize, 0, 0, cv.INTER_AREA);
         cv.imshow('outputCanvas', dst);
         colorImage(cv.imread('outputCanvas'), dst);
         var kanvas = document.getElementById('outputCanvas2');
-        thinningImage(kanvas);
+        thinningImage2(kanvas);
         var kanvas2 = document.getElementById('outputCanvas3');
         tepi(kanvas2);
-        src = cv.imread('outputCanvas4');
-        let templ = cv.imread('srcImage2');
-        dst = new cv.Mat();
-        let mask = new cv.Mat();
-        cv.matchTemplate(src, templ, dst, cv.TM_CCORR_NORMED, mask);
-        let result = cv.minMaxLoc(dst, mask); 
-        console.log(result);
-        if(result.maxVal>0.8){
-            poin++;
+        var kanvas3 = document.getElementById('outputCanvas4');
+        var ctx = kanvas3.getContext('2d');
+        var imgData = ctx.getImageData(0,0,64,64);
+        templateData = context.getImageData(0,0,64,64);
+
+        var batasAtas=0; var nilai=0;  var darah = 3;
+        for(var i = 0; i<imgData.data.length; i+=4){
+          if(templateData.data[i]==0){
+            // batasAtas++;
+            batasAtas = 64*64;
+          }
+          // nilai = nilai + ((1-Math.round(templateData.data[i]/255)) * (1-Math.round(imgData.data[i]/255)));
+          nilai = nilai + Math.pow(((1-Math.round(templateData.data[i]/255)) - (1-Math.round(imgData.data[i]/255))),2);
+        }
+        console.log(batasAtas);
+        console.log(nilai);
+        //if(nilai>=(batasAtas*80/100)){
+        if(nilai<=(batasAtas*20/100)){
+            sound_benar();
+            // point=point+10;
             soal++;
+          
+            $("#pop_benar").fadeIn();
+            $("#pop_benar").fadeOut('slow');
         }
         else{
-            salah.push(input);
+            sound_salah();
+            // liveleft--;
+            // alert("Salah");
+            $("#pop_salah").fadeIn();
+            $("#pop_salah").fadeOut('slow');
         }
+            src.delete(); dst.delete();
+      }
+        
+
+        // src = cv.imread('outputCanvas4');
+        // let templ = cv.imread('srcImage2');
+        // dst = new cv.Mat();
+        // let mask = new cv.Mat();
+        // cv.matchTemplate(src, templ, dst, cv.TM_CCORR_NORMED, mask);
+        // let result = cv.minMaxLoc(dst, mask); 
+        // console.log(result);
+        // if(result.maxVal>0.8){
+        //     poin++;
+        //     soal++;
+        //     salah.push(input);
+        //     hapus();
+        // }
+        // else{
+        //     salah.push(input);
+        //     hapus();
+        // }
         if(soal==9){
             console.log(salah);
             var peringatan = "Nilai anda "+poin+", jawaban yang salah: ";
@@ -129,9 +172,10 @@
     }
 
     function hapus(){
-        var c = document.getElementById("gambar");
-        var ctx = c.getContext("2d");
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        // var c = document.getElementById("gambar");
+        // var ctx = c.getContext("2d");
+        // ctx.clearRect(0, 0, canvas.width, canvas.height);
+        var c = document.getElementById("gambar");c.width = c.width;
     }
 </script>
 

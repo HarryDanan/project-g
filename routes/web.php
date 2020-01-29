@@ -43,3 +43,16 @@ Route::get('/tutorial', function () {
 Route::get('/instruksi', function () {
     return view('instruksi');
 });
+
+Route::get('/scoreboard', function () {
+    return view('scoreboard');
+});
+
+Route::get('/menu_ujian', function () {
+    return view('menu_ujian');
+});
+Route::get('/ujian_test', function () {
+    return view('ujian_test');
+});
+
+

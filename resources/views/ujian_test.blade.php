@@ -72,7 +72,7 @@
                             <img id="srcImage2" src="" width="64" height="64">
                         </div>
                     
-                            <select class="selectpicker "name="carlist" form="carform" id="masuk" onchange="inputan()">
+                            <select class="selectpicker "name="carlist" form="carform" id="masuk" onchange="inputan()" hidden>
                                 <option value="a" selected>A</option>
                                 <option value="b">B</option>
                                 <option value="c">C</option>
@@ -120,7 +120,7 @@
         </div>
         </center>
 
-        <div hidden class="row">
+        <div class="row">
             <div class="col-sm-3">
                 <h5>Gambar Template</h5>
                 <canvas width="64" height="64" id='outputTemplate'></canvas>
@@ -223,11 +223,17 @@
     //sound click end
 
     // var score =0;
-    var input = document.getElementById("masuk").value;
+    // var input = document.getElementById("masuk").value;
+    var huruf = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"];
+    var input = huruf[Math.floor(Math.random() * 26)];
+    var soal = 0;
+    var timeLeft = 120; //setting timer
+    var liveleft =20; //setting jumlah nyawa
+    var point = 0; //skor
+
     document.getElementById("srcImage2").src = "../../template/" + input + ".jpg";
     var canvasTemplate = document.getElementById('outputTemplate');
     var context = canvasTemplate.getContext('2d');
-
     make_base();
 
     function make_base() { //membuat inputgambar template
@@ -239,9 +245,9 @@
         }
     }
 
-    var timeLeft = 120; //setting timer
-    var liveleft =3; //setting jumlah nyawa
-    var point = 0; //skor
+  
+
+
 
     // check kanvas kosong
     function isCanvasBlank(canvas) {
@@ -288,7 +294,7 @@
   
     templateData = context.getImageData(0,0,64,64);
 
-    var batasAtas=0; var nilai=0;  var darah = 3;
+    var batasAtas=0; var nilai=0;
     for(var i = 0; i<imgData.data.length; i+=4){
     	if(templateData.data[i]==0){
     		// batasAtas++;
@@ -307,6 +313,7 @@
        
         $("#pop_benar").fadeIn();
         $("#pop_benar").fadeOut('slow');
+        hapus();
     }
     else{
         sound_salah();
@@ -314,10 +321,18 @@
         // alert("Salah");
         $("#pop_salah").fadeIn();
         $("#pop_salah").fadeOut('slow');
+        hapus();
     }
-        src.delete(); dst.delete();
+    if(soal==11){
+        alert("ok");
+    }
+        input = huruf[Math.floor(Math.random() * 26)];
+        document.getElementById("srcImage2").src = "../../template/"+input+".jpg";
+        make_base();
+        
+        src.delete(); dst.delete(); 
 	}
-
+  
     // periksa
 
     

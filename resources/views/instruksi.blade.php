@@ -16,10 +16,10 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
   </head>
-  <body class="bg3">
+  <body class="bg_instruksi">
     
     <!-- loading screen -->
-    <div class="loader-wrapper">
+    <div class="loader-wrapper" style="z-index: 9999999">
         <span class="loader"><span class="loader-inner"></span></span>
     </div>
     <!-- loading screen -->
@@ -33,35 +33,35 @@
 
       <!-- carousel -->
       <center>
-      <div id="demo" class="carousel slide" data-ride="carousel">
+      <div id="demo" class="carousel slide" data-interval="false" data-ride="carousel">
 
-      <!-- Indicators -->
-      <ul class="carousel-indicators">
-        <li data-target="#demo" data-slide-to="0" class="active"></li>
-        <li data-target="#demo" data-slide-to="1"></li>
-        <li data-target="#demo" data-slide-to="2"></li>
-      </ul>
+        <!-- Indicators -->
+        <ul class="carousel-indicators">
+          <li data-target="#demo" data-slide-to="0" class="active"></li>
+          <li data-target="#demo" data-slide-to="1"></li>
+          <li data-target="#demo" data-slide-to="2"></li>
+        </ul>
 
-      <!-- The slideshow -->
-      <div class="carousel-inner">
-        <div class="carousel-item active">
-          <img src="{{asset('assets/icon/back.png')}}" alt="Los Angeles">
+        <!-- The slideshow -->
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <img src="{{asset('assets/icon/back.png')}}" alt="Los Angeles">
+          </div>
+          <div class="carousel-item">
+            <img src="{{asset('assets/icon/back.png')}}" alt="Chicago">
+          </div>
+          <div class="carousel-item">
+            <img src="{{asset('assets/icon/back.png')}}" alt="New York">
+          </div>
         </div>
-        <div class="carousel-item">
-          <img src="{{asset('assets/icon/back.png')}}" alt="Chicago">
-        </div>
-        <div class="carousel-item">
-          <img src="{{asset('assets/icon/back.png')}}" alt="New York">
-        </div>
-      </div>
 
-      <!-- Left and right controls -->
-      <a class="carousel-control-prev" href="#demo" data-slide="prev">
-        <span class="carousel-control-prev-icon"></span>
-      </a>
-      <a class="carousel-control-next" href="#demo" data-slide="next">
-        <span class="carousel-control-next-icon"></span>
-      </a>
+        <!-- Left and right controls -->
+        <a class="carousel-control-prev" href="#demo" data-slide="prev">
+          <img style="width:25%;"src="{{asset('assets/icon/btn_back.png')}}">
+        </a>
+        <a class="carousel-control-next" href="#demo" data-slide="next">
+          <img style="width:25%;"src="{{asset('assets/icon/btn_next.png')}}">
+        </a>
 
       </div>
         

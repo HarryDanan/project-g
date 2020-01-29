@@ -289,14 +289,34 @@ z-index: 1;
   background-size: cover;
 
 }
-.bg4 {
-  background: url(../assets/icon/bg3.jpg) no-repeat center center fixed; 
+
+.bg_instruksi {
+  background: url(../assets/icon/bginstruksi.png) no-repeat center center fixed; 
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
 
 }
+
+.bg_scoreboard {
+  background: url(../assets/icon/bg_scoreboard.png) no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+
+}
+
+.bg_menu_ujian {
+  background: url(../assets/icon/bg_ujian.png) no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+
+}
+
 
 
 .papan{

@@ -19,7 +19,7 @@
     
     <script type="text/javascript" src="{{asset('js/Audio-HTML5.js')}}"></script>
   </head>
-  <body class="bg2">
+  <body class="bg_menu_ujian">
       <!-- Demo stuff-->
   <!-- loading -->
 
@@ -36,13 +36,16 @@
 
         <div style="padding-top:10%;">
         <center>
-          <a href="/instruksi" onclick="btn_s()"><img  class="icn_menu" src="{{asset('assets/icon/logo_h_b.png')}}" alt=""></a>
-          <a href="/latihan_kecil" onclick="btn_s()"><img class='icn_menu' src="{{asset('assets/icon/logo_h_k.png')}}" alt=""></a>
-          <a href="/latihan_angka" onclick="btn_s()"><img class="icn_menu" src="{{asset('assets/icon/logo_ang.png')}}" alt=""></a>
+          <a href="/ujian" onclick="btn_s()"><img  class="icn_menu" src="{{asset('assets/icon/logo_h_b.png')}}" alt=""></a>
+          <a href="/ujian_kecil" onclick="btn_s()"><img class='icn_menu' src="{{asset('assets/icon/logo_h_k.png')}}" alt=""></a>
+          <a href="/ujian_angka" onclick="btn_s()"><img class="icn_menu" src="{{asset('assets/icon/logo_ang.png')}}" alt=""></a>
+          <a href="/scoreboard" onclick="btn_s()"><img class="icn_menu" src="{{asset('assets/icon/logo_scoreboard.png')}}" alt=""></a>
         </center>
         </div>
      
-      
+    <!-- Modal -->      
+
+      <!-- Component starts here-->
   <audio src="../assets/sound/touch.mp3" id="btn-s"></audio>
   
   

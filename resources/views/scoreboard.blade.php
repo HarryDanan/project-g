@@ -19,7 +19,7 @@
     
     <script type="text/javascript" src="{{asset('js/Audio-HTML5.js')}}"></script>
   </head>
-  <body class="bg2">
+  <body class="bg_scoreboard">
       <!-- Demo stuff-->
   <!-- loading -->
 
@@ -34,14 +34,50 @@
           </div>
       </div>
 
-        <div style="padding-top:10%;">
+        <!-- <div style="padding-top:10%;">
         <center>
           <a href="/instruksi" onclick="btn_s()"><img  class="icn_menu" src="{{asset('assets/icon/logo_h_b.png')}}" alt=""></a>
           <a href="/latihan_kecil" onclick="btn_s()"><img class='icn_menu' src="{{asset('assets/icon/logo_h_k.png')}}" alt=""></a>
           <a href="/latihan_angka" onclick="btn_s()"><img class="icn_menu" src="{{asset('assets/icon/logo_ang.png')}}" alt=""></a>
         </center>
+        </div> -->
+        <div class="container" style="padding-top : 5%;color:white">
+            <table class="table">
+                <thead>
+                    <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">First</th>
+                    <th scope="col">Last</th>
+                    <th scope="col">Handle</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                    <th scope="row">1</th>
+                    <td>Mark</td>
+                    <td>Otto</td>
+                    <td>@mdo</td>
+                    </tr>
+                    <tr>
+                    <th scope="row">2</th>
+                    <td>Jacob</td>
+                    <td>Thornton</td>
+                    <td>@fat</td>
+                    </tr>
+                    <tr>
+                    <th scope="row">3</th>
+                    <td>Larry</td>
+                    <td>the Bird</td>
+                    <td>@twitter</td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
+        
      
+    <!-- Modal -->      
+
+      <!-- Component starts here-->
       
   <audio src="../assets/sound/touch.mp3" id="btn-s"></audio>
   
