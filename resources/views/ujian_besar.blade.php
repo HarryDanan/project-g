@@ -34,6 +34,16 @@
             <a href="/menu" onclick="btn_s()"><img class="icn2" src="{{asset('assets/icon/back.png')}}" alt="" style="position:fixed;"></a>
 
             <div class="container-fluid" style="background :url(../assets/icon/bgnav.png);  position:fixed; z-index:-1; height:13%;"></div>     
+            
+            <div class="menua">
+                <a href="" class ="score" id="livecount" style="color : white; padding-top:2.2%; padding-left:2.2%"></a>
+                <a href="" class ="score" id="score" style="color : #00bfff; padding-top:2.2%; padding-left:10%"></a>
+                <a href="" class ="score" id="countdown" style="color : red; padding-top:2.2%; padding-left:22%"></a>
+
+                <a href="" ><img class=" icn_darah" src="{{asset('assets/icon/darah.png')}}" alt=""></a>
+                <a href="" ><img class=" icn_sw" src="{{asset('assets/icon/icon_skor.png')}}" alt=""></a>
+                <a href="" ><img class=" icn_sw" src="{{asset('assets/icon/icon_waktu.png')}}" alt=""></a>
+            </div>
             <div>
                 <center>
                     <img class="icn_logo" src="{{asset('assets/icon/logo_h_b.png')}}" alt=""></h3>
@@ -61,37 +71,8 @@
                         <div>
                             <img id="srcImage2" src="" width="64" height="64">
                         </div>
-                    
-                            <select class="selectpicker "name="carlist" form="carform" id="masuk" onchange="inputan()">
-                                <option value="a" selected>A</option>
-                                <option value="b">B</option>
-                                <option value="c">C</option>
-                                <option value="d">D</option>
-                                <option value="e">E</option>
-                                <option value="f">F</option>
-                                <option value="g">G</option>
-                                <option value="h">H</option>
-                                <option value="i">I</option>
-                                <option value="j">J</option>
-                                <option value="k">K</option>
-                                <option value="l">L</option>
-                                <option value="m">M</option>
-                                <option value="n">N</option>
-                                <option value="o">O</option>
-                                <option value="p">P</option>
-                                <option value="q">Q</option>
-                                <option value="r">R</option>
-                                <option value="s">S</option>
-                                <option value="t">T</option>
-                                <option value="u">U</option>
-                                <option value="v">V</option>
-                                <option value="w">W</option>
-                                <option value="x">X</option>
-                                <option value="y">Y</option>
-                                <option value="z">Z</option>
-                            </select>
                         </center>
-                        </div>
+                    </div>
                         <!-- <div>
                             <img id="srcImage3" src="" width="120" height="120">
                         </div> -->
@@ -137,6 +118,41 @@
         <audio src="../assets/sound/salah.mp3" id="btn-salah"></audio>
     </main>
 
+    <!-- Modal waktu -->
+    <div id="myModal_waktu" class="modal fade" role="dialog">
+        <div class="modal-dialog  modal-lg modal-dialog-centered">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="container">
+                    <img class="about_modal" style="width:100%;height:100%;" src="{{asset('assets/icon/waktu_habis_popup.png')}}" alt="">
+                    
+                </div>
+                <div class="container" style="padding-left:10%;">
+                     <a href="/menu" onclick="btn_s()"><img  style ="width:45%;" src="{{asset('assets/icon/btn_lihat_skor.png')}}" alt=""></a>
+                </div>
+            </div>
+        </div>
+    </div> 
+
+        <!-- modal skor -->
+    <div id="myModal_skor" class="modal fade" role="dialog" >
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="container">
+                    <!-- <button type="button" class="close" data-dismiss="modal">&times;</button> -->
+                    <img onclick="btn_s()"class="close_modal" src="{{asset('assets/icon/close_btn.png')}}" data-dismiss="modal" alt="">&times;</img>
+                </div>
+                <div class="container" style="">
+                    <img class="skor_modal" style="width:100%;height:100%;"src="{{asset('assets/icon/skor_modal.png')}}" alt="">
+                </div>
+                <div class="container" style="padding-left:10%;">
+                    <a href="/menu" onclick="btn_s()"><img  style ="width:45%;" src="{{asset('assets/icon/btn_ulang.png')}}" alt=""></a>
+                    <a href="/" onclick="btn_s()"><img style ="width:45%;" src="{{asset('assets/icon/btn_keluar.png')}}" alt=""></a>
+                </div>
+            </div>
+        </div>
+    </div> 
      <!-- carousel -->
 </body>
 
@@ -178,11 +194,17 @@
     //sound click end
 
     // var score =0;
-    var input = document.getElementById("masuk").value;
+    // var input = document.getElementById("masuk").value;
+    var huruf = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"];
+    var input = huruf[Math.floor(Math.random() * 26)];
+    var soal = 0;
+    var timeLeft = 120; //setting timer
+    var liveleft = 3; //setting jumlah nyawa
+    var point = 0; //skor
+
     document.getElementById("srcImage2").src = "../../template/" + input + ".jpg";
     var canvasTemplate = document.getElementById('outputTemplate');
     var context = canvasTemplate.getContext('2d');
-
     make_base();
 
     function make_base() { //membuat inputgambar template
@@ -193,6 +215,10 @@
             context.drawImage(base_image, 0, 0);
         }
     }
+
+  
+
+
 
     // check kanvas kosong
     function isCanvasBlank(canvas) {
@@ -222,58 +248,108 @@
     // check end
     // periksa
     function periksa(){
-        var batasAtas=0; 
-        var nilai=0;
-    
-        let src = cv.imread(document.getElementById("gambar"));
-        let dst = new cv.Mat();
-        let dsize = new cv.Size(64,64);
-        cv.resize(src, dst, dsize, 0, 0, cv.INTER_AREA);
-        cv.imshow('outputCanvas', dst);
-        colorImage(cv.imread('outputCanvas'), dst);
-        var kanvas = document.getElementById('outputCanvas2');
-        thinningImage2(kanvas);
-        var kanvas2 = document.getElementById('outputCanvas3');
-        tepi(kanvas2);
-        var kanvas3 = document.getElementById('outputCanvas4');
-        var ctx = kanvas3.getContext('2d');
-        var imgData = ctx.getImageData(0,0,64,64);
-    
-        templateData = context.getImageData(0,0,64,64);
+   
+    let src = cv.imread(document.getElementById("gambar"));
+    let dst = new cv.Mat();
+    let dsize = new cv.Size(64,64);
+    cv.resize(src, dst, dsize, 0, 0, cv.INTER_AREA);
+    cv.imshow('outputCanvas', dst);
+    colorImage(cv.imread('outputCanvas'), dst);
+    var kanvas = document.getElementById('outputCanvas2');
+    thinningImage2(kanvas);
+    var kanvas2 = document.getElementById('outputCanvas3');
+    tepi(kanvas2);
+    var kanvas3 = document.getElementById('outputCanvas4');
+    var ctx = kanvas3.getContext('2d');
+    var imgData = ctx.getImageData(0,0,64,64);
+  
+    templateData = context.getImageData(0,0,64,64);
 
-        for(var i = 0; i<imgData.data.length; i+=4){
-            if(templateData.data[i]==0){
-                // batasAtas++;
-            batasAtas = 64*64;
-            }
-            // nilai = nilai + ((1-Math.round(templateData.data[i]/255)) * (1-Math.round(imgData.data[i]/255)));
-            nilai = nilai + Math.pow(((1-Math.round(templateData.data[i]/255)) - (1-Math.round(imgData.data[i]/255))),2);
-        }
+    var batasAtas=0; var nilai=0;
+    for(var i = 0; i<imgData.data.length; i+=4){
+    	if(templateData.data[i]==0){
+    		// batasAtas++;
+        batasAtas = 64*64;
+    	}
+    	// nilai = nilai + ((1-Math.round(templateData.data[i]/255)) * (1-Math.round(imgData.data[i]/255)));
+    	nilai = nilai + Math.pow(((1-Math.round(templateData.data[i]/255)) - (1-Math.round(imgData.data[i]/255))),2);
+    }
 
-        console.log(batasAtas);
-        console.log(nilai);
-        //if(nilai>=(batasAtas*80/100)){
-        if(nilai<=(batasAtas*20/100)){
-            sound_benar();
-            $("#pop_benar").fadeIn();
-            $("#pop_benar").fadeOut('slow');
-        }
-        else{
-            sound_salah();
-            $("#pop_salah").fadeIn();
-            $("#pop_salah").fadeOut('slow');
-        }
-            src.delete(); dst.delete();
+    console.log(batasAtas);
+    console.log(nilai);
+    //if(nilai>=(batasAtas*80/100)){
+    if(nilai<=(batasAtas*20/100)){
+        sound_benar();
+        point=point+10;
+        soal++;
+        $("#pop_benar").fadeIn();
+        $("#pop_benar").fadeOut('slow');
+        hapus();
+    }
+    else{
+        sound_salah();
+        liveleft--;
+        // alert("Salah");
+        $("#pop_salah").fadeIn();
+        $("#pop_salah").fadeOut('slow');
+        hapus();
+    }
+    if(soal==10){
+        $('#myModal_skor').modal({backdrop: 'static', keyboard: false})  
+        $("#myModal_skor").modal('show');
+    }
+        input = huruf[Math.floor(Math.random() * 26)];
+        document.getElementById("srcImage2").src = "../../template/"+input+".jpg";
+        make_base();
+        
+        src.delete(); dst.delete(); 
 	}
-
+  
     // periksa
 
-    function inputan(){
-        input = document.getElementById("masuk").value;
-        document.getElementById("srcImage2").src = "../../template/"+input+".jpg";
-        // document.getElementById("srcImage3").src = "../../template/bewarna/"+input+".png";
-        var c = document.getElementById("gambar");c.width = c.width;
-        make_base();
+    
+
+    //darah 
+    var liveelem = document.getElementById('livecount');
+    var liveid = setInterval(livecount, 0);
+
+    function livecount() {
+        if (liveleft == 0) {
+            clearTimeout(liveid);
+            // alert("Darah Habis");
+            $('#myModal_skor').modal({backdrop: 'static', keyboard: false})  
+            $("#myModal_skor").modal('show');
+            
+        } else {
+            liveelem.innerHTML = liveleft;
+            
+            //timeLeft--;
+        }
+    }
+
+    // waktu
+    var elem = document.getElementById('countdown');
+    var timerId = setInterval(countdown, 10);
+    function countdown() {
+        if (timeLeft == -1) {
+            clearTimeout(timerId);
+            // alert("Waktu Habis");
+            // call_modal_waktu();
+            $('#myModal_skor').modal({backdrop: 'static', keyboard: false})  
+            $("#myModal_skor").modal('show');
+            
+        } else {
+            elem.innerHTML = timeLeft;
+            timeLeft--;
+        }
+    }
+
+
+    //score 
+    var selem = document.getElementById('score');
+    var scoreid = setInterval(score, 0);
+    function score(){
+        selem.innerHTML = point;
     }
 
     function hapus(){
@@ -340,40 +416,40 @@
 
     // Allow for animation
     (function drawLoop () {
-        requestAnimFrame(drawLoop);
-        renderCanvas();
-        })();
+    requestAnimFrame(drawLoop);
+    renderCanvas();
+    })();
 
-        // Set up touch events for mobile, etc
-        canvas.addEventListener("touchstart", function (e) {
-                mousePos = getTouchPos(canvas, e);
-        var touch = e.touches[0];
-        var mouseEvent = new MouseEvent("mousedown", {
-            clientX: touch.clientX,
-            clientY: touch.clientY
-        });
-        canvas.dispatchEvent(mouseEvent);
-        }, false);
-        canvas.addEventListener("touchend", function (e) {
-        var mouseEvent = new MouseEvent("mouseup", {});
-        canvas.dispatchEvent(mouseEvent);
-        }, false);
-        canvas.addEventListener("touchmove", function (e) {
-        var touch = e.touches[0];
-        var mouseEvent = new MouseEvent("mousemove", {
-            clientX: touch.clientX,
-            clientY: touch.clientY
-        });
-        canvas.dispatchEvent(mouseEvent);
-        }, false);
+    // Set up touch events for mobile, etc
+    canvas.addEventListener("touchstart", function (e) {
+            mousePos = getTouchPos(canvas, e);
+    var touch = e.touches[0];
+    var mouseEvent = new MouseEvent("mousedown", {
+        clientX: touch.clientX,
+        clientY: touch.clientY
+    });
+    canvas.dispatchEvent(mouseEvent);
+    }, false);
+    canvas.addEventListener("touchend", function (e) {
+    var mouseEvent = new MouseEvent("mouseup", {});
+    canvas.dispatchEvent(mouseEvent);
+    }, false);
+    canvas.addEventListener("touchmove", function (e) {
+    var touch = e.touches[0];
+    var mouseEvent = new MouseEvent("mousemove", {
+        clientX: touch.clientX,
+        clientY: touch.clientY
+    });
+    canvas.dispatchEvent(mouseEvent);
+    }, false);
 
-        // Get the position of a touch relative to the canvas
-        function getTouchPos(canvasDom, touchEvent) {
-        var rect = canvasDom.getBoundingClientRect();
-        return {
-            x: touchEvent.touches[0].clientX - rect.left,
-            y: touchEvent.touches[0].clientY - rect.top
-        };
+    // Get the position of a touch relative to the canvas
+    function getTouchPos(canvasDom, touchEvent) {
+    var rect = canvasDom.getBoundingClientRect();
+    return {
+        x: touchEvent.touches[0].clientX - rect.left,
+        y: touchEvent.touches[0].clientY - rect.top
+    };
     }
 
 </script>

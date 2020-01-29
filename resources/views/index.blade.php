@@ -37,7 +37,7 @@
       <!-- icon menu -->
       <div style="padding-top : 5%">
         <a href="/menu" onclick="btn_s()"><img  class="icn" src="{{asset('assets/icon/btn_latihan.png')}}" alt=""></a>
-        <a href="/ujian" onclick="btn_s()"><img class='icn' src="{{asset('assets/icon/btn_ujian.png')}}" alt=""></a>
+        <a href="/menu_ujian" onclick="btn_s()"><img class='icn' src="{{asset('assets/icon/btn_ujian.png')}}" alt=""></a>
         <a href="/tutorial" onclick="btn_s()"><img class="icn" src="{{asset('assets/icon/btn_tutorial.png')}}" alt=""></a>
         <a data-toggle="modal" href="#myModal" onclick="btn_s()"><img class="icn" src="{{asset('assets/icon/btn_about.png')}}" alt=""></a>
         <a  href="JavaScript:window.close()" onclick="btn_s()"><img class="icn" src="{{asset('assets/icon/btn_keluar.png')}}" alt=""></a>

@@ -18,9 +18,7 @@ Route::get('/', function () {
 Route::get('/latihan', function () {
     return view('latihan');
 });
-Route::get('/latihanbesar', function () {
-    return view('latihanbesar');
-});
+
 
 Route::get('/latihan_kecil', function () {
     return view('latihan_kecil');
@@ -51,8 +49,17 @@ Route::get('/scoreboard', function () {
 Route::get('/menu_ujian', function () {
     return view('menu_ujian');
 });
-Route::get('/ujian_test', function () {
-    return view('ujian_test');
+
+Route::get('/ujian_besar', function () {
+    return view('ujian_besar');
+});
+
+Route::get('/ujian_kecil', function () {
+    return view('ujian_kecil');
+});
+
+Route::get('/ujian_angka', function () {
+    return view('ujian_angka');
 });
 
 

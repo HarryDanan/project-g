@@ -71,37 +71,8 @@
                         <div>
                             <img id="srcImage2" src="" width="64" height="64">
                         </div>
-                    
-                            <select class="selectpicker "name="carlist" form="carform" id="masuk" onchange="inputan()" hidden>
-                                <option value="a" selected>A</option>
-                                <option value="b">B</option>
-                                <option value="c">C</option>
-                                <option value="d">D</option>
-                                <option value="e">E</option>
-                                <option value="f">F</option>
-                                <option value="g">G</option>
-                                <option value="h">H</option>
-                                <option value="i">I</option>
-                                <option value="j">J</option>
-                                <option value="k">K</option>
-                                <option value="l">L</option>
-                                <option value="m">M</option>
-                                <option value="n">N</option>
-                                <option value="o">O</option>
-                                <option value="p">P</option>
-                                <option value="q">Q</option>
-                                <option value="r">R</option>
-                                <option value="s">S</option>
-                                <option value="t">T</option>
-                                <option value="u">U</option>
-                                <option value="v">V</option>
-                                <option value="w">W</option>
-                                <option value="x">X</option>
-                                <option value="y">Y</option>
-                                <option value="z">Z</option>
-                            </select>
                         </center>
-                        </div>
+                    </div>
                         <!-- <div>
                             <img id="srcImage3" src="" width="120" height="120">
                         </div> -->
@@ -120,7 +91,7 @@
         </div>
         </center>
 
-        <div class="row">
+        <div hidden class="row">
             <div class="col-sm-3">
                 <h5>Gambar Template</h5>
                 <canvas width="64" height="64" id='outputTemplate'></canvas>
@@ -224,14 +195,14 @@
 
     // var score =0;
     // var input = document.getElementById("masuk").value;
-    var huruf = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"];
-    var input = huruf[Math.floor(Math.random() * 26)];
+    var huruf = ["0","1","2","3","4","5","6","7","8","9"];
+    var input = huruf[Math.floor(Math.random() * 10)];
     var soal = 0;
     var timeLeft = 120; //setting timer
-    var liveleft =20; //setting jumlah nyawa
+    var liveleft = 3; //setting jumlah nyawa
     var point = 0; //skor
 
-    document.getElementById("srcImage2").src = "../../template/" + input + ".jpg";
+    document.getElementById("srcImage2").src = "../../template/angka/" + input + ".png";
     var canvasTemplate = document.getElementById('outputTemplate');
     var context = canvasTemplate.getContext('2d');
     make_base();
@@ -310,7 +281,7 @@
     if(nilai<=(batasAtas*20/100)){
         sound_benar();
         point=point+10;
-       
+        soal++;
         $("#pop_benar").fadeIn();
         $("#pop_benar").fadeOut('slow');
         hapus();
@@ -323,11 +294,12 @@
         $("#pop_salah").fadeOut('slow');
         hapus();
     }
-    if(soal==11){
-        alert("ok");
+    if(soal==10){
+        $('#myModal_skor').modal({backdrop: 'static', keyboard: false})  
+        $("#myModal_skor").modal('show');
     }
-        input = huruf[Math.floor(Math.random() * 26)];
-        document.getElementById("srcImage2").src = "../../template/"+input+".jpg";
+        input = huruf[Math.floor(Math.random() * 10)];
+        document.getElementById("srcImage2").src = "../../template/angka/"+input+".png";
         make_base();
         
         src.delete(); dst.delete(); 
@@ -342,7 +314,7 @@
     var liveid = setInterval(livecount, 0);
 
     function livecount() {
-        if (liveleft == -1) {
+        if (liveleft == 0) {
             clearTimeout(liveid);
             // alert("Darah Habis");
             $('#myModal_skor').modal({backdrop: 'static', keyboard: false})  
@@ -378,21 +350,6 @@
     var scoreid = setInterval(score, 0);
     function score(){
         selem.innerHTML = point;
-    }
-
-    // var selem_m = document.getElementById('score_m');
-    // var scoreid_m = setInterval(score_m, 0);
-    // function score_m(){
-    //     selem_m.innerHTML = point;
-    // }
-
-
-    function inputan(){
-        input = document.getElementById("masuk").value;
-        document.getElementById("srcImage2").src = "../../template/"+input+".jpg";
-        // document.getElementById("srcImage3").src = "../../template/bewarna/"+input+".png";
-        var c = document.getElementById("gambar");c.width = c.width;
-        make_base();
     }
 
     function hapus(){
