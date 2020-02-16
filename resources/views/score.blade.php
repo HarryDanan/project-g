@@ -41,7 +41,7 @@
           <a href="/latihan_angka" onclick="btn_s()"><img class="icn_menu" src="{{asset('assets/icon/logo_ang.png')}}" alt=""></a>
         </center>
         </div> -->
-        <div class="container" style="padding-top : 5%;color:white">
+        <!-- <div class="container" style="padding-top : 5%;color:white">
             <table class="table">
                 <thead>
                     <tr>
@@ -73,7 +73,28 @@
                 </tbody>
             </table>
         </div>
-        
+         -->
+
+        <h1>Score</h1>
+        <table>
+            <tr>
+                <td>id</td>
+                <td>nama</td>
+                <td>score</td>
+
+            </tr>
+            @foreach($score as $s)
+            <tr>
+
+                <td>{{$s->id}}</td>
+                <td>{{$s->nama}}</td>
+                <td>{{$s->nilai}}</td>
+
+            </tr>
+            @endforeach
+        </table>
+
+
      
     <!-- Modal -->      
 

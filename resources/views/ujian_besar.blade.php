@@ -127,8 +127,8 @@
                     <img class="about_modal" style="width:100%;height:100%;" src="{{asset('assets/icon/waktu_habis_popup.png')}}" alt="">
                     
                 </div>
-                <div class="container" style="padding-left:10%;">
-                     <a href="/menu" onclick="btn_s()"><img  style ="width:45%;" src="{{asset('assets/icon/btn_lihat_skor.png')}}" alt=""></a>
+                <div class="container" style="text-align:center">
+                     <a href="/menu" onclick="btn_s()" data-target="#myModal_skor" data-toggle="modal" data-dismiss="modal" ><img  style ="width:45%;" src="{{asset('assets/icon/btn_lihat_skor.png')}}" alt=""></a>
                 </div>
             </div>
         </div>
@@ -147,7 +147,7 @@
                     <img class="skor_modal" style="width:100%;height:100%;"src="{{asset('assets/icon/skor_modal.png')}}" alt="">
                 </div>
                 <div class="container" style="padding-left:10%;">
-                    <a href="/menu" onclick="btn_s()"><img  style ="width:45%;" src="{{asset('assets/icon/btn_ulang.png')}}" alt=""></a>
+                    <a href="/menu_ujian" onclick="btn_s()"><img  style ="width:45%;" src="{{asset('assets/icon/btn_ulang.png')}}" alt=""></a>
                     <a href="/" onclick="btn_s()"><img style ="width:45%;" src="{{asset('assets/icon/btn_keluar.png')}}" alt=""></a>
                 </div>
             </div>
@@ -261,9 +261,9 @@
     tepi(kanvas2);
     var kanvas3 = document.getElementById('outputCanvas4');
     var ctx = kanvas3.getContext('2d');
-    var imgData = ctx.getImageData(0,0,64,64);
+    var imgData = ctx.getImageData(0,0,64,64); //data gambar tulisan
   
-    templateData = context.getImageData(0,0,64,64);
+    templateData = context.getImageData(0,0,64,64); //data gambar template
 
     var batasAtas=0; var nilai=0;
     for(var i = 0; i<imgData.data.length; i+=4){
@@ -271,14 +271,14 @@
     		// batasAtas++;
         batasAtas = 64*64;
     	}
-    	// nilai = nilai + ((1-Math.round(templateData.data[i]/255)) * (1-Math.round(imgData.data[i]/255)));
+    	//nilai = nilai + ((1-Math.round(templateData.data[i]/255)) * (1-Math.round(imgData.data[i]/255)));
     	nilai = nilai + Math.pow(((1-Math.round(templateData.data[i]/255)) - (1-Math.round(imgData.data[i]/255))),2);
     }
 
     console.log(batasAtas);
     console.log(nilai);
     //if(nilai>=(batasAtas*80/100)){
-    if(nilai<=(batasAtas*20/100)){
+    if(nilai<=(batasAtas*12.5/100)){
         sound_benar();
         point=point+10;
         soal++;

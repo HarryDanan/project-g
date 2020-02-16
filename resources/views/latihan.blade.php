@@ -2,22 +2,21 @@
 <html>
 
 <head>
-    <meta charset="utf-8">  
+    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-
     <title>Ayo Menulis</title>
 
     <link rel="stylesheet" href="{{asset('css/style.css')}}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
     <!-- <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.0.0/dist/tf.min.js"></script> -->
     <script src="{{asset('js/imageProcessing/preProcessing.js')}}" type="text/javascript"></script>
-    <script src="{{asset('js/imageProcessing/opencv.js')}}" type="text/javascript"></script> 
+    <script src="{{asset('js/imageProcessing/opencv.js')}}" type="text/javascript"></script>
     <script type="text/javascript" src="{{asset('js/Audio-HTML5.js')}}"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
-    
+
 
 </head>
 
@@ -33,8 +32,8 @@
 
             <a href="/menu" onclick="btn_s()"><img class="icn2" src="{{asset('assets/icon/back.png')}}" alt="" style="position:fixed;"></a>
 
-            <div class="container-fluid" style="background :url(../assets/icon/bgnav.png);  position:fixed; z-index:-1; height:13%;"></div>     
-            
+            <div class="container-fluid" style="background :url(../assets/icon/bgnav.png);  position:fixed; z-index:-1; height:13%;"></div>
+
             <div class="menua">
                 <a href="" class ="score" id="livecount" style="color : white; padding-top:2.2%; padding-left:2.2%"></a>
                 <a href="" class ="score" id="score" style="color : #00bfff; padding-top:2.2%; padding-left:10%"></a>
@@ -71,7 +70,7 @@
                         <div>
                             <img id="srcImage2" src="" width="64" height="64">
                         </div>
-                    
+
                             <select class="selectpicker "name="carlist" form="carform" id="masuk" onchange="inputan()">
                                 <option value="a" selected>A</option>
                                 <option value="b">B</option>
@@ -105,18 +104,18 @@
                         <!-- <div>
                             <img id="srcImage3" src="" width="120" height="120">
                         </div> -->
-                
+
             </div>
-            
+
             <br>
             <img class="icn_anak" src="{{asset('assets/icon/anak.png')}}" alt=""></h3>
         </div>
 
         <center>
         <div  style="padding-top:23%">
-            <a id="check" onclick="btn_s()"><img class="icn" src="{{asset('assets/icon/btn_periksa.png')}}" alt=""></a>
+            <a id="check" onclick="periksa()"><img class="icn" src="{{asset('assets/icon/btn_periksa.png')}}" alt=""></a>
             <a onclick="btn_s();hapus()"><img class="icn" src="{{asset('assets/icon/btn_hapus.png')}}" alt=""></a>
-            <img src="" alt="">
+            <a data-toggle="modal" href="#myModal_skor" onclick="btn_s()"><img class="icn" src="{{asset('assets/icon/btn_about.png')}}" alt=""></a>
         </div>
         </center>
 
@@ -125,7 +124,7 @@
                 <h5>Gambar Template</h5>
                 <canvas width="64" height="64" id='outputTemplate'></canvas>
             </div>
-            <div class="col-sm-3">
+            <div class="col-sm-3">[]
                 <h5>Gambar Resize</h5>
                 <canvas width="64" height="64" id='outputCanvas'></canvas>
             </div>
@@ -153,15 +152,18 @@
             <!-- Modal content-->
             <div class="modal-content">
                 <div class="container">
-                    <img class="about_modal" style="width:100%;height:100%;" src="{{asset('assets/icon/waktu_habis_popup.png')}}" alt="">
-                    
+                    {{-- <img class="about_modal" style="width:100%;height:100%;" src="{{asset('assets/icon/waktu_habis_popup.png')}}" alt="">
+                    <p> --}}
+                    <p>
+                    Waktu
+                    </p>
                 </div>
                 <div class="container" style="padding-left:10%;">
                      <a href="/menu" onclick="btn_s()"><img  style ="width:45%;" src="{{asset('assets/icon/btn_lihat_skor.png')}}" alt=""></a>
                 </div>
             </div>
         </div>
-    </div> 
+    </div>
 
         <!-- modal skor -->
     <div id="myModal_skor" class="modal fade" role="dialog" >
@@ -172,20 +174,29 @@
                     <!-- <button type="button" class="close" data-dismiss="modal">&times;</button> -->
                     <img onclick="btn_s()"class="close_modal" src="{{asset('assets/icon/close_btn.png')}}" data-dismiss="modal" alt="">&times;</img>
                 </div>
-                <div class="container" style="">
-                    <img class="skor_modal" style="width:100%;height:100%;"src="{{asset('assets/icon/skor_modal.png')}}" alt="">
+                <div class="container">
+                    <div class="input_skor">
+                        <form  action="/score/store" method="post">
+                            {{ csrf_field() }}
+                            <!-- <h4 name="nilai" id="scoreinput"></h4> -->
+                            <input type="text" name="nilai" id="scoreinput" readonly><br>
+                            <input type="text" name="nama" id="" placeholder="Nama ......."><br>
+                            <input type="submit" value="simpan">
+                        </form>
+                    </div>
+                    <img class="skor_modal"  src="{{asset('assets/icon/skor_modal.png')}}" alt="">
                 </div>
                 <div class="container" style="padding-left:10%;">
-                    <a href="/menu" onclick="btn_s()"><img  style ="width:45%;" src="{{asset('assets/icon/btn_ulang.png')}}" alt=""></a>
+                    <a href="/menu_ujian" onclick="btn_s()"><img  style ="width:45%;" src="{{asset('assets/icon/btn_ulang.png')}}" alt=""></a>
                     <a href="/" onclick="btn_s()"><img style ="width:45%;" src="{{asset('assets/icon/btn_keluar.png')}}" alt=""></a>
                 </div>
             </div>
         </div>
-    </div> 
+    </div>
      <!-- carousel -->
 </body>
 
-     
+
 <script type="text/javascript">
     // loading
 
@@ -233,7 +244,7 @@
     function make_base() { //membuat inputgambar template
         base_image = new Image();
         base_image.src = document.getElementById("srcImage2").src;
-    
+
         base_image.onload = function () {
             context.drawImage(base_image, 0, 0);
         }
@@ -261,17 +272,15 @@
             sound_salah();
             $("#pop_kanvas").fadeIn();
             $("#pop_kanvas").fadeOut('slow');
-        }else{
-            periksa();
         }
-        
+
     });
 
 
     // check end
     // periksa
     function periksa(){
-   
+
     let src = cv.imread(document.getElementById("gambar"));
     let dst = new cv.Mat();
     let dsize = new cv.Size(64,64);
@@ -285,10 +294,10 @@
     var kanvas3 = document.getElementById('outputCanvas4');
     var ctx = kanvas3.getContext('2d');
     var imgData = ctx.getImageData(0,0,64,64);
-  
+    var darah = 3;
     templateData = context.getImageData(0,0,64,64);
 
-    var batasAtas=0; var nilai=0;  var darah = 3;
+    var batasAtas=0; var nilai=0;
     for(var i = 0; i<imgData.data.length; i+=4){
     	if(templateData.data[i]==0){
     		// batasAtas++;
@@ -296,33 +305,36 @@
     	}
     	// nilai = nilai + ((1-Math.round(templateData.data[i]/255)) * (1-Math.round(imgData.data[i]/255)));
     	nilai = nilai + Math.pow(((1-Math.round(templateData.data[i]/255)) - (1-Math.round(imgData.data[i]/255))),2);
+
     }
 
     console.log(batasAtas);
     console.log(nilai);
     //if(nilai>=(batasAtas*80/100)){
     if(nilai<=(batasAtas*20/100)){
-        sound_benar();
+
+       sound_benar();
         point=point+10;
-       
+        document.getElementById("scoreinput").value = point;
         $("#pop_benar").fadeIn();
         $("#pop_benar").fadeOut('slow');
     }
     else{
-        sound_salah();
+
         liveleft--;
-        // alert("Salah");
-        $("#pop_salah").fadeIn();
-        $("#pop_salah").fadeOut('slow');
+
+         $("#pop_salah").fadeIn();
+         $("#pop_salah").fadeOut('slow');
+        sound_salah();
     }
         src.delete(); dst.delete();
 	}
 
     // periksa
 
-    
 
-    //darah 
+
+    //darah
     var liveelem = document.getElementById('livecount');
     var liveid = setInterval(livecount, 0);
 
@@ -330,27 +342,27 @@
         if (liveleft == -1) {
             clearTimeout(liveid);
             // alert("Darah Habis");
-            $('#myModal_skor').modal({backdrop: 'static', keyboard: false})  
+            $('#myModal_skor').modal({backdrop: 'static', keyboard: false})
             $("#myModal_skor").modal('show');
-            
+
         } else {
             liveelem.innerHTML = liveleft;
-            
+
             //timeLeft--;
         }
     }
 
     // waktu
     var elem = document.getElementById('countdown');
-    var timerId = setInterval(countdown, 10);
+    var timerId = setInterval(countdown, 1000);
     function countdown() {
         if (timeLeft == -1) {
             clearTimeout(timerId);
             // alert("Waktu Habis");
             // call_modal_waktu();
-            $('#myModal_skor').modal({backdrop: 'static', keyboard: false})  
+            $('#myModal_skor').modal({backdrop: 'static', keyboard: false})
             $("#myModal_skor").modal('show');
-            
+
         } else {
             elem.innerHTML = timeLeft;
             timeLeft--;
@@ -358,7 +370,7 @@
     }
 
 
-    //score 
+    //score
     var selem = document.getElementById('score');
     var scoreid = setInterval(score, 0);
     function score(){
@@ -420,7 +432,7 @@
 
     // Get a regular interval for drawing to the screen
     window.requestAnimFrame = (function (callback) {
-            return window.requestAnimationFrame || 
+            return window.requestAnimationFrame ||
             window.webkitRequestAnimationFrame ||
             window.mozRequestAnimationFrame ||
             window.oRequestAnimationFrame ||
@@ -482,5 +494,5 @@
 
 </script>
 
-     
+
 </html>

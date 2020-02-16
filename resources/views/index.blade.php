@@ -22,6 +22,11 @@
       <div class="loader-wrapper">
         <span class="loader"><span class="loader-inner"></span></span>
       </div>
+      <div class="container-fluid">
+        <div class="float-right">
+          <a data-toggle="modal" href="#myModal" onclick="btn_s()"><img style="width: 64px;height:64px" src="{{asset('assets/icon/btn_helpper.png')}}" alt=""></a>
+        </div>
+      </div>
 
       <!--  -->
      
@@ -33,13 +38,14 @@
       </div>
 
       <!-- logo end -->
-
+      <div hidden>
+        <a href="/menu" onclick="btn_s()"><img  class="icn" src="{{asset('assets/icon/btn_play.png')}}" alt=""></a>
+      </div>
       <!-- icon menu -->
       <div style="padding-top : 5%">
         <a href="/menu" onclick="btn_s()"><img  class="icn" src="{{asset('assets/icon/btn_latihan.png')}}" alt=""></a>
         <a href="/menu_ujian" onclick="btn_s()"><img class='icn' src="{{asset('assets/icon/btn_ujian.png')}}" alt=""></a>
         <a href="/tutorial" onclick="btn_s()"><img class="icn" src="{{asset('assets/icon/btn_tutorial.png')}}" alt=""></a>
-        <a data-toggle="modal" href="#myModal" onclick="btn_s()"><img class="icn" src="{{asset('assets/icon/btn_about.png')}}" alt=""></a>
         <a  href="JavaScript:window.close()" onclick="btn_s()"><img class="icn" src="{{asset('assets/icon/btn_keluar.png')}}" alt=""></a>
       </div>
 
@@ -102,13 +108,6 @@
         </div>
       </div>
     </div>
-
-
-
-
-
-
-
     <audio src="../assets/sound/touch.mp3" id="btn-s"></audio>
   </body>
 

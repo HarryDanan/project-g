@@ -110,7 +110,7 @@
         </div>
         </center>
 
-        <div hidden class="row">
+        <div class="row">
             <div class="col-sm-3">
                 <h5>Gambar Template</h5>
                 <canvas width="64" height="64" id='outputTemplate'></canvas>
@@ -183,7 +183,7 @@
     var canvasTemplate = document.getElementById('outputTemplate');
     var context = canvasTemplate.getContext('2d');
 
-    make_base();
+    // make_base();
 
     function make_base() { //membuat inputgambar template
         base_image = new Image();
@@ -230,9 +230,11 @@
         let dsize = new cv.Size(64,64);
         cv.resize(src, dst, dsize, 0, 0, cv.INTER_AREA);
         cv.imshow('outputCanvas', dst);
+        
         colorImage(cv.imread('outputCanvas'), dst);
+        
         var kanvas = document.getElementById('outputCanvas2');
-        thinningImage2(kanvas);
+        thinningImage(kanvas);
         var kanvas2 = document.getElementById('outputCanvas3');
         tepi(kanvas2);
         var kanvas3 = document.getElementById('outputCanvas4');

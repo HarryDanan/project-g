@@ -42,9 +42,9 @@ Route::get('/instruksi', function () {
     return view('instruksi');
 });
 
-Route::get('/scoreboard', function () {
-    return view('scoreboard');
-});
+// Route::get('/score', function () {
+//     return view('scoreboard');
+// });
 
 Route::get('/menu_ujian', function () {
     return view('menu_ujian');
@@ -61,5 +61,14 @@ Route::get('/ujian_kecil', function () {
 Route::get('/ujian_angka', function () {
     return view('ujian_angka');
 });
+
+Route::get('/menu_utama', function () {
+    return view('menu_utama');
+});
+
+
+
+Route::get('/score','score@index');
+Route::post('/score/store','score@store');
 
 
