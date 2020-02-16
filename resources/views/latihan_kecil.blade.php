@@ -53,7 +53,7 @@
         <!-- pop up benar dan salah end -->
             <img class="papan" src="{{asset('assets/icon/papan.png')}}" alt="">
             <canvas id="gambar" width="192" height="192" style=" top :40%; position:absolute; border:2px solid #000000;z-index:2"></canvas>
-            <img id="srcImage3" src="" width="190" height="190" style="z-index:1;position :absolute;top:40.5%;display:none">
+            <img id="srcImage3" src="" width="190" height="190" style="z-index:1;position :absolute;top:40.5%;display:none;opacity: 0.5;">
         </div>
         <br><br>
         
@@ -65,7 +65,6 @@
                         <center>
                         <div>
                             <img id="srcImage2" src="" width="64" height="64">
-                            <img hidden id="srcImage4" src="" width="64" height="64">
                         </div>
                     
                             <select class="selectpicker "name="carlist" form="carform" id="masuk" onchange="inputan();ubah_contoh();ubah_contoh_template();">
@@ -208,8 +207,8 @@
     var input = document.getElementById("masuk").value;
     //ambil data src gambar template
     document.getElementById("srcImage2").src = "../../template/" + input + ".jpg";
-    document.getElementById("srcImage3").src = "../../template/besar/" + input + ".png";
-    document.getElementById("srcImage4").src = "../../template/bw_besar/" + input + ".jpg";
+    document.getElementById("srcImage3").src = "../../template/huruf_besar/" + input + ".jpg";
+   //document.getElementById("srcImage4").src = "../../template/bw_besar/" + input + ".jpg";
     
     //ambil template dari canvas
     var canvasTemplate = document.getElementById('outputTemplate');
@@ -300,10 +299,12 @@
         thinningImage(kanvas); //zhen suen
         //thinningImage2(kanvas); //steinford  
         //normalisasi warna template
-        colorTemplate(cv.imread('outputTemplate'),dst);
+        colorTemplate(cv.imread('outputContoh'),dst);
         //thinning template
         templateThinning(kanvas_template);
         check_path();
+
+       
     }
     
     //check path tulisan pada canvas
@@ -403,12 +404,14 @@
         //inisialisasi nilai threshold
         var batasAtas=0; 
         var batasAtas_=0;
+        var contohcontoh=0;
+        var contohcontoh_=0;
         //inisaslisasi nilai
         var nilai=0;
         //ambil data gambar
         var kanvas2 = document.getElementById('outputCanvas3');
         var kanvas3 = document.getElementById('template_thin'); 
-
+        
         //ambil data 2d gambar
         var ctx = kanvas2.getContext('2d');
         //ambil data 2d template
@@ -417,6 +420,8 @@
         var imgData = ctx.getImageData(0,0,64,64);
         //ablil data pixel array template
         templateData = context.getImageData(0,0,64,64);
+        contohData = ctx2.getImageData(0,0,64,64);
+ 
         //looping array pixel gambar
         for(var i = 0; i<imgData.data.length; i+=4){
             //pemberian threshold
@@ -427,18 +432,23 @@
                 batasAtas_ = Math.round(batasAtas*25/100);
                 //threshold = threshold + (Math.round(batasAtas*20/100));
             }
+            if(contohData.data[i]==0){
+                contohcontoh =  contohcontoh + (1-Math.round((contohData.data[i]/255)));
+                contohcontoh_ = Math.round(contohcontoh*50/100);
+            }
             //template matching
 
-            //nilai = nilai + Math.pow(((1-Math.round(templateData.data[i]/255)) - (1-Math.round(imgData.data[i]/255))),2); //tm_sqdiff
-             nilai = nilai + (1-Math.round(templateData.data[i]/255)) * (1-Math.round(imgData.data[i]/255)); //TM_CCORR
+            nilai = nilai + Math.pow(((1-Math.round(contohData.data[i]/255)) - (1-Math.round(imgData.data[i]/255))),2); //tm_sqdiff
+            // nilai = nilai + (1-Math.round(contohData.data[i]/255)) * (1-Math.round(imgData.data[i]/255)); //TM_CCORR
         }
-
+        console.log(contohcontoh);
+        console.log(contohcontoh_);
         console.log(batasAtas);
         console.log(batasAtas_);
         console.log(nilai);
         //if(nilai>=(batasAtas*80/100)){
         //kondisi benar dan salah
-        if(nilai>=batasAtas_){
+        if(nilai>=contohcontoh_){
             sound_benar();
             $("#pop_benar").fadeIn();
             $("#pop_benar").fadeOut('slow');
@@ -461,7 +471,7 @@
     //mengubah template contoh
     function ubah_contoh(){
         input = document.getElementById("masuk").value;
-        document.getElementById('srcImage3').src="../../template/besar/"+input+".png";
+        document.getElementById('srcImage3').src="../../template/huruf_besar/"+input+".jpg";
         make_b(); //draw template ke canvas
     }
     //mengubah tempalte contoh
@@ -482,7 +492,7 @@
     var canvas = document.getElementById("gambar");
     var ctx = canvas.getContext("2d");
     ctx.strokeStyle = "#000000";
-    ctx.lineWidth = 8;
+    ctx.lineWidth = 10;
 
     // Set up mouse events for drawing
     var drawing = false;
@@ -524,7 +534,7 @@
     function renderCanvas() {
     if (drawing) {
         ctx.strokeStyle = "#000000";
-        ctx.lineWidth = 8;
+        ctx.lineWidth = 10;
         ctx.moveTo(lastPos.x, lastPos.y);
         ctx.lineTo(mousePos.x, mousePos.y);
         ctx.stroke();

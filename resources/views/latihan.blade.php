@@ -176,10 +176,12 @@
                 </div>
                 <div class="container">
                     <div class="input_skor">
+                    <div id="display"></div>
                         <form  action="/score/store" method="post">
                             {{ csrf_field() }}
                             <!-- <h4 name="nilai" id="scoreinput"></h4> -->
-                            <input type="text" name="nilai" id="scoreinput" readonly><br>
+                    
+                            <input type="text" name="nilai" id="scoreinput" readonly onchange="input()"><br>
                             <input type="text" name="nama" id="" placeholder="Nama ......."><br>
                             <input type="submit" value="simpan">
                         </form>
@@ -204,6 +206,10 @@
         $(".loader-wrapper").fadeOut("slow");
     });
 
+       function input(){
+            var input_taker = document.getElementById('scoreinput').value;
+            document.getElementById('display').innerHTML = input_taker;
+        }
     // loading end
     // sound
 

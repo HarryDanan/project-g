@@ -29,7 +29,7 @@ function colorImage(src,dst){
 function colorTemplate(src,dst){
 	//ubah warna gamba rke hitam putih
 	let low = new cv.Mat(src.rows, src.cols, src.type(), [0,0,0,255]); //parameter bahwa
-    let high = new cv.Mat(src.rows, src.cols, src.type(), [0,0,0,255]); //paramter atas
+    let high = new cv.Mat(src.rows, src.cols, src.type(), [150,150,150,255]); //paramter atas
     
     cv.inRange(src, low, high, dst); //mengecek apakah nilai array berada diantara paramter bawah dan atas
 
@@ -162,56 +162,6 @@ function templateThinning(kanvas){
 	var kanvas3 = document.getElementById('template_thin'); //inisialisasi kanvas
 	var ctx3 = kanvas3.getContext('2d'); //membuat object CanvasRenderingContext2D
 	ctx3.putImageData(imgData,0,0); //tampilkan gambar pada kanvas
-}
-
-function thinningContoh(temp){
-	//get image data
-	var ctx = temp.getContext('2d');
-	var imgData = ctx.getImageData(0,0,64,64);
-	//operation	
-	var gambar = zeros([64,64]);
-	var gambarStep1 = zeros([64,64]);
-	var gambarStep2 = zeros([64,64]);
-	var j = 0;
-	var k = 0;
-	var l = 0;
-	for (var i = 0; i < imgData.data.length; i+=4) {
-	 	if(l==64){
-	 		l=0;
-	 		j=0;
-	 		k=k+1;
-	 	}
-	 	gambar[k][j] = imgData.data[i];
-	 	j=j+1;
-	 	l=l+1;
-	}
-	while(berhenti!=1){
-		var gambar = step1(gambar);
-		var gambar = step2(gambar);
-	}
-	berhenti=0;
-
-	//change image
-	var j = 0;
-	var k = 0;
-	var l = 0;
-	for (var i = 0; i < imgData.data.length; i+=4) {
-	 	if(l==64){
-	 		l=0;
-	 		j=0;
-	 		k=k+1;
-	 	}
-	 	imgData.data[i] = gambar[k][j];
-	 	imgData.data[i+1] = gambar[k][j];
-	 	imgData.data[i+2] = gambar[k][j];
-	 	j=j+1;
-	 	l=l+1;
-	}
-
-	//show image 
-	var kanvas3 = document.getElementById('outputTemp');
-	var ctx3 = kanvas3.getContext('2d');
-	ctx3.putImageData(imgData,0,0);
 }
 
 //cut and resize
