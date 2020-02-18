@@ -74,26 +74,27 @@
             </table>
         </div>
          -->
-
-        <h1>Score</h1>
-        <table>
+      <div class="container table-skor">
+        <table class="table">
+          <thead style="color:white;font-size:30px;">
             <tr>
-                <td>id</td>
-                <td>nama</td>
-                <td>score</td>
+                <td scope="col">NO</td>
+                <td scope="col">NAMA</td>
+                <td scope="col">SCORE</td>
 
             </tr>
+          </thead>
+          <tbody style="color :white;font-size:30px;">
             @foreach($score as $s)
             <tr>
-
                 <td>{{$s->id}}</td>
                 <td>{{$s->nama}}</td>
                 <td>{{$s->nilai}}</td>
-
             </tr>
             @endforeach
+          </tbody>
         </table>
-
+      </div>
 
      
     <!-- Modal -->      

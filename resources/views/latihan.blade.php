@@ -55,6 +55,7 @@
             <img  id="pop_benar" style="display:none; position:fixed" class="pop_bs" src="{{asset('assets/icon/pop_benar.png')}}" alt="">
             <img  id="pop_salah" style="display:none; position:fixed" class="pop_bs" src="{{asset('assets/icon/pop_salah.png')}}" alt="">
             <img  id="pop_kanvas" style="display:none; position:fixed" class="pop_bs" src="{{asset('assets/icon/pop_kanvas.png')}}" alt="">
+            <img  id="pop_contoh" style="display:none; position:fixed" class="pop_bs" src="{{asset('assets/icon/pop_contoh.png')}}" alt="">
         <!-- pop up benar dan salah end -->
             <img class="papan" src="{{asset('assets/icon/papan.png')}}" alt="">
             <canvas id="gambar" width="192" height="192" style="background-color: white; top :40%; position:fixed; border:2px solid #000000;"></canvas>
@@ -115,7 +116,7 @@
         <div  style="padding-top:23%">
             <a id="check" onclick="periksa()"><img class="icn" src="{{asset('assets/icon/btn_periksa.png')}}" alt=""></a>
             <a onclick="btn_s();hapus()"><img class="icn" src="{{asset('assets/icon/btn_hapus.png')}}" alt=""></a>
-            <a data-toggle="modal" href="#myModal_skor" onclick="btn_s()"><img class="icn" src="{{asset('assets/icon/btn_about.png')}}" alt=""></a>
+            <!-- <a data-toggle="modal" href="#myModal_waktu" onclick="btn_s()"><img class="icn" src="{{asset('assets/icon/btn_about.png')}}" alt=""></a> -->
         </div>
         </center>
 
@@ -152,14 +153,10 @@
             <!-- Modal content-->
             <div class="modal-content">
                 <div class="container">
-                    {{-- <img class="about_modal" style="width:100%;height:100%;" src="{{asset('assets/icon/waktu_habis_popup.png')}}" alt="">
-                    <p> --}}
-                    <p>
-                    Waktu
-                    </p>
+                    <img class="about_modal" style="width:100%;height:100%;" src="{{asset('assets/icon/waktu_habis_popup.png')}}" alt="">
                 </div>
-                <div class="container" style="padding-left:10%;">
-                     <a href="/menu" onclick="btn_s()"><img  style ="width:45%;" src="{{asset('assets/icon/btn_lihat_skor.png')}}" alt=""></a>
+                <div class="container" style="text-align:center">
+                     <a href="#" onclick="btn_s()" data-target="#myModal_skor" data-toggle="modal" data-dismiss="modal" ><img  style ="width:45%;" src="{{asset('assets/icon/btn_lihat_skor.png')}}" alt=""></a>
                 </div>
             </div>
         </div>
@@ -177,19 +174,20 @@
                 <div class="container">
                     <div class="input_skor">
                     <div id="display"></div>
-                        <form  action="/score/store" method="post">
+                        <form  action="/score/store" method="post" id="form-skor">
                             {{ csrf_field() }}
                             <!-- <h4 name="nilai" id="scoreinput"></h4> -->
-                    
-                            <input type="text" name="nilai" id="scoreinput" readonly onchange="input()"><br>
-                            <input type="text" name="nama" id="" placeholder="Nama ......."><br>
-                            <input type="submit" value="simpan">
+                            <h1 class='skorbox' id='skorbox'></h1>
+                            <!-- <input type='text' name='fname' value="60" class='chatinput' id='chatinput'> -->
+                            <input class="form-control" type="text" name="nilai"id="scoreinput" disabled hidden><br>
+                            <input class="form-control" type="text" name="nama" style="text-align:center;"placeholder="Nama"><br>
+                            <!-- <input type="submit" value="simpan"> -->
                         </form>
                     </div>
                     <img class="skor_modal"  src="{{asset('assets/icon/skor_modal.png')}}" alt="">
                 </div>
                 <div class="container" style="padding-left:10%;">
-                    <a href="/menu_ujian" onclick="btn_s()"><img  style ="width:45%;" src="{{asset('assets/icon/btn_ulang.png')}}" alt=""></a>
+                    <a href="/menu_ujian" id="submit" onclick="btn_s()"><img  style ="width:45%;" src="{{asset('assets/icon/btn_ulang.png')}}" alt=""></a>
                     <a href="/" onclick="btn_s()"><img style ="width:45%;" src="{{asset('assets/icon/btn_keluar.png')}}" alt=""></a>
                 </div>
             </div>
@@ -206,10 +204,10 @@
         $(".loader-wrapper").fadeOut("slow");
     });
 
-       function input(){
-            var input_taker = document.getElementById('scoreinput').value;
-            document.getElementById('display').innerHTML = input_taker;
-        }
+    document.getElementById("submit").onclick = function() {
+        document.getElementById("form-skor").submit();
+    }
+
     // loading end
     // sound
 
@@ -338,7 +336,12 @@
 
     // periksa
 
-
+    $('#myModal_skor').on('shown.bs.modal', function (e) {
+        display_skor();
+    })
+    function display_skor() {
+        document.getElementById('skorbox').innerHTML = point;
+    }
 
     //darah
     var liveelem = document.getElementById('livecount');

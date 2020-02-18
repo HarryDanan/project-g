@@ -34,12 +34,12 @@
           </div>
       </div>
 
-        <div style="padding-top:10%;">
+        <div style="padding-top:7%;">
         <center>
           <a href="/ujian_besar" onclick="btn_s()"><img  class="icn_menu" src="{{asset('assets/icon/logo_h_b.png')}}" alt=""></a>
           <a href="/ujian_kecil" onclick="btn_s()"><img class='icn_menu' src="{{asset('assets/icon/logo_h_k.png')}}" alt=""></a>
-          <a href="/ujian_angka" onclick="btn_s()"><img class="icn_menu" src="{{asset('assets/icon/logo_ang.png')}}" alt=""></a>
-          <a href="/scoreboard" onclick="btn_s()"><img class="icn_menu" src="{{asset('assets/icon/logo_scoreboard.png')}}" alt=""></a>
+          <a href="/ujian_angka" onclick="btn_s()"><img class="icn_menu" src="{{asset('assets/icon/logo_ang.png')}}" alt=""></a><br>
+          <a href="/score" onclick="btn_s()"><img class="icn_menu" src="{{asset('assets/icon/logo_scoreboard.png')}}" alt=""></a>
         </center>
         </div>
      

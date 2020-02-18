@@ -28,7 +28,7 @@ function colorImage(src,dst){
 //normalisasi rgb
 function colorTemplate(src,dst){
 	//ubah warna gamba rke hitam putih
-	let low = new cv.Mat(src.rows, src.cols, src.type(), [0,0,0,255]); //parameter bahwa
+	let low = new cv.Mat(src.rows, src.cols, src.type(), [0,0,0,0]); //parameter bahwa
     let high = new cv.Mat(src.rows, src.cols, src.type(), [150,150,150,255]); //paramter atas
     
     cv.inRange(src, low, high, dst); //mengecek apakah nilai array berada diantara paramter bawah dan atas

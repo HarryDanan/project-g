@@ -24,7 +24,7 @@
       </div>
       <div class="container-fluid">
         <div class="float-right">
-          <a data-toggle="modal" href="#myModal" onclick="btn_s()"><img style="width: 64px;height:64px" src="{{asset('assets/icon/btn_helpper.png')}}" alt=""></a>
+          <a data-toggle="modal" href="#myModal" onclick="btn_s()"><img class="help_index" src="{{asset('assets/icon/btn_helpper.png')}}" alt=""></a>
         </div>
       </div>
 
@@ -42,7 +42,9 @@
         <a href="/menu" onclick="btn_s()"><img  class="icn" src="{{asset('assets/icon/btn_play.png')}}" alt=""></a>
       </div>
       <!-- icon menu -->
-      <div style="padding-top : 5%">
+      <a href="#" id="btn_play" onclick="btn_s();btn_muncul();"><img  class="icn" src="{{asset('assets/icon/btn_play.png')}}" alt=""></a>
+
+      <div id="btn_menu" style="padding-top : 5%" >
         <a href="/menu" onclick="btn_s()"><img  class="icn" src="{{asset('assets/icon/btn_latihan.png')}}" alt=""></a>
         <a href="/menu_ujian" onclick="btn_s()"><img class='icn' src="{{asset('assets/icon/btn_ujian.png')}}" alt=""></a>
         <a href="/tutorial" onclick="btn_s()"><img class="icn" src="{{asset('assets/icon/btn_tutorial.png')}}" alt=""></a>
@@ -116,7 +118,22 @@
     $(window).on("load",function(){
           $(".loader-wrapper").fadeOut("slow");
     });
+    $(window).on("load",function(){
+      document.getElementById("btn_menu").style.display = "none";
+    });
+
+    // $( document ).ready(function() {
+    // $("#btn_play").on("click",function(){
+    //       $("#btn_menu").toggle();
+    //   });
+    // }); 
     // loading screen end
+    function btn_muncul() {
+      $("#btn_play").fadeOut('slow');
+      $("#btn_menu").fadeIn('slow');
+    }
+    //$("").fadeIn();
+ 
 
     // sound click
     var sound = document.getElementById('btn-s');

@@ -15,7 +15,7 @@ body {
   position: absolute;
   top: 0;
   left: 0;
-  background-color: #242f3f;
+  background-color: black; /*#242f3*/
   display:flex;
   justify-content: center;
   align-items: center;
@@ -183,8 +183,26 @@ main .plate {
 
 .btn_bantuan{
   width: 40%;
+  transition: transform .2s;
+}
+.btn_bantuan:hover{
+  transform: scale(1.2);
+}
+.btn_bantuan:active{
+  transform: translateY(4px);
 }
 
+
+.skorbox{
+  font-family: Janda Manatee Solid;
+  font-size :60px;
+}
+
+.table-skor{
+  padding-top: 5%;
+  font-family: Janda Manatee Solid;
+  font-color : white
+}
 /* score */
 
 .score{
@@ -225,7 +243,28 @@ main .plate {
   width: 20%;
   padding-left:1%;
   padding-right:1%;
+  transition: transform .2s;
 }
+
+.icn_menu:hover{
+  transform: scale(1.2);
+}
+.icn_menu:active{
+  transform: translateY(10px);
+}
+
+.help_index{
+  width: 64px;
+  height:64px;
+  transition: transform .2s;
+}
+.help_index:hover{
+  transform: scale(1.2);
+}
+.help_index:active{
+  transform: translateY(4px);
+}
+
 
 .logo_latihan{
   height: 30%;
@@ -281,15 +320,20 @@ z-index: 1;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
+  margin: 0; 
+  height: 100%;
+  overflow: hidden;
 }
 
 .bg2 {
-  background: url(../assets/icon/bgmenu.png) no-repeat center center fixed; 
+  background: url(../assets/icon/bg_latihan.png) no-repeat center center fixed; 
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
-
+  /* margin: 0; 
+  height: 100%;
+  overflow: hidden; */
 }
 
 .bg3 {
@@ -298,7 +342,9 @@ z-index: 1;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
-
+  /* margin: 0; 
+  height: 100%;
+  overflow: hidden; */
 }
 
 .bg_instruksi {
@@ -307,25 +353,31 @@ z-index: 1;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
-
+  /* margin: 0; 
+  height: 100%;
+  overflow: hidden; */
 }
 
 .bg_scoreboard {
-  background: url(../assets/icon/bg_scoreboard.png) no-repeat center center fixed; 
+  background: url(../assets/icon/bg_scoreboard2.png) no-repeat center center fixed; 
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
-
+  /* margin: 0; 
+  height: 100%;
+  overflow: hidden; */
 }
 
 .bg_menu_ujian {
-  background: url(../assets/icon/bg_ujian.png) no-repeat center center fixed; 
+  background: url(../assets/icon/bg_ujian2.png) no-repeat center center fixed; 
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
-
+  /* margin: 0; 
+  height: 100%;
+  overflow: hidden; */
 }
 
 
@@ -342,10 +394,24 @@ z-index: 1;
 
 .icn {
   width: 17%;
+  transition: transform .2s;
+}
+.icn:hover{
+  transform: scale(1.2);
+}
+.icn:active{
+  transform: translateY(10px);
 }
 
 .icn2 {
   width: 7%;
+  transition: transform .2s;
+}
+.icn2:hover{
+  transform: scale(1.2);
+}
+.icn2:active{
+  transform: translateY(4px);
 }
 
 .close_modal{
@@ -353,6 +419,13 @@ z-index: 1;
   right: 1%;
   position: absolute;
   width: 10%;
+  transition: transform .2s;
+}
+.close_modal:hover{
+  transform: scale(1.2);
+}
+.close_modal:active{
+  transform: translateY(10px);
 }
 
 .input_skor{

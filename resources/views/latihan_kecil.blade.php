@@ -50,6 +50,7 @@
             <img  id="pop_benar" style="display:none; position:fixed" class="pop_bs" src="{{asset('assets/icon/pop_benar.png')}}" alt="">
             <img  id="pop_salah" style="display:none; position:fixed" class="pop_bs" src="{{asset('assets/icon/pop_salah.png')}}" alt="">
             <img  id="pop_kanvas" style="display:none; position:fixed" class="pop_bs" src="{{asset('assets/icon/pop_kanvas.png')}}" alt="">
+            <img  id="pop_contoh" style="display:none; position:fixed" class="pop_bs" src="{{asset('assets/icon/pop_contoh.png')}}" alt="">
         <!-- pop up benar dan salah end -->
             <img class="papan" src="{{asset('assets/icon/papan.png')}}" alt="">
             <canvas id="gambar" width="192" height="192" style=" top :40%; position:absolute; border:2px solid #000000;z-index:2"></canvas>
@@ -207,8 +208,8 @@
     var input = document.getElementById("masuk").value;
     //ambil data src gambar template
     document.getElementById("srcImage2").src = "../../template/" + input + ".jpg";
-    document.getElementById("srcImage3").src = "../../template/huruf_besar/" + input + ".jpg";
-   //document.getElementById("srcImage4").src = "../../template/bw_besar/" + input + ".jpg";
+    document.getElementById("srcImage3").src = "../../template/besar/" + input + ".jpg";
+   //document.getElementById("srcImage4").src = "../../template/bw_huruf_besar/" + input + ".jpg";
     
     //ambil template dari canvas
     var canvasTemplate = document.getElementById('outputTemplate');
@@ -371,8 +372,8 @@
         }else{
             //jika path salah
             sound_salah();
-            $("#pop_contoh_salah").fadeIn();
-            $("#pop_contoh_salah").fadeOut('slow');
+            $("#pop_contoh").fadeIn();
+            $("#pop_contoh").fadeOut('slow');
         }
         // $('#table2').append(table);
         
@@ -471,7 +472,7 @@
     //mengubah template contoh
     function ubah_contoh(){
         input = document.getElementById("masuk").value;
-        document.getElementById('srcImage3').src="../../template/huruf_besar/"+input+".jpg";
+        document.getElementById('srcImage3').src="../../template/besar/"+input+".jpg";
         make_b(); //draw template ke canvas
     }
     //mengubah tempalte contoh
