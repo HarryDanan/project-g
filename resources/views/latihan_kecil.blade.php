@@ -5,7 +5,7 @@
     <meta charset="utf-8">  
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
-    <title>Latihan Huruf Kecil</title>
+    <title>Latihan Menulis Huruf Besar</title>
 
     <link rel="stylesheet" href="{{asset('css/style.css')}}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
@@ -68,7 +68,7 @@
                             <img id="srcImage2" src="" width="64" height="64">
                         </div>
                     
-                            <select class="selectpicker "name="carlist" form="carform" id="masuk" onchange="inputan();ubah_contoh();ubah_contoh_template();">
+                            <select class="selectpicker "name="carlist" form="carform" id="masuk" onchange="inputan();ubah_contoh()">
                                 <option value="a" selected>A</option>
                                 <option value="b">B</option>
                                 <option value="c">C</option>
@@ -112,7 +112,7 @@
         </div>
         </center>
 
-        <div class="row">
+        <div hidden class="row">
             <div class="col-sm-3">
                 <h5>Gambar Template</h5>
                 <canvas width="64" height="64" id='outputTemplate'></canvas>
@@ -207,9 +207,9 @@
     var x = 0;
     var input = document.getElementById("masuk").value;
     //ambil data src gambar template
-    document.getElementById("srcImage2").src = "../../template/" + input + ".jpg";
-    document.getElementById("srcImage3").src = "../../template/besar/" + input + ".jpg";
-   //document.getElementById("srcImage4").src = "../../template/bw_huruf_besar/" + input + ".jpg";
+    document.getElementById("srcImage2").src = "../../template/kecil/" + input + ".jpg";
+    document.getElementById("srcImage3").src = "../../template/contoh_kecil/" + input + ".jpg";
+   //document.getElementById("srcImage4").src = "../../template/bw_huruf_kecil/" + input + ".jpg";
     
     //ambil template dari canvas
     var canvasTemplate = document.getElementById('outputTemplate');
@@ -220,12 +220,14 @@
     var context2 = contoh.getContext('2d');
     
     //draw template ke canvas
-    make_base();
+    draw_template();
     //draw contoh ke canvas
-    make_b();
+    draw_contoh();
+
+    switch_threshold();
 
      //draw template ke canvas
-    function make_base() {
+    function draw_template() {
         //inisialisasi gmabar baru
         base_image = new Image();
         //ambil data src dari gambar dengan id srcImage2
@@ -237,7 +239,7 @@
     }
 
     //draw tempalte contoh ke canvas
-    function make_b(){
+    function draw_contoh(){
         //inisialisasi gambar baru
         base_image2 = new Image();
         //ambil data src dar gambar dengan id srcImage3
@@ -300,7 +302,7 @@
         thinningImage(kanvas); //zhen suen
         //thinningImage2(kanvas); //steinford  
         //normalisasi warna template
-        colorTemplate(cv.imread('outputContoh'),dst);
+        colorTemplate(cv.imread('outputTemplate'),dst);
         //thinning template
         templateThinning(kanvas_template);
         check_path();
@@ -411,7 +413,9 @@
         var nilai=0;
         //ambil data gambar
         var kanvas2 = document.getElementById('outputCanvas3');
-        var kanvas3 = document.getElementById('template_thin'); 
+        var kanvas3 = document.getElementById('outputTemplate'); 
+
+        var kanvas4 = document.getElementById('template_thin');
         
         //ambil data 2d gambar
         var ctx = kanvas2.getContext('2d');
@@ -420,8 +424,8 @@
         //ambil data pixel array gambar
         var imgData = ctx.getImageData(0,0,64,64);
         //ablil data pixel array template
-        templateData = context.getImageData(0,0,64,64);
-        contohData = ctx2.getImageData(0,0,64,64);
+        templateData = ctx2.getImageData(0,0,64,64);
+        //template_thinData = ctx3.getImageData(0,0,64,64);
  
         //looping array pixel gambar
         for(var i = 0; i<imgData.data.length; i+=4){
@@ -430,26 +434,21 @@
                 // batasAtas++;
                //batasAtas = 64*64;
                 batasAtas =  batasAtas + (1-Math.round((templateData.data[i]/255)));
-                batasAtas_ = Math.round(batasAtas*25/100);
+                batasAtas_ = Math.round(batasAtas*x);
                 //threshold = threshold + (Math.round(batasAtas*20/100));
-            }
-            if(contohData.data[i]==0){
-                contohcontoh =  contohcontoh + (1-Math.round((contohData.data[i]/255)));
-                contohcontoh_ = Math.round(contohcontoh*50/100);
             }
             //template matching
 
-            nilai = nilai + Math.pow(((1-Math.round(contohData.data[i]/255)) - (1-Math.round(imgData.data[i]/255))),2); //tm_sqdiff
-            // nilai = nilai + (1-Math.round(contohData.data[i]/255)) * (1-Math.round(imgData.data[i]/255)); //TM_CCORR
+            //nilai = nilai + Math.pow(((1-Math.round(contohData.data[i]/255)) - (1-Math.round(imgData.data[i]/255))),2); //tm_sqdiff
+            nilai = nilai + (1-Math.round(templateData.data[i]/255)) * (1-Math.round(imgData.data[i]/255)); //TM_CCORR
         }
-        console.log(contohcontoh);
-        console.log(contohcontoh_);
-        console.log(batasAtas);
+
+        //console.log(batasAtas);
         console.log(batasAtas_);
         console.log(nilai);
         //if(nilai>=(batasAtas*80/100)){
         //kondisi benar dan salah
-        if(nilai>=contohcontoh_){
+        if(nilai>=batasAtas_){
             sound_benar();
             $("#pop_benar").fadeIn();
             $("#pop_benar").fadeOut('slow');
@@ -465,26 +464,65 @@
     //mengubah tempalte
     function inputan(){
         input = document.getElementById("masuk").value; 
-        document.getElementById("srcImage2").src = "../../template/"+input+".jpg"; //ambil data src template
+        document.getElementById("srcImage2").src = "../../template/kecil/"+input+".jpg"; //ambil data src template
         var c = document.getElementById("gambar");c.width = c.width; //hapus gambar di canvas
-        make_base(); //draw template ke canvas
+        draw_template(); //draw template ke canvas
+        switch_threshold();
     }
     //mengubah template contoh
     function ubah_contoh(){
         input = document.getElementById("masuk").value;
-        document.getElementById('srcImage3').src="../../template/besar/"+input+".jpg";
-        make_b(); //draw template ke canvas
-    }
-    //mengubah tempalte contoh
-    function ubah_contoh_template(){
-        input = document.getElementById("masuk").value;
-        document.getElementById('srcImage2').src="../../template/"+input+".jpg";
+        document.getElementById('srcImage3').src="../../template/contoh_kecil/"+input+".jpg";
+        draw_contoh(); //draw template ke canvas
     }
     //hapus gambar
     function hapus(){
         var c = document.getElementById("gambar");c.width = c.width;
         // var ctx = c.getContext("2d");
         // ctx.clearRect(0, 0, canvas.width, canvas.height);
+    }
+    function switch_threshold (){
+        input = document.getElementById("masuk").value;
+        switch(input){
+            case "a" :
+            case "c" :
+            case "d" :
+            case "o" :
+            case "q" :
+            case "x" :
+            case "z" :
+            case "e" :
+                x = 30/100;
+                break;
+            case "s" :
+            case "t" :
+            case "v" :
+            case "y" :
+                x = 25/100;
+                break;
+            case "p" :
+                x = 22
+                break;
+            case "f" :
+            case "g" :
+            case "h" :
+            case "k" :
+            case "u" :
+            case "r" :
+                x = 20/100;
+                break;
+            case "l" :
+            case "m" :
+            case "n" :
+                x = 18/100;
+                break;
+            case "b" :
+                x = 15/100;
+                break;
+            default :
+            x = 30/100;
+            break;
+        }
     }
 
 </script>
