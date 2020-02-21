@@ -112,7 +112,7 @@
         </div>
         </center>
 
-        <div hidden class="row">
+        <div class="row">
             <div class="col-sm-3">
                 <h5>Gambar Template</h5>
                 <canvas width="64" height="64" id='outputTemplate'></canvas>
@@ -209,7 +209,7 @@
     //ambil data src gambar template
     document.getElementById("srcImage2").src = "../../template/besar/" + input + ".jpg";
     document.getElementById("srcImage3").src = "../../template/contoh_besar/" + input + ".jpg";
-   //document.getElementById("srcImage4").src = "../../template/bw_huruf_besar/" + input + ".jpg";
+   //document.getElementById("srcImage4").src = "../../template/bw_huruf_kecil/" + input + ".jpg";
     
     //ambil template dari canvas
     var canvasTemplate = document.getElementById('outputTemplate');

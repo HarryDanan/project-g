@@ -126,7 +126,8 @@ function templateThinning(kanvas){
 	 		l=0;
 	 		j=0;
 	 		k=k+1;
-	 	}
+		 }
+		//menyimpan data pixel imgData ke matriks gambar
 	 	gambar[k][j] = imgData.data[i];
 	 	j=j+1;
 	 	l=l+1;
@@ -139,10 +140,6 @@ function templateThinning(kanvas){
 	berhenti=0;
 
 	//change image
-	// inisialisasi variable
-	var j = 0;
-	var k = 0;
-	var l = 0;
 	//mengubah array pixel menjadi matriks
 	for (var i = 0; i < imgData.data.length; i+=4) {
 	 	if(l==64){
@@ -150,7 +147,7 @@ function templateThinning(kanvas){
 	 		j=0;
 	 		k=k+1;
 		 }
-		//mengubah data matriks gambar agar sesuai dengan hasil thinning
+		//mengubah pixel rgb data matriks gambar agar sesuai dengan hasil thinning
 	 	imgData.data[i] = gambar[k][j];
 	 	imgData.data[i+1] = gambar[k][j];
 	 	imgData.data[i+2] = gambar[k][j];
@@ -165,9 +162,9 @@ function templateThinning(kanvas){
 }
 
 //cut and resize
-function tepi(kanvas){
+function tepi(kanvas2){
 	//get image data
-	var ctx = kanvas.getContext('2d');
+	var ctx = kanvas2.getContext('2d');
 	var imgData = ctx.getImageData(0,0,64,64);
 
 	//operations
@@ -189,9 +186,9 @@ function tepi(kanvas){
 	var y = 0;
 
 	//draw image ke canvas
-	var kanvas2 = document.getElementById('outputCanvas4'); //inisialisasi canvas
-	var ctx2 = kanvas2.getContext('2d');  //render 2d
-	ctx2.drawImage(kanvas,tepianX(gambar),tepianY(gambar),tepianX2(gambar)-tepianX(gambar)+1,tepianY2(gambar)-tepianY(gambar)+1,0,0,64,64); //render berdasarkan tepi
+	var kanvas3 = document.getElementById('outputCanvas4'); //inisialisasi canvas
+	var ctx2 = kanvas3.getContext('2d');  //render 2d
+	ctx2.drawImage(kanvas2,tepianX(gambar),tepianY(gambar),tepianX2(gambar)-tepianX(gambar)+1,tepianY2(gambar)-tepianY(gambar)+1,0,0,64,64); //render berdasarkan tepi
 }
 
 //mengambil data array gambar
@@ -240,7 +237,6 @@ function step1(objek){
 }
 
 function step2(objek){
-	berhenti = 1;
 	var hasil = objek;
 	var i = 1;
 	var j = 1;

@@ -5,7 +5,7 @@
     <meta charset="utf-8">  
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
-    <title>Latihan Menulis Huruf Besar</title>
+    <title>Latihan Menulis Huruf Kecil</title>
 
     <link rel="stylesheet" href="{{asset('css/style.css')}}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
@@ -402,21 +402,16 @@
 
     //periksa hasil tulisan pada canvas
     function periksa(){
-          //check path
+        //check path
         //check_path();
         //inisialisasi nilai threshold
         var batasAtas=0; 
         var batasAtas_=0;
-        var contohcontoh=0;
-        var contohcontoh_=0;
         //inisaslisasi nilai
         var nilai=0;
         //ambil data gambar
         var kanvas2 = document.getElementById('outputCanvas3');
         var kanvas3 = document.getElementById('outputTemplate'); 
-
-        var kanvas4 = document.getElementById('template_thin');
-        
         //ambil data 2d gambar
         var ctx = kanvas2.getContext('2d');
         //ambil data 2d template
@@ -438,7 +433,6 @@
                 //threshold = threshold + (Math.round(batasAtas*20/100));
             }
             //template matching
-
             //nilai = nilai + Math.pow(((1-Math.round(contohData.data[i]/255)) - (1-Math.round(imgData.data[i]/255))),2); //tm_sqdiff
             nilai = nilai + (1-Math.round(templateData.data[i]/255)) * (1-Math.round(imgData.data[i]/255)); //TM_CCORR
         }

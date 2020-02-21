@@ -96,7 +96,7 @@
         </div>
         </center>
 
-        <div hidden class="row">
+        <div class="row">
             <div class="col-sm-3">
                 <h5>Gambar Template</h5>
                 <canvas width="64" height="64" id='outputTemplate'></canvas>
@@ -468,43 +468,24 @@
     function switch_threshold (){
         input = document.getElementById("masuk").value;
         switch(input){
-            case "a" :
-            case "c" :
-            case "d" :
-            case "o" :
-            case "q" :
-            case "x" :
-            case "z" :
-            case "e" :
-                x = 30/100;
-                break;
-            case "s" :
-            case "t" :
-            case "v" :
-            case "y" :
+            case "0" :
+            case "1" :
+            case "2" :
+            case "3" :
                 x = 25/100;
                 break;
-            case "p" :
-                x = 22
+            case "6" :
+            case "7" :
+            case "8" :
+            case "9" :
+            case "4" :
+                x = 21/100;
                 break;
-            case "f" :
-            case "g" :
-            case "h" :
-            case "k" :
-            case "u" :
-            case "r" :
-                x = 20/100;
-                break;
-            case "l" :
-            case "m" :
-            case "n" :
-                x = 18/100;
-                break;
-            case "b" :
-                x = 15/100;
+            case "5" :
+                x = 30/100;
                 break;
             default :
-            x = 30/100;
+                x = 30/100;
             break;
         }
     }
