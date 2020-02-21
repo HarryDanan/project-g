@@ -168,7 +168,6 @@
             <!-- Modal content-->
             <div class="modal-content">
                 <div class="container">
-                    <!-- <button type="button" class="close" data-dismiss="modal">&times;</button> -->
                     <img onclick="btn_s()"class="close_modal" src="{{asset('assets/icon/close_btn.png')}}" data-dismiss="modal" alt="">&times;</img>
                 </div>
                 <div class="container">
@@ -176,12 +175,10 @@
                     <div id="display"></div>
                         <form  action="/score/store" method="post" id="form-skor">
                             {{ csrf_field() }}
-                            <!-- <h4 name="nilai" id="scoreinput"></h4> -->
                             <h1 class='skorbox' id='skorbox'></h1>
-                            <!-- <input type='text' name='fname' value="60" class='chatinput' id='chatinput'> -->
                             <input class="form-control" type="text" name="nilai"id="scoreinput" disabled hidden><br>
+                            <input class="form-control" type="text" name="tipe"id="tipe" value="Huruf Besar" disabled hidden><br>
                             <input class="form-control" type="text" name="nama" style="text-align:center;"placeholder="Nama"><br>
-                            <!-- <input type="submit" value="simpan"> -->
                         </form>
                     </div>
                     <img class="skor_modal"  src="{{asset('assets/icon/skor_modal.png')}}" alt="">

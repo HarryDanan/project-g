@@ -402,20 +402,15 @@
 
     //periksa hasil tulisan pada canvas
     function periksa(){
-          //check path
-        //check_path();
         //inisialisasi nilai threshold
         var batasAtas=0; 
         var batasAtas_=0;
-        var contohcontoh=0;
-        var contohcontoh_=0;
         //inisaslisasi nilai
         var nilai=0;
         //ambil data gambar
         var kanvas2 = document.getElementById('outputCanvas3');
         var kanvas3 = document.getElementById('outputTemplate'); 
-
-        var kanvas4 = document.getElementById('template_thin');
+        //var kanvas4 = document.getElementById('template_thin');
         
         //ambil data 2d gambar
         var ctx = kanvas2.getContext('2d');
@@ -431,14 +426,10 @@
         for(var i = 0; i<imgData.data.length; i+=4){
             //pemberian threshold
             if(templateData.data[i]==0){
-                // batasAtas++;
-               //batasAtas = 64*64;
                 batasAtas =  batasAtas + (1-Math.round((templateData.data[i]/255)));
                 batasAtas_ = Math.round(batasAtas*x);
-                //threshold = threshold + (Math.round(batasAtas*20/100));
             }
             //template matching
-
             //nilai = nilai + Math.pow(((1-Math.round(contohData.data[i]/255)) - (1-Math.round(imgData.data[i]/255))),2); //tm_sqdiff
             nilai = nilai + (1-Math.round(templateData.data[i]/255)) * (1-Math.round(imgData.data[i]/255)); //TM_CCORR
         }
@@ -446,7 +437,7 @@
         //console.log(batasAtas);
         console.log(batasAtas_);
         console.log(nilai);
-        //if(nilai>=(batasAtas*80/100)){
+
         //kondisi benar dan salah
         if(nilai>=batasAtas_){
             sound_benar();

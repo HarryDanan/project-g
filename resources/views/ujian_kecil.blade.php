@@ -44,6 +44,10 @@
                 <a href="" ><img class=" icn_sw" src="{{asset('assets/icon/icon_skor.png')}}" alt=""></a>
                 <a href="" ><img class=" icn_sw" src="{{asset('assets/icon/icon_waktu.png')}}" alt=""></a>
             </div>
+            <div class="top_right">
+                <a href="#" id="btn_ubah"onclick="btn_s()"><img class=" btn_bantuan" src="{{asset('assets/icon/btn_bantuan.png')}}" alt=""></a>
+                <a href="$" ><img class=" btn_bantuan" src="{{asset('assets/icon/btn_helpper.png')}}" alt=""></a>
+            </div>    
             <div>
                 <center>
                     <img class="icn_logo" src="{{asset('assets/icon/logo_h_b.png')}}" alt=""></h3>
@@ -56,9 +60,11 @@
             <img  id="pop_benar" style="display:none; position:fixed" class="pop_bs" src="{{asset('assets/icon/pop_benar.png')}}" alt="">
             <img  id="pop_salah" style="display:none; position:fixed" class="pop_bs" src="{{asset('assets/icon/pop_salah.png')}}" alt="">
             <img  id="pop_kanvas" style="display:none; position:fixed" class="pop_bs" src="{{asset('assets/icon/pop_kanvas.png')}}" alt="">
+            <img  id="pop_contoh" style="display:none; position:fixed" class="pop_bs" src="{{asset('assets/icon/pop_contoh.png')}}" alt="">
         <!-- pop up benar dan salah end -->
             <img class="papan" src="{{asset('assets/icon/papan.png')}}" alt="">
-            <canvas id="gambar" width="192" height="192" style="background-color: white; top :40%; position:fixed; border:2px solid #000000;"></canvas>
+            <canvas id="gambar" width="192" height="192" style=" top :40%; position:absolute; border:2px solid #000000;z-index:2"></canvas>
+            <img id="srcImage3" src="" width="190" height="190" style="z-index:1;position :absolute;top:40.5%;display:none;opacity: 0.5;">
         </div>
         <br><br>
 
@@ -73,10 +79,6 @@
                         </div>
                         </center>
                     </div>
-                        <!-- <div>
-                            <img id="srcImage3" src="" width="120" height="120">
-                        </div> -->
-                
             </div>
             
             <br>
@@ -91,10 +93,22 @@
         </div>
         </center>
 
-        <div hidden class="row">
+        <div class="row">
             <div class="col-sm-3">
                 <h5>Gambar Template</h5>
                 <canvas width="64" height="64" id='outputTemplate'></canvas>
+            </div>
+            <div class="col-sm-3">
+                <h5>Gambar Template normal</h5>
+                <canvas width="64" height="64" id='template_normal'></canvas>
+            </div>
+            <div class="col-sm-3">
+                <h5>Gambar Template thinning</h5>
+                <canvas width="64" height="64" id='template_thin'></canvas>
+            </div>
+            <div class="col-sm-3">
+                <h5>Gambar Contoh</h5>
+                <canvas width="64" height="64" id='outputContoh'></canvas>
             </div>
             <div class="col-sm-3">
                 <h5>Gambar Resize</h5>
@@ -108,11 +122,19 @@
                 <h5>Gambar Skletoning</h5>
                 <canvas width="64" height="64" id='outputCanvas3'></canvas>
             </div>
-            <div class="col-sm-3">
+            <div hidden class="col-sm-3">
                 <h5>Gambar Tanpa Tepi</h5>
                 <canvas width="64" height="64" id='outputCanvas4'></canvas>
             </div>
         </div>
+        <center>
+            <table hidden id="table">
+                
+            </table>
+            <table hidden id="table2">
+                
+            </table>
+        </center>
         <audio src="../assets/sound/touch.mp3" id="btn-s"></audio>
         <audio src="../assets/sound/benar.mp3" id="btn-benar"></audio>
         <audio src="../assets/sound/salah.mp3" id="btn-salah"></audio>
@@ -135,25 +157,75 @@
     </div> 
 
         <!-- modal skor -->
-    <div id="myModal_skor" class="modal fade" role="dialog" >
-        <div class="modal-dialog modal-lg modal-dialog-centered">
-            <!-- Modal content-->
-            <div class="modal-content">
-                <div class="container">
-                    <!-- <button type="button" class="close" data-dismiss="modal">&times;</button> -->
-                    <img onclick="btn_s()"class="close_modal" src="{{asset('assets/icon/close_btn.png')}}" data-dismiss="modal" alt="">&times;</img>
-                </div>
-                <div class="container" style="">
-                    <img class="skor_modal" style="width:100%;height:100%;"src="{{asset('assets/icon/skor_modal.png')}}" alt="">
-                </div>
-                <div class="container" style="padding-left:10%;">
-                    <a href="/menu_ujian" onclick="btn_s()"><img  style ="width:45%;" src="{{asset('assets/icon/btn_ulang.png')}}" alt=""></a>
-                    <a href="/" onclick="btn_s()"><img style ="width:45%;" src="{{asset('assets/icon/btn_keluar.png')}}" alt=""></a>
+        <div id="myModal_skor" class="modal fade" role="dialog" >
+            <div class="modal-dialog modal-lg modal-dialog-centered">
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="container">
+                        <img onclick="btn_s()"class="close_modal" src="{{asset('assets/icon/close_btn.png')}}" data-dismiss="modal" alt="">&times;</img>
+                    </div>
+                    <div class="container">
+                        <div class="input_skor">
+                        <div id="display"></div>
+                            <form  action="/score/store" method="post" id="form-skor">
+                                {{ csrf_field() }}
+                                <h1 class='skorbox' id='skorbox'></h1>
+                                <input class="form-control" type="text" name="nilai"id="scoreinput" disabled hidden><br>
+                                <input class="form-control" type="text" name="tipe"id="tipe" value="Huruf kecil" disabled hidden><br>
+                                <input class="form-control" type="text" name="nama" style="text-align:center;"placeholder="Nama"><br>
+                            </form>
+                        </div>
+                        <img class="skor_modal"  src="{{asset('assets/icon/skor_modal.png')}}" alt="">
+                    </div>
+                    <div class="container" style="padding-left:10%;">
+                        <a href="/menu_ujian" id="submit" onclick="btn_s()"><img  style ="width:45%;" src="{{asset('assets/icon/btn_ulang.png')}}" alt=""></a>
+                        <a href="/" onclick="btn_s()"><img style ="width:45%;" src="{{asset('assets/icon/btn_keluar.png')}}" alt=""></a>
+                    </div>
                 </div>
             </div>
         </div>
-    </div> 
-     <!-- carousel -->
+        <!-- modal carousel -->
+
+        <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content">
+                <div id="demo" class="carousel slide" data-interval="false" data-ride="carousel">
+    
+                <!-- Indicators -->
+                <ul class="carousel-indicators">
+                    <li data-target="#demo" data-slide-to="0" class="active"></li>
+                    <li data-target="#demo" data-slide-to="1"></li>
+                    <li data-target="#demo" data-slide-to="2"></li>
+                </ul>
+                <center>
+                <!-- The slideshow -->
+                    <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <img src="{{asset('assets/icon/back.png')}}" alt="Los Angeles">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="{{asset('assets/icon/back.png')}}" alt="Chicago">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="{{asset('assets/icon/back.png')}}" alt="New York"><br>
+                        <a href="/latihan" onclick="btn_s()"><img  class="icn" src="{{asset('assets/icon/btn_mulai.png')}}" alt=""></a>
+                    </div>
+                    </div>
+    
+                    <!-- Left and right controls -->
+                    <a class="carousel-control-prev" href="#demo" data-slide="prev">
+                    <img style="width:25%;"src="{{asset('assets/icon/btn_back.png')}}">
+                    </a>
+                    <a class="carousel-control-next" href="#demo" data-slide="next">
+                    <img style="width:25%;"src="{{asset('assets/icon/btn_next.png')}}">
+                    </a>
+                </center>
+                </div>
+            </div>
+            </div>
+        </div>
+
+        {{-- end modal carousel --}}
 </body>
 
      
@@ -164,12 +236,19 @@
         $(".loader-wrapper").fadeOut("slow");
     });
 
+    $( document ).ready(function() {
+    $("#btn_ubah").on("click",function(){
+          $("#srcImage3").toggle();
+        });
+    }); 
+
     // loading end
     // sound
 
     var sound = document.getElementById('btn-s');
     var sound_b = document.getElementById('btn-benar');
     var sound_s = document.getElementById('btn-salah');
+    document.getElementById("tipe").value = "Huruf kecil";
 
     // sound end
 
@@ -201,13 +280,22 @@
     var timeLeft = 120; //setting timer
     var liveleft = 3; //setting jumlah nyawa
     var point = 0; //skor
+    var x =0;
 
-    document.getElementById("srcImage2").src = "../../template/" + input + ".jpg";
+    document.getElementById("srcImage2").src = "../../template/kecil/" + input + ".jpg";
+    document.getElementById("srcImage3").src = "../../template/contoh_kecil/" + input + ".jpg";
+
     var canvasTemplate = document.getElementById('outputTemplate');
-    var context = canvasTemplate.getContext('2d');
-    make_base();
+    var contoh = document.getElementById('outputContoh');
 
-    function make_base() { //membuat inputgambar template
+    var context = canvasTemplate.getContext('2d');
+    var context2 = contoh.getContext('2d');
+
+    draw_template();
+    draw_contoh();
+    switch_threshold();
+
+    function draw_template() { //membuat inputgambar template
         base_image = new Image();
         base_image.src = document.getElementById("srcImage2").src;
     
@@ -216,8 +304,17 @@
         }
     }
 
-  
-
+       //draw tempalte contoh ke canvas
+    function draw_contoh(){
+        //inisialisasi gambar baru
+        base_image2 = new Image();
+        //ambil data src dar gambar dengan id srcImage3
+        base_image2.src = document.getElementById('srcImage3').src;
+        //draw gambar ke canvas
+        base_image2.onload = function(){
+            context2.drawImage(base_image2, 0,0);
+        }
+    }
 
 
     // check kanvas kosong
@@ -239,49 +336,173 @@
             $("#pop_kanvas").fadeIn();
             $("#pop_kanvas").fadeOut('slow');
         }else{
-            periksa();
+            pre_proses();
         }
         
     });
+    function pre_proses(){
+        //ambil data template dari canvas
+        var kanvas_template = document.getElementById('template_normal');
+        var kanvas = document.getElementById('outputCanvas2');
+        //ambil data 2d template
+        var ctx3 = kanvas.getContext('2d');
+       //ambil data pixel array template
+        var kanvasData = ctx3.getImageData(0,0,64,64);
+        //proses resize
+        //ambil data gambar dari canvas
+        let src = cv.imread(document.getElementById("gambar"));
+        //inisialisasi Mat baru
+        let dst = new cv.Mat();
+        //inisialisasi resolusi
+        let dsize = new cv.Size(64,64);
+        //resize gambar
+        cv.resize(src, dst, dsize, 0, 0, cv.INTER_AREA);
+        //tampilkan gambar pada canvas outputCanvas
+        cv.imshow('outputCanvas', dst);
+        //normalisasai warna 
+        colorImage(cv.imread('outputCanvas'), dst);
+        //thinning gambar
+        thinningImage(kanvas); //zhen suen
+        //thinningImage2(kanvas); //steinford  
+        //normalisasi warna template
+        //colorTemplate(cv.imread('outputTemplate'),dst);
+        //thinning template
+        //templateThinning(kanvas_template);
+        check_path();
+   
+    }
+
+    function check_path(){
+        var i = 0;
+        var j = 0;
+        var k = 0;
+        //ambil data gambar dari canvas
+        var input_gambar = document.getElementById('outputCanvas2');
+        var template = document.getElementById('outputContoh');
+        //ambil data 2d gambar
+        var ctx1 = input_gambar.getContext('2d');
+        //ambil data 2d contoh
+        var ctx2 = template.getContext('2d');
+
+        //ambil data pixel array gambar
+        var gambarData = ctx1.getImageData(0,0,64,64);
+        //ambil data pixel array contoh
+        var templateData = ctx2.getImageData(0,0,64,64);
+
+        //pengecekan path
+        let table = "";
+        let status = true;
+        //looping pixel array contoh berdasarkan tinggi
+        for (let i = 0; i < templateData.height; i++) {
+            table += "<tr>";
+            //looping pixel array contoh berdasarkan lebar
+            for (let j = 0; j < templateData.width; j++) { 
+                //bagi nilai array pixel template berdasarkan rgb               
+                sum = (templateData.data[i*256+j*4] + templateData.data[i*256+j*4+1] + templateData.data[i*256+j*4+2]) /3; 
+                 //ubah nilai pixel dibawah 128 menjadi hitam dan diatas menjadi putih
+                if(sum < 128){
+                    temp1 = 0;
+                }else{
+                    temp1 = 1;
+                }
+                //bagi nilai array pixel gambar berdasarkan rgb
+                sum = (gambarData.data[i*256+j*4] + gambarData.data[i*256+j*4+1] + gambarData.data[i*256+j*4+2]) /3; 
+                //ubah nilai array pixel dibawah 128 menjadi hitam dan diatas menjadi putih
+                if(sum < 128){
+                    temp2 = 0;
+                }else{
+                    temp2 = 1;
+                }
+                if(temp1 == 1 && temp2 == 0){
+                    status = false;
+                }
+                if(!status){
+                    break;
+                }
+                // table += "<td> "+temp+" </td>";
+                
+            }
+            if(!status){
+                break;
+            }
+            // table += "</tr>";
+            
+        }
+        //check status 
+        if(status){
+            //jika path benar
+            periksa();
+        }else{
+            //jika path salah
+            sound_salah();
+            $("#pop_contoh").fadeIn();
+            $("#pop_contoh").fadeOut('slow');
+        }
+        // $('#table2').append(table);
+        
+        // console.log(templateData);
+
+        // for (let i = 0; i < gambarData.height; i++) {
+        //     table += "<tr>";
+        //     for (let j = 0; j < gambarData.width; j++) {                
+        //         sum = (gambarData.data[i*256+j*4] + gambarData.data[i*256+j*4+1] + gambarData.data[i*256+j*4+2]) /3;
+        //         if(sum < 128)
+        //             temp = 0;
+        //         else
+        //             temp = 1;
+        //         table += "<td> "+temp+" </td>";
+                
+        //     }
+        //     table += "</tr>";
+            
+        // }
+        // $('#table').append(table);
+        
+        // console.log(gambarData);
+    }
 
 
     // check end
     // periksa
     function periksa(){
    
-    let src = cv.imread(document.getElementById("gambar"));
-    let dst = new cv.Mat();
-    let dsize = new cv.Size(64,64);
-    cv.resize(src, dst, dsize, 0, 0, cv.INTER_AREA);
-    cv.imshow('outputCanvas', dst);
-    colorImage(cv.imread('outputCanvas'), dst);
-    var kanvas = document.getElementById('outputCanvas2');
-    thinningImage2(kanvas);
-    var kanvas2 = document.getElementById('outputCanvas3');
-    tepi(kanvas2);
-    var kanvas3 = document.getElementById('outputCanvas4');
-    var ctx = kanvas3.getContext('2d');
-    var imgData = ctx.getImageData(0,0,64,64);
-  
-    templateData = context.getImageData(0,0,64,64);
+    var batasAtas=0;
+    var batasAtas_=0; 
+    var nilai=0;
+ 
 
-    var batasAtas=0; var nilai=0;
+    var kanvas2 = document.getElementById('outputCanvas3');
+    var kanvas3 = document.getElementById('outputTemplate'); 
+
+
+    var ctx = kanvas2.getContext('2d');
+    var ctx2 = kanvas3.getContext('2d');
+    
+    imgData = ctx.getImageData(0,0,64,64); //data gambar tulisan
+  
+    templateData = ctx2.getImageData(0,0,64,64); //data gambar template
+
+    
     for(var i = 0; i<imgData.data.length; i+=4){
     	if(templateData.data[i]==0){
-    		// batasAtas++;
-        batasAtas = 64*64;
+            batasAtas =  batasAtas + (1-Math.round((templateData.data[i]/255)));
+            batasAtas_ = Math.round(batasAtas*x);
+
     	}
-    	// nilai = nilai + ((1-Math.round(templateData.data[i]/255)) * (1-Math.round(imgData.data[i]/255)));
-    	nilai = nilai + Math.pow(((1-Math.round(templateData.data[i]/255)) - (1-Math.round(imgData.data[i]/255))),2);
+    	//nilai = nilai + ((1-Math.round(templateData.data[i]/255)) * (1-Math.round(imgData.data[i]/255)));
+    	//nilai = nilai + Math.pow(((1-Math.round(templateData.data[i]/255)) - (1-Math.round(imgData.data[i]/255))),2);
+        nilai = nilai + (1-Math.round(templateData.data[i]/255)) * (1-Math.round(imgData.data[i]/255));
     }
 
+    console.log(batasAtas_);
     console.log(batasAtas);
     console.log(nilai);
     //if(nilai>=(batasAtas*80/100)){
-    if(nilai<=(batasAtas*20/100)){
+    if(nilai>=batasAtas_){
         sound_benar();
         point=point+10;
         soal++;
+        document.getElementById("scoreinput").value = point;
         $("#pop_benar").fadeIn();
         $("#pop_benar").fadeOut('slow');
         hapus();
@@ -299,15 +520,59 @@
         $("#myModal_skor").modal('show');
     }
         input = huruf[Math.floor(Math.random() * 26)];
-        document.getElementById("srcImage2").src = "../../template/"+input+".jpg";
-        make_base();
+        document.getElementById("srcImage2").src = "../../template/kecil/"+input+".jpg";
+        draw_template();
+        document.getElementById("srcImage3").src = "../../template/contoh_kecil/"+input+".jpg";
+        draw_contoh();
+        switch_threshold();
         
-        src.delete(); dst.delete(); 
 	}
+
+    function switch_threshold (){
+        //input = document.getElementById("masuk").value;
+        switch(input){
+            case "a" :
+            case "c" :
+            case "d" :
+            case "o" :
+            case "q" :
+            case "x" :
+            case "z" :
+            case "e" :
+                x = 30/100;
+                break;
+            case "s" :
+            case "t" :
+            case "v" :
+            case "y" :
+                x = 25/100;
+                break;
+            case "p" :
+                x = 22
+                break;
+            case "f" :
+            case "g" :
+            case "h" :
+            case "k" :
+            case "u" :
+            case "r" :
+                x = 20/100;
+                break;
+            case "l" :
+            case "m" :
+            case "n" :
+                x = 18/100;
+                break;
+            case "b" :
+                x = 15/100;
+                break;
+            default :
+            x = 30/100;
+            break;
+        }
+    }
   
     // periksa
-
-    
 
     //darah 
     var liveelem = document.getElementById('livecount');
@@ -335,8 +600,8 @@
             clearTimeout(timerId);
             // alert("Waktu Habis");
             // call_modal_waktu();
-            $('#myModal_skor').modal({backdrop: 'static', keyboard: false})  
-            $("#myModal_skor").modal('show');
+            $('#myModal_waktu').modal({backdrop: 'static', keyboard: false})  
+            $("#myModal_waktu").modal('show');
             
         } else {
             elem.innerHTML = timeLeft;
@@ -356,6 +621,13 @@
         var c = document.getElementById("gambar");c.width = c.width;
         // var ctx = c.getContext("2d");
         // ctx.clearRect(0, 0, canvas.width, canvas.height);
+    }
+    
+    $('#myModal_skor').on('shown.bs.modal', function (e) {
+        display_skor();
+    })
+    function display_skor() {
+        document.getElementById('skorbox').innerHTML = point;
     }
 
 </script>
