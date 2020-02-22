@@ -385,8 +385,8 @@ z-index: 1;
 .papan{
   z-index:-1;
   position: fixed;
-  width: 40%;
-  height: 50%;
+  min-width: 40%;
+  min-height: 50%;
   top:27%;
   padding-left:1%;
 
