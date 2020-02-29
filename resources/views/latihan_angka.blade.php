@@ -54,7 +54,7 @@
         <!-- pop up benar dan salah end -->
             <img class="papan" src="{{asset('assets/icon/papan.png')}}" alt="">
             <canvas id="gambar" width="192" height="192" style=" top :40%; position:absolute; border:2px solid #000000;z-index:2"></canvas>
-            <img id="srcImage3" src="" width="190" height="190" style="z-index:1;position :absolute;top:40.5%;display:none;opacity: 0.5;">
+            <img id="srcImage3" src="" width="190" height="190" style="z-index:1;position :absolute;top:40.5%;opacity: 0.5;">
         </div>
         <br><br>
         
@@ -266,9 +266,6 @@
         var kanvas_template = document.getElementById('template_normal');
         var kanvas = document.getElementById('outputCanvas2');
         //ambil data 2d template
-        var ctx3 = kanvas.getContext('2d');
-       //ambil data pixel array template
-        var kanvasData = ctx3.getImageData(0,0,64,64);
         //proses resize
         //ambil data gambar dari canvas
         let src = cv.imread(document.getElementById("gambar"));
@@ -286,9 +283,9 @@
         thinningImage(kanvas); //zhen suen
         //thinningImage2(kanvas); //steinford  
         //normalisasi warna template
-        colorTemplate(cv.imread('outputTemplate'),dst);
+        //colorTemplate(cv.imread('outputTemplate'),dst);
         //thinning template
-        templateThinning(kanvas_template);
+        //templateThinning(kanvas_template);
         check_path();
 
        
@@ -450,6 +447,11 @@
         input = document.getElementById("masuk").value; 
         document.getElementById("srcImage2").src = "../../template/angka/"+input+".jpg"; //ambil data src template
         var c = document.getElementById("gambar");c.width = c.width; //hapus gambar di canvas
+        var d = document.getElementById("outputTemplate");d.width = d.width; //hapus gambar di canvas
+        var e = document.getElementById("outputContoh");e.width = e.width; //hapus gambar di canvas
+        var f = document.getElementById("outputCanvas");f.width = f.width; //hapus gambar di canvas
+        var g = document.getElementById("outputCanvas2");g.width = g.width; //hapus gambar di canvas
+        var h = document.getElementById("outputCanvas3");h.width = h.width; //hapus gambar di canvas
         draw_template(); //draw template ke canvas
         switch_threshold();
     }
@@ -468,22 +470,32 @@
     function switch_threshold (){
         input = document.getElementById("masuk").value;
         switch(input){
-            case "0" :
-            case "1" :
-            case "2" :
-            case "3" :
-                x = 25/100;
+            case "7" : 
+                x = 35/100;
                 break;
-            case "6" :
-            case "7" :
-            case "8" :
-            case "9" :
-            case "4" :
-                x = 21/100;
+            case "2" :
+                x = 32/100;
                 break;
             case "5" :
+            case "6" :
+            case "3" :
+            case "9" :
                 x = 30/100;
                 break;
+            case "3" :
+            case "4" :
+            case "8" :
+                x = 25/100;
+                break;
+        
+                // x = 21/100;
+                // break;
+            case "0" :
+                x = 16/100;
+                break;
+            case "1" :
+                 x = 1.6/100;
+            break;
             default :
                 x = 30/100;
             break;

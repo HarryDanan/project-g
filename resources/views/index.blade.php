@@ -63,7 +63,7 @@
             </div>
             <center>
             <div>
-                <img class="about_modal" style="width:100%;height:100%;" src="{{asset('assets/icon/about_bill.png')}}" alt="">
+                <img class="about_modal"src="{{asset('assets/icon/about_bill.png')}}" alt="">
             </div>
             </center>
             </div>

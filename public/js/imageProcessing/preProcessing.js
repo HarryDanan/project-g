@@ -2,7 +2,7 @@
 function colorImage(src,dst){
 	//ubah warna gamba rke hitam putih
 	let low = new cv.Mat(src.rows, src.cols, src.type(), [0,0,0,255]); //parameter bahwa
-    let high = new cv.Mat(src.rows, src.cols, src.type(), [150,150,150,255]); //paramter atas
+    let high = new cv.Mat(src.rows, src.cols, src.type(), [128,128,128,255]); //paramter atas
     
     cv.inRange(src, low, high, dst); //mengecek apakah nilai array berada diantara paramter bawah dan atas
 
@@ -29,7 +29,7 @@ function colorImage(src,dst){
 function colorTemplate(src,dst){
 	//ubah warna gamba rke hitam putih
 	let low = new cv.Mat(src.rows, src.cols, src.type(), [0,0,0,0]); //parameter bahwa
-    let high = new cv.Mat(src.rows, src.cols, src.type(), [150,150,150,255]); //paramter atas
+    let high = new cv.Mat(src.rows, src.cols, src.type(), [128,128,128,255]); //paramter atas
     
     cv.inRange(src, low, high, dst); //mengecek apakah nilai array berada diantara paramter bawah dan atas
 
@@ -41,17 +41,17 @@ function colorTemplate(src,dst){
 	var imgData = ctx.getImageData(0,0,64,64); //ambil data pixel gambar
 	//looping untuk invert pixel gambar
 	for(var i = 0; i<imgData.data.length; i+=4){
-		imgData.data[i] =  255-imgData.data[i];//red channel
-	 	imgData.data[i+1] = 255-imgData.data[i+1]; //green channel
-	 	imgData.data[i+2] = 255-imgData.data[i+2]; //blue channel
-	 	imgData.data[i+3] = 255; //aplha channel
+	 	imgData.data[i] =  255-imgData.data[i];//red channel
+	  	imgData.data[i+1] = 255-imgData.data[i+1]; //green channel
+	  	imgData.data[i+2] = 255-imgData.data[i+2]; //blue channel
+	  	imgData.data[i+3] = 255; //aplha channel
 	}
 	//ctx.clearRect(left, top, width, height);
 	//render gambar ke kanvas
 	ctx.putImageData(imgData,0,0);
 
 	//hapus parameer
-    low.delete(); high.delete();src.delete(); dst.delete();
+    //low.delete(); high.delete();src.delete(); dst.delete();
 }
 
 // thinning zhen suen
@@ -110,50 +110,52 @@ function thinningImage(kanvas){
 	ctx3.putImageData(imgData,0,0); //tampilkan gambar pada kanvas
 }
 
-function templateThinning(kanvas){
-	//get image data
-	var ctx = kanvas.getContext('2d'); //membuat object CanvasRenderingContext2D
-	var imgData = ctx.getImageData(0,0,64,64); //mengambil data pixel kanvas dengan ukuran 64 * 64
-	//operation	
-	var gambar = zeros([64,64]); //inisialiasi matriks 64 * 64 kosong
-	//inisialisasi matriks
-	var j = 0;
-	var k = 0;
-	var l = 0;
-	//mengubah array pixel gambar menjadi matriks
-	for (var i = 0; i < imgData.data.length; i+=4) {
-	 	if(l==64){
-	 		l=0;
-	 		j=0;
-	 		k=k+1;
-		 }
-		//menyimpan data pixel imgData ke matriks gambar
-	 	gambar[k][j] = imgData.data[i];
-	 	j=j+1;
-	 	l=l+1;
-	}
-	//proses thinning 
-	while(berhenti!=1){
-		var gambar = step1(gambar);
-		var gambar = step2(gambar);
-	}
-	berhenti=0;
-
-	//change image
-	//mengubah array pixel menjadi matriks
-	for (var i = 0; i < imgData.data.length; i+=4) {
-	 	if(l==64){
-	 		l=0;
-	 		j=0;
-	 		k=k+1;
-		 }
-		//mengubah pixel rgb data matriks gambar agar sesuai dengan hasil thinning
-	 	imgData.data[i] = gambar[k][j];
-	 	imgData.data[i+1] = gambar[k][j];
-	 	imgData.data[i+2] = gambar[k][j];
-	 	j=j+1;
-	 	l=l+1;
-	}
+function templateThinning2(kanvas_template){
+		//get image data
+		var ctx = kanvas_template.getContext('2d'); //membuat object CanvasRenderingContext2D
+		var imgData = ctx.getImageData(0,0,64,64); //mengambil data pixel kanvas dengan ukuran 64 * 64
+		//operation	
+		var gambar = zeros([64,64]); //inisialiasi matriks 64 * 64 kosong
+		//inisialisasi matriks
+		var j = 0;
+		var k = 0;
+		var l = 0;
+		//mengubah array pixel gambar menjadi matriks
+		for (var i = 0; i < imgData.data.length; i+=4) {
+			 if(l==64){
+				 l=0;
+				 j=0;
+				 k=k+1;
+			 }
+			 gambar[k][j] = imgData.data[i];
+			 j=j+1;
+			 l=l+1;
+		}
+		//proses thinning 
+		while(berhenti!=1){
+			var gambar = step1(gambar);
+			var gambar = step2(gambar);
+		}
+		berhenti=0;
+		//change image
+		// inisialisasi variable
+		var j = 0;
+		var k = 0;
+		var l = 0;
+		//mengubah array pixel menjadi matriks
+		for (var i = 0; i < imgData.data.length; i+=4) {
+			 if(l==64){
+				 l=0;
+				 j=0;
+				 k=k+1;
+			 }
+			//mengubah data matriks gambar agar sesuai dengan hasil thinning
+			 imgData.data[i] = gambar[k][j];
+			 imgData.data[i+1] = gambar[k][j];
+			 imgData.data[i+2] = gambar[k][j];
+			 j=j+1;
+			 l=l+1;
+		}
 
 	//show image 
 	var kanvas3 = document.getElementById('template_thin'); //inisialisasi kanvas
@@ -189,6 +191,30 @@ function tepi(kanvas2){
 	var kanvas3 = document.getElementById('outputCanvas4'); //inisialisasi canvas
 	var ctx2 = kanvas3.getContext('2d');  //render 2d
 	ctx2.drawImage(kanvas2,tepianX(gambar),tepianY(gambar),tepianX2(gambar)-tepianX(gambar)+1,tepianY2(gambar)-tepianY(gambar)+1,0,0,64,64); //render berdasarkan tepi
+
+	let src = cv.imread(document.getElementById("outputCanvas4"));
+	let dst = new cv.Mat();
+	let low = new cv.Mat(src.rows, src.cols, src.type(), [0,0,0,255]); //parameter bahwa
+    let high = new cv.Mat(src.rows, src.cols, src.type(), [128,128,128,255]); //paramter atas
+    
+    cv.inRange(src, low, high, dst); //mengecek apakah nilai array berada diantara paramter bawah dan atas
+
+	cv.imshow('outputCanvas4', dst); //tampilkan gambar pada canvas dengan id outputCanvas2
+	//
+	//invert warna gambar putih hitam
+    var kanvas = document.getElementById('outputCanvas4'); //inisialisasi kanvas
+	var ctx = kanvas.getContext('2d'); //ambil data render 2d kanvas
+	var imgData = ctx.getImageData(0,0,64,64); //ambil data pixel gambar
+	//looping untuk invert pixel gambar
+	for(var i = 0; i<imgData.data.length; i+=4){
+		imgData.data[i] =  255-imgData.data[i];//red channel
+	 	imgData.data[i+1] = 255-imgData.data[i+1]; //green channel
+	 	imgData.data[i+2] = 255-imgData.data[i+2]; //blue channel
+	 	imgData.data[i+3] = 255; //aplha channel
+	}
+	//ctx.clearRect(left, top, width, height);
+	ctx.putImageData(imgData,0,0); //render gambar ke kanvas
+	low.delete(); high.delete();src.delete(); dst.delete();
 }
 
 //mengambil data array gambar
@@ -222,7 +248,8 @@ function step1(objek){
 							//mengecek setidaknya salah satu dari p4, p6, p8 putih
 							if((objek[i][j+1]*objek[i+1][j]*objek[i][j-1])==0){
 								//ubah nilai p1 menjadi hitam
-								hasil[i][j] = 255;	
+								hasil[i][j] = 255;
+								berhenti=0;	
 							}
 						}
 					}
@@ -245,12 +272,15 @@ function step2(objek){
 			var jumlahTetangga = tetangga(objek,i,j); 
 			var jumlahTransisi = transisi(objek,i,j);
 			if(objek[i][j]==0){
+				//if(jumlahTetangga>=2*255&&jumlahTetangga<=6*255)
 				if(jumlahTetangga>=2*255&&jumlahTetangga<=6*255){
 					if(jumlahTransisi==1){
+						//if((objek[i-1][j]*objek[i][j+1]*objek[i][j-1])==0){
 						if((objek[i-1][j]*objek[i][j+1]*objek[i][j-1])==0){
+							//if((objek[i-1][j]*objek[i+1][j]*objek[i][j-1])==0){
 							if((objek[i-1][j]*objek[i+1][j]*objek[i][j-1])==0){
 								hasil[i][j] = 255;
-								berhenti = 1;	
+								berhenti = 0;	
 							}
 						}
 					}
@@ -260,6 +290,7 @@ function step2(objek){
 		}
 		i=i+1;
 		j=1;
+		berhenti=1;
 	}
 	return hasil;
 }
@@ -383,10 +414,12 @@ function thinningImage2(kanvas){
 	 	j=j+1;
 	 	l=l+1;
 	}
-	while(berhenti==0){
+	while(berhenti!==1){
 		thinningTemplate(gambar); //step 1
 		thinningTemplate2(gambar); //step 2
+		
 	}
+	berhenti=0;
 	//change image
 	j = 0;
 	k = 0;
@@ -410,8 +443,56 @@ function thinningImage2(kanvas){
 	ctx3.putImageData(imgData,0,0);
 }
 
+function template_thin(kanvas_template){
+	//get image data
+	var ctx = kanvas_template.getContext('2d');
+	var imgData = ctx.getImageData(0,0,64,64);
+	//operation	
+	var gambar = zeros([64,64]);
+	var j = 0;
+	var k = 0;
+	var l = 0;
+	for (var i = 0; i < imgData.data.length; i+=4) {
+	 	if(l==64){
+	 		l=0;
+	 		j=0;
+	 		k=k+1;
+	 	}
+	 	gambar[k][j] = imgData.data[i];
+	 	j=j+1;
+	 	l=l+1;
+	}
+	while(berhenti!==1){
+		thinningTemplate(gambar); //step 1
+		thinningTemplate2(gambar); //step 2
+	}
+	berhenti=0;
+	
+	//change image
+	j = 0;
+	k = 0;
+	l = 0;
+	for (var i = 0; i < imgData.data.length; i+=4) {
+	 	if(l==64){
+	 		l=0;
+	 		j=0;
+	 		k=k+1;
+	 	}
+	 	imgData.data[i] = gambar[k][j];
+	 	imgData.data[i+1] = gambar[k][j];
+	 	imgData.data[i+2] = gambar[k][j];
+	 	j=j+1;
+	 	l=l+1;
+	}
+
+	//show image 
+	var kanvas3 = document.getElementById('template_thin');
+	var ctx3 = kanvas3.getContext('2d');
+	ctx3.putImageData(imgData,0,0);
+}
+
 function thinningTemplate(gambar){
-	berhenti =1;
+	berhenti=0;
 	var i=0;
 	var j=0;
 	while(i<62){
@@ -423,7 +504,8 @@ function thinningTemplate(gambar){
 			var s2=gambar[i+2][j+1]/255-(gambar[i+2][j+1]*gambar[i+2][j]*gambar[i+1][j])/(Math.pow(255,3));
 			var s3=gambar[i+1][j]/255-(gambar[i+1][j]*gambar[i][j]*gambar[i][j+1])/(Math.pow(255,3));
 			var s4=gambar[i][j+1]/255-(gambar[i][j+1]*gambar[i][j+2]*gambar[i+1][j+2])/(Math.pow(255,3));
-			var connect = s1+s2+s3+s4; console.log(connect);console.log(endPoint);
+			var connect = s1+s2+s3+s4; 
+			//console.log(connect);console.log(endPoint);
 			if(endPoint<255*7&&connect==1){
 				if(gambar[i][j+1]==255&&gambar[i+1][j+1]==0&&gambar[i+2][j+1]==0){
 					gambar[i+1][j+1]=255;
@@ -435,10 +517,11 @@ function thinningTemplate(gambar){
 		j=0;
 		i++;
 	}
+	//berhenti =0;
 }
 
 function thinningTemplate2(gambar){
-	berhenti =1;
+	berhenti=0;
 	var i=0;
 	var j=0;
 	while(i<62){
@@ -450,7 +533,8 @@ function thinningTemplate2(gambar){
 			var s2=gambar[i+2][j+1]/255-(gambar[i+2][j+1]*gambar[i+2][j]*gambar[i+1][j])/(Math.pow(255,3));
 			var s3=gambar[i+1][j]/255-(gambar[i+1][j]*gambar[i][j]*gambar[i][j+1])/(Math.pow(255,3));
 			var s4=gambar[i][j+1]/255-(gambar[i][j+1]*gambar[i][j+2]*gambar[i+1][j+2])/(Math.pow(255,3));
-			var connect = s1+s2+s3+s4; console.log(connect);console.log(endPoint);
+			var connect = s1+s2+s3+s4; 
+			//console.log(connect);console.log(endPoint);
 			if(endPoint<255*7&&connect==1){
 				if(gambar[i+1][j]==255&&gambar[i+1][j+1]==0&&gambar[i+1][j+2]==0){
 					gambar[i+1][j+1]=255;
@@ -466,13 +550,13 @@ function thinningTemplate2(gambar){
 				}
 			}
 			j++;
+			// berhenti=1;
 		}
 		j=0;
 		i++;
+		berhenti=1;
 	}
+	//berhenti =1;
 }
 
-function check_gambar(){
-	
-}
 

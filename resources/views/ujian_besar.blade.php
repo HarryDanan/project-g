@@ -36,9 +36,9 @@
             <div class="container-fluid" style="background :url(../assets/icon/bgnav.png);  position:fixed; z-index:-1; height:13%;"></div>     
             
             <div class="menua">
-                <a href="" class ="score" id="livecount" style="color : white; padding-top:2.2%; padding-left:2.2%"></a>
-                <a href="" class ="score" id="score" style="color : #00bfff; padding-top:2.2%; padding-left:10%"></a>
-                <a href="" class ="score" id="countdown" style="color : red; padding-top:2.2%; padding-left:22%"></a>
+                <a href="" class ="score" id="livecount" style=""></a>
+                <a href="" class ="score" id="score" style=""></a>
+                <a href="" class ="score" id="countdown" style=""></a>
 
                 <a href="" ><img class=" icn_darah" src="{{asset('assets/icon/darah.png')}}" alt=""></a>
                 <a href="" ><img class=" icn_sw" src="{{asset('assets/icon/icon_skor.png')}}" alt=""></a>
@@ -63,8 +63,8 @@
             <img  id="pop_contoh" style="display:none; position:fixed" class="pop_bs" src="{{asset('assets/icon/pop_contoh.png')}}" alt="">
         <!-- pop up benar dan salah end -->
             <img class="papan" src="{{asset('assets/icon/papan.png')}}" alt="">
-            <canvas id="gambar" width="192" height="192" style=" top :40%; position:absolute; border:2px solid #000000;z-index:2"></canvas>
-            <img id="srcImage3" src="" width="190" height="190" style="z-index:1;position :absolute;top:40.5%;display:none;opacity: 0.5;">
+            <canvas class="kanvas_template"id="gambar" width="192" height="192" ></canvas>
+            <img class="kanvas_contoh"id="srcImage3" src="" width="190" height="190" >
         </div>
         <br><br>
 
@@ -75,7 +75,7 @@
                     <div class="isi_bubble">
                         <center>
                         <div>
-                            <img id="srcImage2" src="" width="64" height="64">
+                            <img class="papan_template" id="srcImage2" src="" style="padding-bottom:35%">
                         </div>
                         </center>
                     </div>
@@ -86,14 +86,14 @@
         </div>
 
         <center>
-        <div  style="padding-top:23%">
+        <div class="grp_periksa" style="padding-top:23%">
             <a id="check" onclick="btn_s()"><img class="icn" src="{{asset('assets/icon/btn_periksa.png')}}" alt=""></a>
             <a onclick="btn_s();hapus()"><img class="icn" src="{{asset('assets/icon/btn_hapus.png')}}" alt=""></a>
             <img src="" alt="">
         </div>
         </center>
 
-        <div class="row">
+        <div hidden class="row">
             <div class="col-sm-3">
                 <h5>Gambar Template</h5>
                 <canvas width="64" height="64" id='outputTemplate'></canvas>
@@ -150,7 +150,7 @@
                     
                 </div>
                 <div class="container" style="text-align:center">
-                     <a href="/menu" onclick="btn_s()" data-target="#myModal_skor" data-toggle="modal" data-dismiss="modal" ><img  style ="width:45%;" src="{{asset('assets/icon/btn_lihat_skor.png')}}" alt=""></a>
+                     <a href="/menu" onclick="btn_s()" data-target="#myModal_skor" data-toggle="modal" data-dismiss="modal" ><img  class="btn_pop_up" src="{{asset('assets/icon/btn_lihat_skor.png')}}" alt=""></a>
                 </div>
             </div>
         </div>
@@ -161,9 +161,9 @@
             <div class="modal-dialog modal-lg modal-dialog-centered">
                 <!-- Modal content-->
                 <div class="modal-content">
-                    <div class="container">
+                    <!-- <div class="container">
                         <img onclick="btn_s()"class="close_modal" src="{{asset('assets/icon/close_btn.png')}}" data-dismiss="modal" alt="">&times;</img>
-                    </div>
+                    </div> -->
                     <div class="container">
                         <div class="input_skor">
                         <div id="display"></div>
@@ -177,9 +177,9 @@
                         </div>
                         <img class="skor_modal"  src="{{asset('assets/icon/skor_modal.png')}}" alt="">
                     </div>
-                    <div class="container" style="padding-left:10%;">
-                        <a href="/menu_ujian" id="submit" onclick="btn_s()"><img  style ="width:45%;" src="{{asset('assets/icon/btn_ulang.png')}}" alt=""></a>
-                        <a href="/" onclick="btn_s()"><img style ="width:45%;" src="{{asset('assets/icon/btn_keluar.png')}}" alt=""></a>
+                    <div class="grp_btn_skor" style="padding-left:10%;">
+                        <a href="/menu_ujian" id="submit" onclick="btn_s()"><img class="btn_pop_up" src="{{asset('assets/icon/btn_ulang.png')}}" alt=""></a>
+                        <a href="/" onclick="btn_s()"><img class="btn_pop_up" src="{{asset('assets/icon/btn_keluar.png')}}" alt=""></a>
                     </div>
                 </div>
             </div>
@@ -214,7 +214,7 @@
         
                         <!-- Left and right controls -->
                         <a class="carousel-control-prev" href="#demo" data-slide="prev">
-                        <img style="width:25%;"src="{{asset('assets/icon/btn_back.png')}}">
+                        <img style="width:25%;" src="{{asset('assets/icon/btn_back.png')}}">
                         </a>
                         <a class="carousel-control-next" href="#demo" data-slide="next">
                         <img style="width:25%;"src="{{asset('assets/icon/btn_next.png')}}">
@@ -225,7 +225,7 @@
                 </div>
             </div>
     
-            {{-- end modal carousel --}}
+        
 </body>
 
      

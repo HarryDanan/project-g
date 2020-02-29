@@ -35,8 +35,8 @@
 
             <div class="container-fluid" style="background :url(../assets/icon/bgnav.png);  position:fixed; z-index:-1; height:13%;"></div>
             <div class="top_right">
-                <a href="#" id="btn_ubah"onclick="btn_s()"><img class=" btn_bantuan" src="{{asset('assets/icon/btn_bantuan.png')}}" alt=""></a>
-                <a href="$" ><img class=" btn_bantuan" src="{{asset('assets/icon/btn_helpper.png')}}" alt=""></a>
+                <a href="#" id="btn_ubah"onclick=""><img class=" btn_bantuan" src="{{asset('assets/icon/btn_bantuan.png')}}" alt=""></a>
+                <a href="#" onclick="" ><img class=" btn_bantuan" src="{{asset('assets/icon/btn_helpper.png')}}" alt=""></a>
             </div>     
             <div>
                 <center>
@@ -53,8 +53,8 @@
             <img  id="pop_contoh" style="display:none; position:fixed" class="pop_bs" src="{{asset('assets/icon/pop_contoh.png')}}" alt="">
         <!-- pop up benar dan salah end -->
             <img class="papan" src="{{asset('assets/icon/papan.png')}}" alt="">
-            <canvas id="gambar" width="192" height="192" style=" top :40%; position:absolute; border:2px solid #000000;z-index:2"></canvas>
-            <img id="srcImage3" src="" width="190" height="190" style="z-index:1;position :absolute;top:40.5%;display:none;opacity: 0.5;">
+            <canvas class="kanvas_template" id="gambar" width="192" height="192"></canvas>
+            <img class="kanvas_contoh" id="srcImage3" src="" width="190" height="190">
         </div>
         <br><br>
         
@@ -65,7 +65,7 @@
                     <div class="isi_bubble">
                         <center>
                         <div>
-                            <img id="srcImage2" src="" width="64" height="64">
+                            <img id="srcImage2" class="papan_template">
                         </div>
                     
                             <select class="selectpicker "name="carlist" form="carform" id="masuk" onchange="inputan();ubah_contoh()">
@@ -101,13 +101,17 @@
             </div>
             
             <br>
+            
+        </div>
+        <div>
             <img class="icn_anak" src="{{asset('assets/icon/anak.png')}}" alt=""></h3>
         </div>
+        
 
         <center>
-        <div  style="padding-top:20%">
-            <a id="check" onclick="btn_s()"><img class="icn" src="{{asset('assets/icon/btn_periksa.png')}}" alt=""></a>
-            <a onclick="btn_s();hapus()"><img class="icn" src="{{asset('assets/icon/btn_hapus.png')}}" alt=""></a>
+        <div  class = "grp_periksa">
+            <a id="check" onclick="check_kanvas()"><img class="icn" src="{{asset('assets/icon/btn_periksa.png')}}" alt=""></a>
+            <a onclick="hapus()"><img class="icn" src="{{asset('assets/icon/btn_hapus.png')}}" alt=""></a>
             
         </div>
         </center>
@@ -141,7 +145,7 @@
                 <h5>Gambar Skletoning</h5>
                 <canvas width="64" height="64" id='outputCanvas3'></canvas>
             </div>
-            <div hidden class="col-sm-3">
+            <div class="col-sm-3">
                 <h5>Gambar Tanpa Tepi</h5>
                 <canvas width="64" height="64" id='outputCanvas4'></canvas>
             </div>
@@ -176,24 +180,24 @@
     //sound salah
     var sound_s = document.getElementById('btn-salah');
 
-    //play sound click
-    function btn_s() {
-        sound.pause();
-        sound.currentTime = 0;
-        sound.play();
-    }
-    //play sound salah
-    function sound_salah(){
-        sound_s.pause();
-        sound_s.currentTime = 0;
-        sound_s.play();
-    }
-    //play sound benar
-    function sound_benar(){
-        sound_b.pause();
-        sound_b.currentTime = 0;
-        sound_b.play();
-    }
+    // //play sound click
+    // function btn_s() {
+    //     sound.pause();
+    //     sound.currentTime = 0;
+    //     sound.play();
+    // }
+    // //play sound salah
+    // function sound_salah(){
+    //     sound_s.pause();
+    //     sound_s.currentTime = 0;
+    //     sound_s.play();
+    // }
+    // //play sound benar
+    // function sound_benar(){
+    //     sound_b.pause();
+    //     sound_b.currentTime = 0;
+    //     sound_b.play();
+    // }
     
     //toggle contoh template
     $( document ).ready(function() {
@@ -263,7 +267,8 @@
     }
 
     //event listerner untuk btn periksa
-    document.getElementById('check').addEventListener('click', function() {
+    // document.getElementById('check').addEventListener('click', function() {
+    function check_kanvas() {
         const blank = isCanvasBlank(document.getElementById('gambar'));
         //check canvas kosong atau tidak
         if(blank){
@@ -276,15 +281,13 @@
             pre_proses();
         }
         
-    });
+    }
     function pre_proses(){
         //ambil data template dari canvas
         var kanvas_template = document.getElementById('template_normal');
         var kanvas = document.getElementById('outputCanvas2');
-        //ambil data 2d template
-        var ctx3 = kanvas.getContext('2d');
-       //ambil data pixel array template
-        var kanvasData = ctx3.getImageData(0,0,64,64);
+        var kanvas2 = document.getElementById('outputCanvas2');
+        var kanvas3 = document.getElementById('outputCanvas4');
         //proses resize
         //ambil data gambar dari canvas
         let src = cv.imread(document.getElementById("gambar"));
@@ -299,12 +302,16 @@
         //normalisasai warna 
         colorImage(cv.imread('outputCanvas'), dst);
         //thinning gambar
-        thinningImage(kanvas); //zhen suen
+        //thinningImage(kanvas); //zhen suen
         //thinningImage2(kanvas); //steinford  
+        tepi(kanvas2);
+        thinningImage(kanvas3);
+        //thinningTemplate(kanvas3);
         //normalisasi warna template
         colorTemplate(cv.imread('outputTemplate'),dst);
         //thinning template
-        templateThinning(kanvas_template);
+        templateThinning2(kanvas_template);
+        //templateThinning2(kanvas3);
         check_path();
 
        
@@ -373,7 +380,7 @@
             periksa();
         }else{
             //jika path salah
-            sound_salah();
+            //sound_salah();
             $("#pop_contoh").fadeIn();
             $("#pop_contoh").fadeOut('slow');
         }
@@ -430,7 +437,7 @@
                 batasAtas_ = Math.round(batasAtas*x);
             }
             //template matching
-            //nilai = nilai + Math.pow(((1-Math.round(contohData.data[i]/255)) - (1-Math.round(imgData.data[i]/255))),2); //tm_sqdiff
+            //nilai = nilai + Math.pow(((1-Math.round(templateData.data[i]/255)) - (1-Math.round(imgData.data[i]/255))),2); //tm_sqdiff
             nilai = nilai + (1-Math.round(templateData.data[i]/255)) * (1-Math.round(imgData.data[i]/255)); //TM_CCORR
         }
 
@@ -440,23 +447,36 @@
 
         //kondisi benar dan salah
         if(nilai>=batasAtas_){
-            sound_benar();
+            //sound_benar();
             $("#pop_benar").fadeIn();
             $("#pop_benar").fadeOut('slow');
         }
         else{
-            sound_salah();
+            //sound_salah();
             $("#pop_salah").fadeIn();
             $("#pop_salah").fadeOut('slow');
         }
+        //download();
           
-	}
+    }
+    function download(){
+        var download = document.getElementById("download");
+        var image = document.getElementById("outputCanvas3").toDataURL("image/png")
+            .replace("image/png", "image/octet-stream");
+        download.setAttribute("href", image);
+//download.setAttribute("download","archive.png");
+    }
 
     //mengubah tempalte
     function inputan(){
         input = document.getElementById("masuk").value; 
         document.getElementById("srcImage2").src = "../../template/besar/"+input+".jpg"; //ambil data src template
         var c = document.getElementById("gambar");c.width = c.width; //hapus gambar di canvas
+        var d = document.getElementById("outputTemplate");d.width = d.width; //hapus gambar di canvas
+        var e = document.getElementById("outputContoh");e.width = e.width; //hapus gambar di canvas
+        var f = document.getElementById("outputCanvas");f.width = f.width; //hapus gambar di canvas
+        var g = document.getElementById("outputCanvas2");g.width = g.width; //hapus gambar di canvas
+        var h = document.getElementById("outputCanvas3");h.width = h.width; //hapus gambar di canvas
         draw_template(); //draw template ke canvas
         switch_threshold();
     }
@@ -469,46 +489,73 @@
     //hapus gambar
     function hapus(){
         var c = document.getElementById("gambar");c.width = c.width;
+        var d = document.getElementById("outputCanvas");d.width = d.width;
+        var e = document.getElementById("outputCanvas2");e.width = e.width;
+        var f = document.getElementById("outputCanvas3");f.width = f.width;
         // var ctx = c.getContext("2d");
         // ctx.clearRect(0, 0, canvas.width, canvas.height);
     }
     function switch_threshold (){
         input = document.getElementById("masuk").value;
         switch(input){
+            case "z" :
+                x = 48/100;
+                break;
+            case "x" :
+            case "w" :
+                x = 35/100;
+                break;
             case "a" :
-            case "c" :
+                x = 32.2/100;
+                break;
+            case "v" :
+                x = 32/100;
+                break;
             case "d" :
             case "o" :
             case "q" :
             case "x" :
-            case "z" :
             case "e" :
                 x = 30/100;
+                break;
+            case "m" :
+                 x = 26/100;
                 break;
             case "s" :
             case "t" :
             case "v" :
             case "y" :
+            case "k" :
                 x = 25/100;
                 break;
+            case "b" :
+            case "c" :
+                x = 22.5/100;
+                break;
             case "p" :
-                x = 22
+            case "h" :
+                x = 22/100;
+                break;
+            case "n" :
+                x = 21/100;
                 break;
             case "f" :
             case "g" :
-            case "h" :
-            case "k" :
-            case "u" :
             case "r" :
                 x = 20/100;
                 break;
             case "l" :
-            case "m" :
-            case "n" :
+            case "u" :
                 x = 18/100;
                 break;
-            case "b" :
-                x = 15/100;
+          
+                // x = 15/100;
+                // break;
+            case "j" :
+                x = 16/100;
+                break;
+            case "i" :
+                x = 5/100;
                 break;
             default :
             x = 30/100;

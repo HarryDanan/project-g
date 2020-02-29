@@ -1,3 +1,0 @@
-function dataJson(argument) {
-	
-}

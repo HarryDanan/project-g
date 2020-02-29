@@ -178,7 +178,7 @@
                         <img class="skor_modal"  src="{{asset('assets/icon/skor_modal.png')}}" alt="">
                     </div>
                     <div class="container" style="padding-left:10%;">
-                        <a href="/menu_ujian" id="submit" onclick="btn_s()"><img  style ="width:45%;" src="{{asset('assets/icon/btn_ulang.png')}}" alt=""></a>
+                        <a href="/menu_ujian" id="submit" onclick="btn_s()"><img class="btn_pop_up" src="{{asset('assets/icon/btn_ulang.png')}}" alt=""></a>
                         <a href="/" onclick="btn_s()"><img style ="width:45%;" src="{{asset('assets/icon/btn_keluar.png')}}" alt=""></a>
                     </div>
                 </div>

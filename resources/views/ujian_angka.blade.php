@@ -150,7 +150,7 @@
                     
                 </div>
                 <div class="container" style="text-align:center">
-                     <a href="/menu" onclick="btn_s()" data-target="#myModal_skor" data-toggle="modal" data-dismiss="modal" ><img  style ="width:45%;" src="{{asset('assets/icon/btn_lihat_skor.png')}}" alt=""></a>
+                     <a href="/menu" onclick="btn_s()" data-target="#myModal_skor" data-toggle="modal" data-dismiss="modal" ><img  class="btn_pop_up" src="{{asset('assets/icon/btn_lihat_skor.png')}}" alt=""></a>
                 </div>
             </div>
         </div>
@@ -177,9 +177,9 @@
                         </div>
                         <img class="skor_modal"  src="{{asset('assets/icon/skor_modal.png')}}" alt="">
                     </div>
-                    <div class="container" style="padding-left:10%;">
-                        <a href="/menu_ujian" id="submit" onclick="btn_s()"><img  style ="width:45%;" src="{{asset('assets/icon/btn_ulang.png')}}" alt=""></a>
-                        <a href="/" onclick="btn_s()"><img style ="width:45%;" src="{{asset('assets/icon/btn_keluar.png')}}" alt=""></a>
+                    <div class="grp_btn_skor">
+                        <a href="/menu_ujian" id="submit" onclick="btn_s()"><img  class="btn_pop_up" src="{{asset('assets/icon/btn_ulang.png')}}" alt=""></a>
+                        <a href="/" onclick="btn_s()"><img class="btn_pop_up" src="{{asset('assets/icon/btn_keluar.png')}}" alt=""></a>
                     </div>
                 </div>
             </div>
