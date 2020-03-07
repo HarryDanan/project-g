@@ -5,12 +5,13 @@
     <meta charset="utf-8">  
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
-    <title>Latihan Menulis Huruf kecil</title>
+    <title>Latihan Menulis Huruf Kecil</title>
 
     <link rel="stylesheet" href="{{asset('css/style.css')}}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
     <!-- <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.0.0/dist/tf.min.js"></script> -->
     <script src="{{asset('js/imageProcessing/preProcessing.js')}}" type="text/javascript"></script>
+    <script src="{{asset('js/imageProcessing/addon.js')}}" type="text/javascript"></script>
     <script src="{{asset('js/imageProcessing/opencv.js')}}" type="text/javascript"></script> 
     <script type="text/javascript" src="{{asset('js/Audio-HTML5.js')}}"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
@@ -142,12 +143,16 @@
                 <canvas width="64" height="64" id='outputCanvas2'></canvas>
             </div>
             <div class="col-sm-3">
+                <h5>Gambar Tanpa Tepi</h5>
+                <canvas width="64" height="64" id='outputCanvas4'></canvas>
+            </div>
+            <div class="col-sm-3">
                 <h5>Gambar Skletoning</h5>
                 <canvas width="64" height="64" id='outputCanvas3'></canvas>
             </div>
             <div hidden class="col-sm-3">
-                <h5>Gambar Tanpa Tepi</h5>
-                <canvas width="64" height="64" id='outputCanvas4'></canvas>
+                <h5>Gambar Skletoning2</h5>
+                <canvas width="64" height="64" id='outputKhusus'></canvas>
             </div>
         </div>
         <center>
@@ -286,10 +291,11 @@
         //ambil data template dari canvas
         var kanvas_template = document.getElementById('template_normal');
         var kanvas = document.getElementById('outputCanvas2');
-        //ambil data 2d template
-        var ctx3 = kanvas.getContext('2d');
-       //ambil data pixel array template
-        var kanvasData = ctx3.getImageData(0,0,64,64);
+        var kanvas2 = document.getElementById('outputCanvas2');
+        var kanvas3 = document.getElementById('outputCanvas4');
+
+        var ctx = kanvas2.getContext('2d');
+        var blobKanvas = ctx.getImageData(0,0,64,64);
         //proses resize
         //ambil data gambar dari canvas
         let src = cv.imread(document.getElementById("gambar"));
@@ -304,12 +310,18 @@
         //normalisasai warna 
         colorImage(cv.imread('outputCanvas'), dst);
         //thinning gambar
-        thinningImage(kanvas); //zhen suen
+        //thinningImage(kanvas); //zhen suen
         //thinningImage2(kanvas); //steinford  
+        tepi(kanvas2);
+        thinningImage(kanvas3);
+        thinning_khusus(kanvas2);
+        //thinningTemplate(kanvas3);
         //normalisasi warna template
-       // colorTemplate(cv.imread('outputTemplate'),dst);
+        colorTemplate(cv.imread('outputTemplate'),dst);
         //thinning template
-        //templateThinning(kanvas_template);
+        templateThinning2(kanvas_template);
+        //templateThinning2(kanvas3);
+        //FindBlobs(blobKanvas);
         check_path();
 
        
@@ -410,23 +422,159 @@
         //inisialisasi nilai threshold
         var batasAtas=0; 
         var batasAtas_=0;
+        var threshold = 0;
+        var threshold2 = 0;
+        var threshold_khusus = 0;
+        var status_khusus =0;
         //inisaslisasi nilai
         var nilai=0;
+        var status=0;
+        var char= document.getElementById('masuk').value;
         //ambil data gambar
         var kanvas2 = document.getElementById('outputCanvas3');
         var kanvas3 = document.getElementById('outputTemplate'); 
+        var kanvas4 = document.getElementById('outputCanvas4');
+        var check_char = document.getElementById('outputKhusus');
+        var check_khusus = document.getElementById('outputCanvas2');
         //var kanvas4 = document.getElementById('template_thin');
         
         //ambil data 2d gambar
         var ctx = kanvas2.getContext('2d');
-        //ambil data 2d template
         var ctx2 = kanvas3.getContext('2d');
+        var ctx3 = kanvas4.getContext('2d');
+        var ctx_char = check_char.getContext('2d');
+        var ctx_khusus = check_khusus.getContext('2d');
         //ambil data pixel array gambar
         var imgData = ctx.getImageData(0,0,64,64);
-        //ablil data pixel array template
-        templateData = ctx2.getImageData(0,0,64,64);
+        var templateData = ctx2.getImageData(0,0,64,64);
+        var canvas4 = ctx3.getImageData(0,0,64,64);
+        var canvas2 = ctx_char.getImageData(0,0,64,64);
+        var khusus = ctx_khusus.getImageData(0,0,64,64);
         //template_thinData = ctx3.getImageData(0,0,64,64);
- 
+        //countBlob();
+        for (var i=0; i<canvas4.data.length; i+=4){
+            if(canvas4.data[i]==0){
+                threshold = threshold + (1-Math.round((canvas4.data[i]/255)));
+            }
+            if(canvas2.data[i]==0){
+                threshold2 = threshold2 + (1-Math.round((canvas2.data[i]/255)));
+            }
+            if(khusus.data[i]==0){
+                threshold_khusus = threshold_khusus + (1-Math.round((khusus.data[i]/255)));
+            }
+            if(char=="f"){
+                if(threshold2<=250){
+                    status=1;
+                }else{
+                    status=0;
+                }
+            }else if(char=="g"){
+                if(threshold2<=400){
+                    status=1;
+                }else{
+                    status=0;
+                }
+            }
+            else if(char=="h"){
+                if(threshold2<=315){
+                    status=1;
+                }else{
+                    status=0;
+                }
+            }else if(char=="k"){
+                if(threshold2<=300){
+                    status=1;
+                }else{
+                    status=0;
+                }
+            }else if(char=="n"){
+                if(threshold2<=300){
+                    status=1;
+                }else{
+                    status=0;
+                }
+            }else if(char=="q"){
+                if(threshold2<=300){
+                    status=1;
+                }else{
+                    status=0;
+                }
+            }else if(char=="r"){
+                if(threshold2<=200){
+                    status=1;
+                }else{
+                    status=0;
+                }
+            }
+            else if(char=="y"){
+                if(threshold2<=150){
+                    status=1;
+                }else{
+                    status=0;
+                }
+            }
+            else if(char=="z"){
+                if(threshold2<=200){
+                    status=1;
+                }else{
+                    status=0;
+                }
+            }
+            else if(char=="v"){
+                if(threshold2<=150){
+                    status=1;
+                }else{
+                    status=0;
+                }
+            }
+            else if(char=="u"){
+                if(threshold2<=350){
+                    status=1;
+                }else{
+                    status=0;
+                }
+            }
+            else if(char=="t"){
+                if(threshold2<=100){
+                    status=1;
+                }else{
+                    status=0;
+                }
+            }
+            else if(char=="i"){
+                if(threshold>=1500){
+                    status=1;
+                }else{
+                    status=0;
+                }
+            }
+            else if(char=="l"){
+                if(threshold_khusus<=150){
+                    status=1;
+                }else{
+                    status=0;
+                }
+            }
+            else if(char=="j"){
+                status_khusus=1;
+                if(threshold_khusus<=140){
+                    status=1;
+                }else{
+                    status=0;
+                }
+            }
+            else{
+                status=0;
+            }
+            if(char!=="i"){
+                if(char!=="l"){
+                        if(threshold>=900){
+                            status=1;
+                        }
+                }
+            
+            }
+        }
         //looping array pixel gambar
         for(var i = 0; i<imgData.data.length; i+=4){
             //pemberian threshold
@@ -434,28 +582,55 @@
                 batasAtas =  batasAtas + (1-Math.round((templateData.data[i]/255)));
                 batasAtas_ = Math.round(batasAtas*x);
             }
-            //template matching
-            //nilai = nilai + Math.pow(((1-Math.round(contohData.data[i]/255)) - (1-Math.round(imgData.data[i]/255))),2); //tm_sqdiff
-            nilai = nilai + (1-Math.round(templateData.data[i]/255)) * (1-Math.round(imgData.data[i]/255)); //TM_CCORR
+            
+            if(status!=1 && status_khusus!=1){
+                //template matching
+                //nilai = nilai + Math.pow(((1-Math.round(templateData.data[i]/255)) - (1-Math.round(imgData.data[i]/255))),2); //tm_sqdiff
+                nilai = nilai + (1-Math.round(templateData.data[i]/255)) * (1-Math.round(imgData.data[i]/255)); //TM_CCORR
+            }else if(status!=1 && status_khusus==1){
+                nilai = nilai + (1-Math.round(templateData.data[i]/255)) * (1-Math.round(canvas2.data[i]/255)); //TM_CCORR
+            }
+                
         }
-
+        //console.log(char);
+        //console.log(status);
+        //console.log(status_khusus);
+        //console.log(threshold_khusus);
+        //console.log(threshold2);
+        //console.log(threshold);
         //console.log(batasAtas);
         console.log(batasAtas_);
         console.log(nilai);
 
         //kondisi benar dan salah
-        if(nilai>=batasAtas_){
-            //sound_benar();
-            $("#pop_benar").fadeIn();
-            $("#pop_benar").fadeOut('slow');
-        }
-        else{
-            //sound_salah();
+        if(status!=1){
+            if(nilai>=batasAtas_){
+                //sound_benar();
+                $("#pop_benar").fadeIn();
+                $("#pop_benar").fadeOut('slow');
+            }
+            else{
+                //sound_salah();
+                $("#pop_salah").fadeIn();
+                $("#pop_salah").fadeOut('slow');
+            }
+            status=0;
+            status_khusus=0;
+        }else{
             $("#pop_salah").fadeIn();
             $("#pop_salah").fadeOut('slow');
         }
+     
+        //download();
           
-	}
+    }
+    function download(){
+        var download = document.getElementById("download");
+        var image = document.getElementById("outputCanvas3").toDataURL("image/png")
+            .replace("image/png", "image/octet-stream");
+        download.setAttribute("href", image);
+//download.setAttribute("download","archive.png");
+    }
 
     //mengubah tempalte
     function inputan(){
@@ -464,6 +639,10 @@
         var c = document.getElementById("gambar");c.width = c.width; //hapus gambar di canvas
         var d = document.getElementById("outputTemplate");d.width = d.width; //hapus gambar di canvas
         var e = document.getElementById("outputContoh");e.width = e.width; //hapus gambar di canvas
+        var f = document.getElementById("outputCanvas");f.width = f.width; //hapus gambar di canvas
+        var g = document.getElementById("outputCanvas2");g.width = g.width; //hapus gambar di canvas
+        var h = document.getElementById("outputCanvas3");h.width = h.width; //hapus gambar di canvas
+        var i = document.getElementById("outputCanvas4");i.width = i.width; //hapus gambar di canvas
         draw_template(); //draw template ke canvas
         switch_threshold();
     }
@@ -479,72 +658,81 @@
         var d = document.getElementById("outputCanvas");d.width = d.width;
         var e = document.getElementById("outputCanvas2");e.width = e.width;
         var f = document.getElementById("outputCanvas3");f.width = f.width;
+        var g = document.getElementById("outputCanvas4");g.width = g.width;
         // var ctx = c.getContext("2d");
         // ctx.clearRect(0, 0, canvas.width, canvas.height);
     }
     function switch_threshold (){
         input = document.getElementById("masuk").value;
         switch(input){
+            case "g" :
+                x = 45/100;
+                break;
+            case "q" :
+                x = 43/100;
+                break;
+            case "p" :
+            case "b" :
+            case "d" :
+                x = 42/100;
+                break;
+            case "z" :
+                x = 40/100;
+                break;
             case "w" :
-            case "x" :
                 x = 38/100;
                 break;
-            case "y" :
-                x = 32/100;
+            case "o" :
+            case "c" :
+                x = 37/100;
                 break;
-            case "v" :
-                x = 30/100;
-                break;
-            case "e" :
-            case "z" :
-                x = 28/100;
+            case "x" :
+                x = 35/100;
                 break;
             case "s" :
-            case "o" :
-                x = 25/100;
-                break;
-            case "a" :
-                x = 22/100;
-                break;
-            case "p" :
-                x = 21/100;
-                break;
-            case "f" :
-            case "g" :
-            case "k" :
-            case "i" :
-            case "j" :
-            case "p" :
-                x = 20/100;
+            case "y" :
+            case "e" :
+                x = 32/100;
                 break;
             case "m" :
-            case "c" :
+                x = 30/100;
+                break;
+            case "a" :
+                x = 29/100;
+                break;
+            case "n" :
+                x = 28/100;
+                break;
+            case "h" :
+                x = 25/100;
+                break;
+            case "v" :
+                x = 22/100;
+                break;
+            
+                // x = 21/100;
+                // break;
+            case "t" :
+            case "f" :
+            case "k" :
+            case "j" :
+                x = 20/100;
+                break;
+            case "r" :
                 x = 18/100;
                 break;
-            case "d" :
-            case "b" :
+            case "i" :
             case "l" :
             case "u" :
                 x = 15/100;
                 break;
-            case "q" :
-            case "t" :
-                x = 12/100;
-                break;
-            case "r" :
-                x = 9/100;
-                break;
-            case "h" :
-            case "n" :
-                x = 8.5/100;
-                break;
+                // x = 9/100;
+                // break;
             default :
             x = 30/100;
             break;
         }
     }
-
-
 
 </script>
 

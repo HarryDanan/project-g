@@ -556,100 +556,18 @@ div.modal-content{
 #score.score{
   color : #00bfff; padding-left:10%
 }
-@-moz-document url-prefix() {
-   @media only screen and (min-width : 668px) and (max-width: 846px), 
-   (max-width: 667){
-    /* For mobile phones: */
-    .papan{
-      min-width: 70%;
-      min-height: 82%;
-      max-width: 70%;
-      max-height: 82%;
-      top:15%;
-      padding-left:1%;
-    
-    }
-    .grp_periksa{
-      padding-top:30%;
-      position:fixed;
-      bottom:0px;
-      left:0%;
-    }
-    .kanvas_template{
-      top :29.5%; 
-    }
-    .kanvas_contoh{
-      top:29.5%;
-    }
-    .papan_template{
-      width: 40%;
-    }
-    .papan_template_ujian{
-      width: 40%;
-    }
-    .isi_bubble {
-      bottom: 43%;
-      left: 18%;
-    
-    }
-    .about_modal{
-      height: 60%;
-      width: 60%;
-    }
-    .close_modal{
-      right: 12%;
-      width: 10%;
-    }
-    .skor_modal{
-      height: 100%;
-      width: 100%;
-      bottom: 10%;
-    }
-    .grp_btn_skor{
-      left: 18%;
-      padding-top: 40%;
-      z-index: 1;
-      position: fixed;
-    }
-    .btn_pop_up{
-      width: 30%;
-    }
-    .input_skor{
-      z-index:2;
-      position: fixed;
-      text-align: center;
-      padding-left: 18%;
-      padding-top: 12%;
-      font-size: 2px;
-    }
-    .score{
-      font-size: 10px;
-      padding-top: 3%;
-      padding-left: 1%;
-    }
-    #livecount.score{
-      padding-left:2.2%
-    }
-    #score.score{
-      padding-left:10%
-    }
-    #countdown.score{ 
-      padding-left:23%
-    }
 
-    .icn_sw {
-      z-index: 1;;
-      height: 35px;
-      width: 30%;
-      padding-top:0.5%;
-    
-    }
-    .icn_darah {
-      height: 15%;
-      width: 15%;
-      padding-top:2%;
-    
-    }
+.grp_pop_up{
+  position: absolute;
+  right:5%;
+  top: 50%;
+  width: 100%;
+  text-align: center;
+  z-index:4;
+}
+@-moz-document url-prefix() {
+   @media only screen and (min-width : 668px) and (max-width: 846px){
+    /* For mobile phones: */
 
     /* max-width : 812 */
     .papan{
@@ -742,11 +660,131 @@ div.modal-content{
       padding-top:2%;
     
     }
+    .grp_pop_up{
+      position: absolute;
+      right:7%;
+      top: 50%;
+      width: 100%;
+      text-align: center;
+      z-index:4;
+    }
+    .pop_bs{
+      height: 13%;
+      width: 13%; 
+    }
    }
     /* For mobile phones: */
 
     /* (max-width : 705px) and (max-height:327px) */
+    @media (min-width: 481px) and (max-width: 767px) {
+      .papan{
+        min-width: 70%;
+        min-height: 82%;
+        max-width: 70%;
+        max-height: 82%;
+        top:15%;
+        padding-left:1%;
+      
+      }
+      .grp_periksa{
+        padding-top:30%;
+        position:fixed;
+        bottom:0px;
+        left:0%;
+      }
+      .kanvas_template{
+        top :29.5%; 
+      }
+      .kanvas_contoh{
+        top:29.5%;
+      }
+      .papan_template{
+        width: 40%;
+      }
+      .papan_template_ujian{
+        width: 40%;
+      }
+      .isi_bubble {
+        bottom: 43%;
+        left: 18%;
+      
+      }
+      .about_modal{
+        height: 60%;
+        width: 60%;
+      }
+      .close_modal{
+        right: 12%;
+        width: 10%;
+      }
+      .skor_modal{
+        height: 100%;
+        width: 100%;
+        bottom: 10%;
+      }
+      .grp_btn_skor{
+        left: 18%;
+        padding-top: 40%;
+        z-index: 1;
+        position: fixed;
+      }
+      .btn_pop_up{
+        width: 30%;
+      }
+      .input_skor{
+        z-index:2;
+        position: fixed;
+        text-align: center;
+        padding-left: 18%;
+        padding-top: 12%;
+        font-size: 2px;
+      }
+      .score{
+        font-size: 10px;
+        padding-top: 3%;
+        padding-left: 1%;
+      }
+      #livecount.score{
+        padding-left:2.2%
+      }
+      #score.score{
+        padding-left:10%
+      }
+      #countdown.score{ 
+        padding-left:23%
+      }
     
+      .icn_sw {
+        z-index: 1;;
+        height: 35px;
+        width: 30%;
+        padding-top:0.5%;
+      
+      }
+      .icn_darah {
+        height: 15%;
+        width: 15%;
+        padding-top:2%;
+      
+      }
+      .grp_pop_up{
+        position: absolute;
+        right:7%;
+        top: 50%;
+        width: 100%;
+        text-align: center;
+        z-index:4;
+      }
+      .pop_bs{
+        height: 13%;
+        width: 13%; 
+      }
+    
+}
+
+
+  
+  
 }
 
 

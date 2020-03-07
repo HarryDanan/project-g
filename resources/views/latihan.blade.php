@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
     <!-- <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.0.0/dist/tf.min.js"></script> -->
     <script src="{{asset('js/imageProcessing/preProcessing.js')}}" type="text/javascript"></script>
+    <script src="{{asset('js/imageProcessing/addon.js')}}" type="text/javascript"></script>
     <script src="{{asset('js/imageProcessing/opencv.js')}}" type="text/javascript"></script> 
     <script type="text/javascript" src="{{asset('js/Audio-HTML5.js')}}"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
@@ -44,13 +45,17 @@
                 </center>
             </div>
         </div>
-    
+        <div style="position:relative">
+            <div class="grp_pop_up">
+                <img  id="pop_benar" style="display:none; position:fixed" class="pop_bs" src="{{asset('assets/icon/pop_benar.png')}}" alt="">
+                <img  id="pop_salah" style="display:none; position:fixed" class="pop_bs" src="{{asset('assets/icon/pop_salah.png')}}" alt="">
+                <img  id="pop_kanvas" style="display:none; position:fixed" class="pop_bs" src="{{asset('assets/icon/pop_kanvas.png')}}" alt="">
+                <img  id="pop_contoh" style="display:none; position:fixed" class="pop_bs" src="{{asset('assets/icon/pop_contoh.png')}}" alt="">
+            </div>
+        </div>
         <div class="d-flex justify-content-center">
         <!-- pop up benar dan salah -->
-            <img  id="pop_benar" style="display:none; position:fixed" class="pop_bs" src="{{asset('assets/icon/pop_benar.png')}}" alt="">
-            <img  id="pop_salah" style="display:none; position:fixed" class="pop_bs" src="{{asset('assets/icon/pop_salah.png')}}" alt="">
-            <img  id="pop_kanvas" style="display:none; position:fixed" class="pop_bs" src="{{asset('assets/icon/pop_kanvas.png')}}" alt="">
-            <img  id="pop_contoh" style="display:none; position:fixed" class="pop_bs" src="{{asset('assets/icon/pop_contoh.png')}}" alt="">
+
         <!-- pop up benar dan salah end -->
             <img class="papan" src="{{asset('assets/icon/papan.png')}}" alt="">
             <canvas class="kanvas_template" id="gambar" width="192" height="192"></canvas>
@@ -58,7 +63,7 @@
         </div>
         <br><br>
         
-        <div class="bottom_left">
+        <div class=>
             <div>
                 <img class="bubble" src="{{asset('assets/icon/bubble.png')}}" alt="">
                     <img class="icn_ayo" src="{{asset('assets/icon/ayo.png')}}" alt=""><br>
@@ -67,8 +72,8 @@
                         <div>
                             <img id="srcImage2" class="papan_template">
                         </div>
-                    
-                            <select class="selectpicker "name="carlist" form="carform" id="masuk" onchange="inputan();ubah_contoh()">
+                            
+                            <select id="masuk" onchange="inputan();ubah_contoh()">
                                 <option value="a" selected>A</option>
                                 <option value="b">B</option>
                                 <option value="c">C</option>
@@ -109,14 +114,14 @@
         
 
         <center>
-        <div  class = "grp_periksa">
+        <div class="grp_periksa">
             <a id="check" onclick="check_kanvas()"><img class="icn" src="{{asset('assets/icon/btn_periksa.png')}}" alt=""></a>
             <a onclick="hapus()"><img class="icn" src="{{asset('assets/icon/btn_hapus.png')}}" alt=""></a>
             
         </div>
         </center>
 
-        <div class="row">
+        <div hidden class="row">
             <div class="col-sm-3">
                 <h5>Gambar Template</h5>
                 <canvas width="64" height="64" id='outputTemplate'></canvas>
@@ -142,12 +147,16 @@
                 <canvas width="64" height="64" id='outputCanvas2'></canvas>
             </div>
             <div class="col-sm-3">
+                <h5>Gambar Tanpa Tepi</h5>
+                <canvas width="64" height="64" id='outputCanvas4'></canvas>
+            </div>
+            <div class="col-sm-3">
                 <h5>Gambar Skletoning</h5>
                 <canvas width="64" height="64" id='outputCanvas3'></canvas>
             </div>
-            <div class="col-sm-3">
-                <h5>Gambar Tanpa Tepi</h5>
-                <canvas width="64" height="64" id='outputCanvas4'></canvas>
+            <div hidden class="col-sm-3">
+                <h5>Gambar Skletoning2</h5>
+                <canvas width="64" height="64" id='outputKhusus'></canvas>
             </div>
         </div>
         <center>
@@ -288,6 +297,9 @@
         var kanvas = document.getElementById('outputCanvas2');
         var kanvas2 = document.getElementById('outputCanvas2');
         var kanvas3 = document.getElementById('outputCanvas4');
+
+        var ctx = kanvas2.getContext('2d');
+        var blobKanvas = ctx.getImageData(0,0,64,64);
         //proses resize
         //ambil data gambar dari canvas
         let src = cv.imread(document.getElementById("gambar"));
@@ -306,12 +318,14 @@
         //thinningImage2(kanvas); //steinford  
         tepi(kanvas2);
         thinningImage(kanvas3);
+        thinning_khusus(kanvas2);
         //thinningTemplate(kanvas3);
         //normalisasi warna template
         colorTemplate(cv.imread('outputTemplate'),dst);
         //thinning template
         templateThinning2(kanvas_template);
         //templateThinning2(kanvas3);
+        //FindBlobs(blobKanvas);
         check_path();
 
        
@@ -412,23 +426,117 @@
         //inisialisasi nilai threshold
         var batasAtas=0; 
         var batasAtas_=0;
+        var nilai_canvas = 0;
+        var nilai_canvas2 = 0;
+        var nilai_khusus = 0;
+        var status_khusus =0;
         //inisaslisasi nilai
         var nilai=0;
+        var status=0;
+        var char= document.getElementById('masuk').value;
         //ambil data gambar
         var kanvas2 = document.getElementById('outputCanvas3');
         var kanvas3 = document.getElementById('outputTemplate'); 
+        var kanvas4 = document.getElementById('outputCanvas4');
+        var check_char = document.getElementById('outputKhusus');
+        var check_khusus = document.getElementById('outputCanvas2');
         //var kanvas4 = document.getElementById('template_thin');
         
         //ambil data 2d gambar
         var ctx = kanvas2.getContext('2d');
-        //ambil data 2d template
         var ctx2 = kanvas3.getContext('2d');
+        var ctx3 = kanvas4.getContext('2d');
+        var ctx_char = check_char.getContext('2d');
+        var ctx_khusus = check_khusus.getContext('2d');
         //ambil data pixel array gambar
         var imgData = ctx.getImageData(0,0,64,64);
-        //ablil data pixel array template
-        templateData = ctx2.getImageData(0,0,64,64);
+        var templateData = ctx2.getImageData(0,0,64,64);
+        var canvas2 = ctx_char.getImageData(0,0,64,64);
+        var canvas4 = ctx3.getImageData(0,0,64,64);
+        var khusus = ctx_khusus.getImageData(0,0,64,64);
         //template_thinData = ctx3.getImageData(0,0,64,64);
- 
+        //countBlob();
+        for (var i=0; i<canvas4.data.length; i+=4){
+            if(canvas4.data[i]==0){
+                nilai_canvas = nilai_canvas + (1-Math.round((canvas4.data[i]/255)));
+            }
+            if(canvas2.data[i]==0){
+                nilai_canvas2 = nilai_canvas2 + (1-Math.round((canvas2.data[i]/255)));
+            }
+            if(khusus.data[i]==0){
+                nilai_khusus = nilai_khusus + (1-Math.round((khusus.data[i]/255)));
+            }
+            if(char=="u"){
+                if(nilai_canvas2<=100){
+                    status=1;
+                }else if (nilai_canvas>=900){
+                    status=1;
+                }else{
+                    status=0;
+                }
+            }else if(char=="t"){
+                if(nilai_canvas2<=70){
+                    status=1;
+                }else{
+                    status=0;
+                }
+            }else if(char=="p"){
+                if(nilai_canvas2<=150){
+                    status=1;
+                }else{
+                    status=0;
+                }
+            }else if(char=="r"){
+                if(nilai_canvas2<=150){
+                    status=1;
+                }else{
+                    status=0;
+                }
+            }else if(char=="n"){
+                if(nilai_canvas2<=140){
+                    status=1;
+                }else{
+                    status=0;
+                }
+            }else if(char=="k"){
+                if(nilai_canvas2<=140){
+                    status=1;
+                }else{
+                    status=0;
+                }
+            }
+            else if(char=="i"){
+                status_khusus=1;
+                if(nilai_khusus<=100){
+                    status=1;
+                }else{
+                    status=0;
+                }
+            }
+            else if(char=="h"){
+                if(nilai_canvas2<=120){
+                    status=1;
+                }else{
+                    status=0;
+                }
+            }
+            else if(char=="j"){
+                status_khusus=1;
+                if(nilai_khusus<=150){
+                    status=1;
+                }else{
+                    status=0;
+                }
+            } 
+            else{
+                status=0;
+            }
+            if(char!=="i"){
+                if(nilai_canvas>=900){
+                    status=1;
+                }
+            }
+        }
         //looping array pixel gambar
         for(var i = 0; i<imgData.data.length; i+=4){
             //pemberian threshold
@@ -436,26 +544,45 @@
                 batasAtas =  batasAtas + (1-Math.round((templateData.data[i]/255)));
                 batasAtas_ = Math.round(batasAtas*x);
             }
-            //template matching
-            //nilai = nilai + Math.pow(((1-Math.round(templateData.data[i]/255)) - (1-Math.round(imgData.data[i]/255))),2); //tm_sqdiff
-            nilai = nilai + (1-Math.round(templateData.data[i]/255)) * (1-Math.round(imgData.data[i]/255)); //TM_CCORR
+            if(status!=1 && status_khusus!=1){
+                //template matching
+                //nilai = nilai + Math.pow(((1-Math.round(templateData.data[i]/255)) - (1-Math.round(imgData.data[i]/255))),2); //tm_sqdiff
+                nilai = nilai + (1-Math.round(templateData.data[i]/255)) * (1-Math.round(imgData.data[i]/255)); //TM_CCORR
+            }else if(status!=1 && status_khusus==1){
+                nilai = nilai + (1-Math.round(templateData.data[i]/255)) * (1-Math.round(canvas2.data[i]/255)); //TM_CCORR
+            }
+                
         }
-
+   
+        //console.log(char);
+        //console.log(status);
+        console.log(status_khusus);
+        console.log(nilai_khusus);
+        console.log(nilai_canvas2);
+        console.log(nilai_canvas);
         //console.log(batasAtas);
         console.log(batasAtas_);
         console.log(nilai);
 
         //kondisi benar dan salah
-        if(nilai>=batasAtas_){
-            //sound_benar();
-            $("#pop_benar").fadeIn();
-            $("#pop_benar").fadeOut('slow');
-        }
-        else{
-            //sound_salah();
+        if(status!=1){
+            if(nilai>=batasAtas_){
+                //sound_benar();
+                $("#pop_benar").fadeIn();
+                $("#pop_benar").fadeOut('slow');
+            }
+            else{
+                //sound_salah();
+                $("#pop_salah").fadeIn();
+                $("#pop_salah").fadeOut('slow');
+            }
+            status=0;
+            status_khusus=0;
+        }else{
             $("#pop_salah").fadeIn();
             $("#pop_salah").fadeOut('slow');
         }
+     
         //download();
           
     }
@@ -477,6 +604,7 @@
         var f = document.getElementById("outputCanvas");f.width = f.width; //hapus gambar di canvas
         var g = document.getElementById("outputCanvas2");g.width = g.width; //hapus gambar di canvas
         var h = document.getElementById("outputCanvas3");h.width = h.width; //hapus gambar di canvas
+        var i = document.getElementById("outputCanvas4");i.width = i.width; //hapus gambar di canvas
         draw_template(); //draw template ke canvas
         switch_threshold();
     }
@@ -492,70 +620,81 @@
         var d = document.getElementById("outputCanvas");d.width = d.width;
         var e = document.getElementById("outputCanvas2");e.width = e.width;
         var f = document.getElementById("outputCanvas3");f.width = f.width;
+        var g = document.getElementById("outputCanvas4");g.width = g.width;
         // var ctx = c.getContext("2d");
         // ctx.clearRect(0, 0, canvas.width, canvas.height);
     }
     function switch_threshold (){
         input = document.getElementById("masuk").value;
         switch(input){
+    
             case "z" :
                 x = 48/100;
                 break;
-            case "x" :
-            case "w" :
-                x = 35/100;
+            case "d" :
+                x = 46/100;
                 break;
             case "a" :
-                x = 32.2/100;
-                break;
-            case "v" :
-                x = 32/100;
-                break;
-            case "d" :
-            case "o" :
+            case "c" :
             case "q" :
-            case "x" :
-            case "e" :
-                x = 30/100;
+                x = 45/100;
                 break;
+            case "w" :
+                x = 43.9/100;
+                break;
+            case "x" :
+            case "g" :
             case "m" :
-                 x = 26/100;
+                x = 40/100;
                 break;
             case "s" :
-            case "t" :
-            case "v" :
-            case "y" :
-            case "k" :
-                x = 25/100;
+                x = 38/100;
                 break;
+            case "e" :
+                x = 36/100;
+                break;
+                // x = 35/100;
+                // break;
             case "b" :
-            case "c" :
-                x = 22.5/100;
+                x = 34/100;
                 break;
             case "p" :
+                x = 33/100;
+                break;
+            case "r" :
+                x = 32.5/100;
+                break;
+            case "n" :
+                x = 31/100;
+                break;
+            case "o" :
+            case "f" :
+                x = 30/100;
+                break;
+            case "v" :
+            case "u" :
+                 x = 26/100;
+                break;
+                // x = 25/100;
+                // break;
+            case "k" :
+                x  = 23/100;
+                break;
+            case "y" :
             case "h" :
                 x = 22/100;
                 break;
-            case "n" :
+            case "t" :
                 x = 21/100;
                 break;
-            case "f" :
-            case "g" :
-            case "r" :
-                x = 20/100;
+            case "i" :
+                x = 19/100;
                 break;
             case "l" :
-            case "u" :
-                x = 18/100;
-                break;
-          
-                // x = 15/100;
-                // break;
-            case "j" :
                 x = 16/100;
                 break;
-            case "i" :
-                x = 5/100;
+            case "j" :
+                x = 4/100;
                 break;
             default :
             x = 30/100;

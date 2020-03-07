@@ -2,7 +2,7 @@
 function colorImage(src,dst){
 	//ubah warna gamba rke hitam putih
 	let low = new cv.Mat(src.rows, src.cols, src.type(), [0,0,0,255]); //parameter bahwa
-    let high = new cv.Mat(src.rows, src.cols, src.type(), [128,128,128,255]); //paramter atas
+    let high = new cv.Mat(src.rows, src.cols, src.type(), [150,150,150,255]); //paramter atas
     
     cv.inRange(src, low, high, dst); //mengecek apakah nilai array berada diantara paramter bawah dan atas
 
@@ -29,7 +29,7 @@ function colorImage(src,dst){
 function colorTemplate(src,dst){
 	//ubah warna gamba rke hitam putih
 	let low = new cv.Mat(src.rows, src.cols, src.type(), [0,0,0,0]); //parameter bahwa
-    let high = new cv.Mat(src.rows, src.cols, src.type(), [128,128,128,255]); //paramter atas
+    let high = new cv.Mat(src.rows, src.cols, src.type(), [150,150,150,255]); //paramter atas
     
     cv.inRange(src, low, high, dst); //mengecek apakah nilai array berada diantara paramter bawah dan atas
 
@@ -106,6 +106,59 @@ function thinningImage(kanvas){
 
 	//show image 
 	var kanvas3 = document.getElementById('outputCanvas3'); //inisialisasi kanvas
+	var ctx3 = kanvas3.getContext('2d'); //membuat object CanvasRenderingContext2D
+	ctx3.putImageData(imgData,0,0); //tampilkan gambar pada kanvas
+}
+function thinning_khusus(kanvas2){
+	//get image data
+	var ctx = kanvas2.getContext('2d'); //membuat object CanvasRenderingContext2D
+	var imgData = ctx.getImageData(0,0,64,64); //mengambil data pixel kanvas dengan ukuran 64 * 64
+	//operation	
+	var gambar = zeros([64,64]); //inisialiasi matriks 64 * 64 kosong
+	//inisialisasi matriks
+	var j = 0;
+	var k = 0;
+	var l = 0;
+	//mengubah array pixel gambar menjadi matriks
+	for (var i = 0; i < imgData.data.length; i+=4) {
+	 	if(l==64){
+	 		l=0;
+	 		j=0;
+	 		k=k+1;
+	 	}
+	 	gambar[k][j] = imgData.data[i];
+	 	j=j+1;
+	 	l=l+1;
+	}
+	//proses thinning 
+	while(berhenti!=1){
+		var gambar = step1(gambar);
+		var gambar = step2(gambar);
+	}
+	berhenti=0;
+
+	//change image
+	// inisialisasi variable
+	var j = 0;
+	var k = 0;
+	var l = 0;
+	//mengubah array pixel menjadi matriks
+	for (var i = 0; i < imgData.data.length; i+=4) {
+	 	if(l==64){
+	 		l=0;
+	 		j=0;
+	 		k=k+1;
+		 }
+		//mengubah data matriks gambar agar sesuai dengan hasil thinning
+	 	imgData.data[i] = gambar[k][j];
+	 	imgData.data[i+1] = gambar[k][j];
+	 	imgData.data[i+2] = gambar[k][j];
+	 	j=j+1;
+	 	l=l+1;
+	}
+
+	//show image 
+	var kanvas3 = document.getElementById('outputKhusus'); //inisialisasi kanvas
 	var ctx3 = kanvas3.getContext('2d'); //membuat object CanvasRenderingContext2D
 	ctx3.putImageData(imgData,0,0); //tampilkan gambar pada kanvas
 }
@@ -195,7 +248,7 @@ function tepi(kanvas2){
 	let src = cv.imread(document.getElementById("outputCanvas4"));
 	let dst = new cv.Mat();
 	let low = new cv.Mat(src.rows, src.cols, src.type(), [0,0,0,255]); //parameter bahwa
-    let high = new cv.Mat(src.rows, src.cols, src.type(), [128,128,128,255]); //paramter atas
+    let high = new cv.Mat(src.rows, src.cols, src.type(), [150,150,150,255]); //paramter atas
     
     cv.inRange(src, low, high, dst); //mengecek apakah nilai array berada diantara paramter bawah dan atas
 
@@ -439,54 +492,6 @@ function thinningImage2(kanvas){
 
 	//show image 
 	var kanvas3 = document.getElementById('outputCanvas3');
-	var ctx3 = kanvas3.getContext('2d');
-	ctx3.putImageData(imgData,0,0);
-}
-
-function template_thin(kanvas_template){
-	//get image data
-	var ctx = kanvas_template.getContext('2d');
-	var imgData = ctx.getImageData(0,0,64,64);
-	//operation	
-	var gambar = zeros([64,64]);
-	var j = 0;
-	var k = 0;
-	var l = 0;
-	for (var i = 0; i < imgData.data.length; i+=4) {
-	 	if(l==64){
-	 		l=0;
-	 		j=0;
-	 		k=k+1;
-	 	}
-	 	gambar[k][j] = imgData.data[i];
-	 	j=j+1;
-	 	l=l+1;
-	}
-	while(berhenti!==1){
-		thinningTemplate(gambar); //step 1
-		thinningTemplate2(gambar); //step 2
-	}
-	berhenti=0;
-	
-	//change image
-	j = 0;
-	k = 0;
-	l = 0;
-	for (var i = 0; i < imgData.data.length; i+=4) {
-	 	if(l==64){
-	 		l=0;
-	 		j=0;
-	 		k=k+1;
-	 	}
-	 	imgData.data[i] = gambar[k][j];
-	 	imgData.data[i+1] = gambar[k][j];
-	 	imgData.data[i+2] = gambar[k][j];
-	 	j=j+1;
-	 	l=l+1;
-	}
-
-	//show image 
-	var kanvas3 = document.getElementById('template_thin');
 	var ctx3 = kanvas3.getContext('2d');
 	ctx3.putImageData(imgData,0,0);
 }

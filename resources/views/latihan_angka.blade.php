@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
     <!-- <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.0.0/dist/tf.min.js"></script> -->
     <script src="{{asset('js/imageProcessing/preProcessing.js')}}" type="text/javascript"></script>
+    <script src="{{asset('js/imageProcessing/addon.js')}}" type="text/javascript"></script>
     <script src="{{asset('js/imageProcessing/opencv.js')}}" type="text/javascript"></script> 
     <script type="text/javascript" src="{{asset('js/Audio-HTML5.js')}}"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
@@ -35,8 +36,8 @@
 
             <div class="container-fluid" style="background :url(../assets/icon/bgnav.png);  position:fixed; z-index:-1; height:13%;"></div>
             <div class="top_right">
-                <a href="#" id="btn_ubah"onclick="btn_s()"><img class=" btn_bantuan" src="{{asset('assets/icon/btn_bantuan.png')}}" alt=""></a>
-                <a href="$" ><img class=" btn_bantuan" src="{{asset('assets/icon/btn_helpper.png')}}" alt=""></a>
+                <a href="#" id="btn_ubah"onclick=""><img class=" btn_bantuan" src="{{asset('assets/icon/btn_bantuan.png')}}" alt=""></a>
+                <a href="#" onclick="" ><img class=" btn_bantuan" src="{{asset('assets/icon/btn_helpper.png')}}" alt=""></a>
             </div>     
             <div>
                 <center>
@@ -53,8 +54,8 @@
             <img  id="pop_contoh" style="display:none; position:fixed" class="pop_bs" src="{{asset('assets/icon/pop_contoh.png')}}" alt="">
         <!-- pop up benar dan salah end -->
             <img class="papan" src="{{asset('assets/icon/papan.png')}}" alt="">
-            <canvas id="gambar" width="192" height="192" style=" top :40%; position:absolute; border:2px solid #000000;z-index:2"></canvas>
-            <img id="srcImage3" src="" width="190" height="190" style="z-index:1;position :absolute;top:40.5%;opacity: 0.5;">
+            <canvas class="kanvas_template" id="gambar" width="192" height="192"></canvas>
+            <img class="kanvas_contoh" id="srcImage3" src="" width="190" height="190">
         </div>
         <br><br>
         
@@ -65,7 +66,7 @@
                     <div class="isi_bubble">
                         <center>
                         <div>
-                            <img id="srcImage2" src="" width="64" height="64">
+                            <img id="srcImage2" class="papan_template">
                         </div>
                     
                             <select class="selectpicker "name="carlist" form="carform" id="masuk" onchange="inputan();ubah_contoh()">
@@ -85,13 +86,17 @@
             </div>
             
             <br>
+            
+        </div>
+        <div>
             <img class="icn_anak" src="{{asset('assets/icon/anak.png')}}" alt=""></h3>
         </div>
+        
 
         <center>
-        <div  style="padding-top:20%">
-            <a id="check" onclick="btn_s()"><img class="icn" src="{{asset('assets/icon/btn_periksa.png')}}" alt=""></a>
-            <a onclick="btn_s();hapus()"><img class="icn" src="{{asset('assets/icon/btn_hapus.png')}}" alt=""></a>
+        <div  class = "grp_periksa">
+            <a id="check" onclick="check_kanvas()"><img class="icn" src="{{asset('assets/icon/btn_periksa.png')}}" alt=""></a>
+            <a onclick="hapus()"><img class="icn" src="{{asset('assets/icon/btn_hapus.png')}}" alt=""></a>
             
         </div>
         </center>
@@ -122,12 +127,16 @@
                 <canvas width="64" height="64" id='outputCanvas2'></canvas>
             </div>
             <div class="col-sm-3">
+                <h5>Gambar Tanpa Tepi</h5>
+                <canvas width="64" height="64" id='outputCanvas4'></canvas>
+            </div>
+            <div class="col-sm-3">
                 <h5>Gambar Skletoning</h5>
                 <canvas width="64" height="64" id='outputCanvas3'></canvas>
             </div>
             <div hidden class="col-sm-3">
-                <h5>Gambar Tanpa Tepi</h5>
-                <canvas width="64" height="64" id='outputCanvas4'></canvas>
+                <h5>Gambar Skletoning2</h5>
+                <canvas width="64" height="64" id='outputKhusus'></canvas>
             </div>
         </div>
         <center>
@@ -160,24 +169,24 @@
     //sound salah
     var sound_s = document.getElementById('btn-salah');
 
-    //play sound click
-    function btn_s() {
-        sound.pause();
-        sound.currentTime = 0;
-        sound.play();
-    }
-    //play sound salah
-    function sound_salah(){
-        sound_s.pause();
-        sound_s.currentTime = 0;
-        sound_s.play();
-    }
-    //play sound benar
-    function sound_benar(){
-        sound_b.pause();
-        sound_b.currentTime = 0;
-        sound_b.play();
-    }
+    // //play sound click
+    // function btn_s() {
+    //     sound.pause();
+    //     sound.currentTime = 0;
+    //     sound.play();
+    // }
+    // //play sound salah
+    // function sound_salah(){
+    //     sound_s.pause();
+    //     sound_s.currentTime = 0;
+    //     sound_s.play();
+    // }
+    // //play sound benar
+    // function sound_benar(){
+    //     sound_b.pause();
+    //     sound_b.currentTime = 0;
+    //     sound_b.play();
+    // }
     
     //toggle contoh template
     $( document ).ready(function() {
@@ -193,7 +202,7 @@
     //ambil data src gambar template
     document.getElementById("srcImage2").src = "../../template/angka/" + input + ".jpg";
     document.getElementById("srcImage3").src = "../../template/contoh_angka/" + input + ".jpg";
-   //document.getElementById("srcImage4").src = "../../template/bw_huruf_angka/" + input + ".jpg";
+   //document.getElementById("srcImage4").src = "../../template/bw_huruf_kecil/" + input + ".jpg";
     
     //ambil template dari canvas
     var canvasTemplate = document.getElementById('outputTemplate');
@@ -247,7 +256,8 @@
     }
 
     //event listerner untuk btn periksa
-    document.getElementById('check').addEventListener('click', function() {
+    // document.getElementById('check').addEventListener('click', function() {
+    function check_kanvas() {
         const blank = isCanvasBlank(document.getElementById('gambar'));
         //check canvas kosong atau tidak
         if(blank){
@@ -260,12 +270,16 @@
             pre_proses();
         }
         
-    });
+    }
     function pre_proses(){
         //ambil data template dari canvas
         var kanvas_template = document.getElementById('template_normal');
         var kanvas = document.getElementById('outputCanvas2');
-        //ambil data 2d template
+        var kanvas2 = document.getElementById('outputCanvas2');
+        var kanvas3 = document.getElementById('outputCanvas4');
+
+        var ctx = kanvas2.getContext('2d');
+        var blobKanvas = ctx.getImageData(0,0,64,64);
         //proses resize
         //ambil data gambar dari canvas
         let src = cv.imread(document.getElementById("gambar"));
@@ -280,12 +294,18 @@
         //normalisasai warna 
         colorImage(cv.imread('outputCanvas'), dst);
         //thinning gambar
-        thinningImage(kanvas); //zhen suen
+        //thinningImage(kanvas); //zhen suen
         //thinningImage2(kanvas); //steinford  
+        tepi(kanvas2);
+        thinningImage(kanvas3);
+        thinning_khusus(kanvas2);
+        //thinningTemplate(kanvas3);
         //normalisasi warna template
-        //colorTemplate(cv.imread('outputTemplate'),dst);
+        colorTemplate(cv.imread('outputTemplate'),dst);
         //thinning template
-        //templateThinning(kanvas_template);
+        templateThinning2(kanvas_template);
+        //templateThinning2(kanvas3);
+        //FindBlobs(blobKanvas);
         check_path();
 
        
@@ -354,7 +374,7 @@
             periksa();
         }else{
             //jika path salah
-            sound_salah();
+            //sound_salah();
             $("#pop_contoh").fadeIn();
             $("#pop_contoh").fadeOut('slow');
         }
@@ -383,64 +403,137 @@
 
     //periksa hasil tulisan pada canvas
     function periksa(){
-          //check path
-        //check_path();
         //inisialisasi nilai threshold
         var batasAtas=0; 
         var batasAtas_=0;
-        var contohcontoh=0;
-        var contohcontoh_=0;
+        var threshold = 0;
+        var threshold2 = 0;
+        var threshold_khusus =0;
         //inisaslisasi nilai
         var nilai=0;
+        var status=0;
+        var char= document.getElementById('masuk').value;
         //ambil data gambar
         var kanvas2 = document.getElementById('outputCanvas3');
         var kanvas3 = document.getElementById('outputTemplate'); 
-
-        var kanvas4 = document.getElementById('template_thin');
+        var kanvas4 = document.getElementById('outputCanvas4');
+        var check_char = document.getElementById('outputKhusus');
+        var check_khusus = document.getElementById('outputCanvas2');
+        //var kanvas4 = document.getElementById('template_thin');
         
         //ambil data 2d gambar
         var ctx = kanvas2.getContext('2d');
-        //ambil data 2d template
         var ctx2 = kanvas3.getContext('2d');
+        var ctx3 = kanvas4.getContext('2d');
+        var ctx_char = check_char.getContext('2d');
+        var ctx_khusus = check_khusus.getContext('2d');
         //ambil data pixel array gambar
         var imgData = ctx.getImageData(0,0,64,64);
-        //ablil data pixel array template
-        templateData = ctx2.getImageData(0,0,64,64);
+        var templateData = ctx2.getImageData(0,0,64,64);
+        var canvas2 = ctx_char.getImageData(0,0,64,64);
+        var canvas4 = ctx3.getImageData(0,0,64,64);
+        var khusus = ctx3.getImageData(0,0,64,64);
         //template_thinData = ctx3.getImageData(0,0,64,64);
- 
+        //countBlob();
+        for (var i=0; i<canvas4.data.length; i+=4){
+            if(canvas4.data[i]==0){
+                threshold = threshold + (1-Math.round((canvas4.data[i]/255)));
+            }
+            if(canvas2.data[i]==0){
+                threshold2 = threshold2 + (1-Math.round((canvas2.data[i]/255)));
+            }
+            if(char=="3"){
+                if(threshold2<=150){
+                    status=1;
+                }else{
+                    status=0;
+                }
+            }else if(char=="5"){
+                if(threshold2<=150){
+                    status=1;
+                }else{
+                    status=0;
+                }
+            }else if(char=="7"){
+                if(threshold2<=100){
+                    status=1;
+                }else{
+                    status=0;
+                }
+            }else if(char=="8"){
+                if(threshold2<=180){
+                    status=1;
+                }else{
+                    status=0;
+                }
+            }
+            else if(char=="9"){
+                if(threshold2<=180){
+                    status=1;
+                }else{
+                    status=0;
+                }
+            }
+            else{
+                status=0;
+            }
+            if(threshold>=900){
+                status=1;
+            }
+        }
         //looping array pixel gambar
         for(var i = 0; i<imgData.data.length; i+=4){
             //pemberian threshold
             if(templateData.data[i]==0){
-                // batasAtas++;
-               //batasAtas = 64*64;
                 batasAtas =  batasAtas + (1-Math.round((templateData.data[i]/255)));
                 batasAtas_ = Math.round(batasAtas*x);
-                //threshold = threshold + (Math.round(batasAtas*20/100));
             }
-            //template matching
-
-            //nilai = nilai + Math.pow(((1-Math.round(contohData.data[i]/255)) - (1-Math.round(imgData.data[i]/255))),2); //tm_sqdiff
-            nilai = nilai + (1-Math.round(templateData.data[i]/255)) * (1-Math.round(imgData.data[i]/255)); //TM_CCORR
+            if(status!=1){
+                //template matching
+                //nilai = nilai + Math.pow(((1-Math.round(templateData.data[i]/255)) - (1-Math.round(imgData.data[i]/255))),2); //tm_sqdiff
+                nilai = nilai + (1-Math.round(templateData.data[i]/255)) * (1-Math.round(imgData.data[i]/255)); //TM_CCORR
+            }
+                
         }
-
+   
+        //console.log(char);
+        //console.log(status);
+        // console.log(status_khusus);
+        //console.log(threshold_khusus);
+        //console.log(threshold2);
+        //console.log(threshold);
         //console.log(batasAtas);
         console.log(batasAtas_);
         console.log(nilai);
-        //if(nilai>=(batasAtas*80/100)){
+
         //kondisi benar dan salah
-        if(nilai>=batasAtas_){
-            sound_benar();
-            $("#pop_benar").fadeIn();
-            $("#pop_benar").fadeOut('slow');
-        }
-        else{
-            sound_salah();
+        if(status!=1){
+            if(nilai>=batasAtas_){
+                //sound_benar();
+                $("#pop_benar").fadeIn();
+                $("#pop_benar").fadeOut('slow');
+            }
+            else{
+                //sound_salah();
+                $("#pop_salah").fadeIn();
+                $("#pop_salah").fadeOut('slow');
+            }
+            status=0;
+        }else{
             $("#pop_salah").fadeIn();
             $("#pop_salah").fadeOut('slow');
         }
+     
+        //download();
           
-	}
+    }
+    function download(){
+        var download = document.getElementById("download");
+        var image = document.getElementById("outputCanvas3").toDataURL("image/png")
+            .replace("image/png", "image/octet-stream");
+        download.setAttribute("href", image);
+//download.setAttribute("download","archive.png");
+    }
 
     //mengubah tempalte
     function inputan(){
@@ -452,6 +545,7 @@
         var f = document.getElementById("outputCanvas");f.width = f.width; //hapus gambar di canvas
         var g = document.getElementById("outputCanvas2");g.width = g.width; //hapus gambar di canvas
         var h = document.getElementById("outputCanvas3");h.width = h.width; //hapus gambar di canvas
+        var i = document.getElementById("outputCanvas4");i.width = i.width; //hapus gambar di canvas
         draw_template(); //draw template ke canvas
         switch_threshold();
     }
@@ -464,34 +558,41 @@
     //hapus gambar
     function hapus(){
         var c = document.getElementById("gambar");c.width = c.width;
+        var d = document.getElementById("outputCanvas");d.width = d.width;
+        var e = document.getElementById("outputCanvas2");e.width = e.width;
+        var f = document.getElementById("outputCanvas3");f.width = f.width;
+        var g = document.getElementById("outputCanvas4");g.width = g.width;
         // var ctx = c.getContext("2d");
         // ctx.clearRect(0, 0, canvas.width, canvas.height);
     }
     function switch_threshold (){
         input = document.getElementById("masuk").value;
         switch(input){
-            case "7" : 
+            case "3" :
+                x = 44/100;
+                break;
+            case "6" :
+            case "5" :
+            case "9" :
+                x = 40/100;
+                break;
+            case "8" :
+            case "0" :
+                x = 36/100;
+                break;
+                // x = 35/100;
+                // break;
+            case "2" :
                 x = 35/100;
                 break;
-            case "2" :
-                x = 32/100;
-                break;
-            case "5" :
-            case "6" :
-            case "3" :
-            case "9" :
+            case "4" :
                 x = 30/100;
                 break;
             case "3" :
-            case "4" :
-            case "8" :
                 x = 25/100;
                 break;
-        
-                // x = 21/100;
-                // break;
-            case "0" :
-                x = 16/100;
+            case "7" :
+                x = 18/100;
                 break;
             case "1" :
                  x = 1.6/100;
