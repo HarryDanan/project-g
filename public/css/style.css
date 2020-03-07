@@ -344,7 +344,7 @@ z-index: 1;
 }
 
 .bg2 {
-  background: url(../assets/icon/bg_latihan.png) no-repeat center center fixed; 
+  background: url(../assets/icon/bg_latihan.png) no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -534,7 +534,7 @@ div.modal-content{
 .kanvas_template{
   top :40%; 
   position:absolute; 
-  border:2px solid #000000;
+  border:2px solid #ff8000;
   z-index:2;
 }
 .kanvas_contoh{

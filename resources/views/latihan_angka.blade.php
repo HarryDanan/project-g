@@ -45,14 +45,16 @@
                 </center>
             </div>
         </div>
+        <div style="position:relative">
+            <div class="grp_pop_up">
+                <img  id="pop_benar" style="display:none; position:fixed" class="pop_bs" src="{{asset('assets/icon/pop_benar.png')}}" alt="">
+                <img  id="pop_salah" style="display:none; position:fixed" class="pop_bs" src="{{asset('assets/icon/pop_salah.png')}}" alt="">
+                <img  id="pop_kanvas" style="display:none; position:fixed" class="pop_bs" src="{{asset('assets/icon/pop_kanvas.png')}}" alt="">
+                <img  id="pop_contoh" style="display:none; position:fixed" class="pop_bs" src="{{asset('assets/icon/pop_contoh.png')}}" alt="">
+            </div>
+        </div>
     
         <div class="d-flex justify-content-center">
-        <!-- pop up benar dan salah -->
-            <img  id="pop_benar" style="display:none; position:fixed" class="pop_bs" src="{{asset('assets/icon/pop_benar.png')}}" alt="">
-            <img  id="pop_salah" style="display:none; position:fixed" class="pop_bs" src="{{asset('assets/icon/pop_salah.png')}}" alt="">
-            <img  id="pop_kanvas" style="display:none; position:fixed" class="pop_bs" src="{{asset('assets/icon/pop_kanvas.png')}}" alt="">
-            <img  id="pop_contoh" style="display:none; position:fixed" class="pop_bs" src="{{asset('assets/icon/pop_contoh.png')}}" alt="">
-        <!-- pop up benar dan salah end -->
             <img class="papan" src="{{asset('assets/icon/papan.png')}}" alt="">
             <canvas class="kanvas_template" id="gambar" width="192" height="192"></canvas>
             <img class="kanvas_contoh" id="srcImage3" src="" width="190" height="190">
@@ -95,22 +97,22 @@
 
         <center>
         <div  class = "grp_periksa">
-            <a id="check" onclick="check_kanvas()"><img class="icn" src="{{asset('assets/icon/btn_periksa.png')}}" alt=""></a>
-            <a onclick="hapus()"><img class="icn" src="{{asset('assets/icon/btn_hapus.png')}}" alt=""></a>
+            <a id="check" onclick="btn_s();check_kanvas()"><img class="icn" src="{{asset('assets/icon/btn_periksa.png')}}" alt=""></a>
+            <a onclick="btn_s();hapus()"><img class="icn" src="{{asset('assets/icon/btn_hapus.png')}}" alt=""></a>
             
         </div>
         </center>
 
-        <div class="row">
+        <div hidden class="row">
             <div class="col-sm-3">
                 <h5>Gambar Template</h5>
                 <canvas width="64" height="64" id='outputTemplate'></canvas>
             </div>
-            <div class="col-sm-3">
+            <div hidden class="col-sm-3">
                 <h5>Gambar Template normal</h5>
                 <canvas width="64" height="64" id='template_normal'></canvas>
             </div>
-            <div class="col-sm-3">
+            <div hidden class="col-sm-3">
                 <h5>Gambar Template thinning</h5>
                 <canvas width="64" height="64" id='template_thin'></canvas>
             </div>
@@ -118,7 +120,7 @@
                 <h5>Gambar Contoh</h5>
                 <canvas width="64" height="64" id='outputContoh'></canvas>
             </div>
-            <div class="col-sm-3">
+            <div hidden class="col-sm-3">
                 <h5>Gambar Resize</h5>
                 <canvas width="64" height="64" id='outputCanvas'></canvas>
             </div>
@@ -169,24 +171,24 @@
     //sound salah
     var sound_s = document.getElementById('btn-salah');
 
-    // //play sound click
-    // function btn_s() {
-    //     sound.pause();
-    //     sound.currentTime = 0;
-    //     sound.play();
-    // }
-    // //play sound salah
-    // function sound_salah(){
-    //     sound_s.pause();
-    //     sound_s.currentTime = 0;
-    //     sound_s.play();
-    // }
-    // //play sound benar
-    // function sound_benar(){
-    //     sound_b.pause();
-    //     sound_b.currentTime = 0;
-    //     sound_b.play();
-    // }
+    //play sound click
+    function btn_s() {
+        sound.pause();
+        sound.currentTime = 0;
+        sound.play();
+    }
+    //play sound salah
+    function sound_salah(){
+        sound_s.pause();
+        sound_s.currentTime = 0;
+        sound_s.play();
+    }
+    //play sound benar
+    function sound_benar(){
+        sound_b.pause();
+        sound_b.currentTime = 0;
+        sound_b.play();
+    }
     
     //toggle contoh template
     $( document ).ready(function() {
@@ -374,7 +376,7 @@
             periksa();
         }else{
             //jika path salah
-            //sound_salah();
+            sound_salah();
             $("#pop_contoh").fadeIn();
             $("#pop_contoh").fadeOut('slow');
         }
@@ -509,17 +511,18 @@
         //kondisi benar dan salah
         if(status!=1){
             if(nilai>=batasAtas_){
-                //sound_benar();
+                sound_benar();
                 $("#pop_benar").fadeIn();
                 $("#pop_benar").fadeOut('slow');
             }
             else{
-                //sound_salah();
+                sound_salah();
                 $("#pop_salah").fadeIn();
                 $("#pop_salah").fadeOut('slow');
             }
             status=0;
         }else{
+            sound_salah();
             $("#pop_salah").fadeIn();
             $("#pop_salah").fadeOut('slow');
         }
