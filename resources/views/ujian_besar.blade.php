@@ -44,31 +44,33 @@
                 <a href="" ><img class=" icn_sw" src="{{asset('assets/icon/icon_skor.png')}}" alt=""></a>
                 <a href="" ><img class=" icn_sw" src="{{asset('assets/icon/icon_waktu.png')}}" alt=""></a>
             </div>
-            <div class="top_right">
+            <!-- <div class="top_right">
                 <a href="#" id="btn_ubah"onclick="btn_s()"><img class=" btn_bantuan" src="{{asset('assets/icon/btn_bantuan.png')}}" alt=""></a>
                 <a href="$" ><img class=" btn_bantuan" src="{{asset('assets/icon/btn_helpper.png')}}" alt=""></a>
-            </div>    
+            </div>     -->
             <div>
                 <center>
                     <img class="icn_logo" src="{{asset('assets/icon/logo_h_b.png')}}" alt=""></h3>
                 </center>
             </div>
         </div>
+        <div style="position:relative">
+            <div class="grp_pop_up">
+                <img  id="pop_benar" style="display:none; position:fixed" class="pop_bs" src="{{asset('assets/icon/pop_benar.png')}}" alt="">
+                <img  id="pop_salah" style="display:none; position:fixed" class="pop_bs" src="{{asset('assets/icon/pop_salah.png')}}" alt="">
+                <img  id="pop_kanvas" style="display:none; position:fixed" class="pop_bs" src="{{asset('assets/icon/pop_kanvas.png')}}" alt="">
+                <img  id="pop_contoh" style="display:none; position:fixed" class="pop_bs" src="{{asset('assets/icon/pop_contoh.png')}}" alt="">
+            </div>
+        </div>
 
         <div class="d-flex justify-content-center">
-        <!-- pop up benar dan salah -->
-            <img  id="pop_benar" style="display:none; position:fixed" class="pop_bs" src="{{asset('assets/icon/pop_benar.png')}}" alt="">
-            <img  id="pop_salah" style="display:none; position:fixed" class="pop_bs" src="{{asset('assets/icon/pop_salah.png')}}" alt="">
-            <img  id="pop_kanvas" style="display:none; position:fixed" class="pop_bs" src="{{asset('assets/icon/pop_kanvas.png')}}" alt="">
-            <img  id="pop_contoh" style="display:none; position:fixed" class="pop_bs" src="{{asset('assets/icon/pop_contoh.png')}}" alt="">
-        <!-- pop up benar dan salah end -->
             <img class="papan" src="{{asset('assets/icon/papan.png')}}" alt="">
             <canvas class="kanvas_template"id="gambar" width="192" height="192" ></canvas>
             <img class="kanvas_contoh"id="srcImage3" src="" width="190" height="190" >
         </div>
         <br><br>
 
-        <div class="bottom_left">
+        <div >
             <div>
                 <img class="bubble" src="{{asset('assets/icon/bubble.png')}}" alt="">
                     <img class="icn_ayo" src="{{asset('assets/icon/ayo.png')}}" alt=""><br>
@@ -82,11 +84,14 @@
             </div>
             
             <br>
+
+        </div>
+        <div>
             <img class="icn_anak" src="{{asset('assets/icon/anak.png')}}" alt=""></h3>
         </div>
 
         <center>
-        <div class="grp_periksa" style="padding-top:23%">
+        <div class="grp_periksa">
             <a id="check" onclick="btn_s()"><img class="icn" src="{{asset('assets/icon/btn_periksa.png')}}" alt=""></a>
             <a onclick="btn_s();hapus()"><img class="icn" src="{{asset('assets/icon/btn_hapus.png')}}" alt=""></a>
             <img src="" alt="">
@@ -98,11 +103,11 @@
                 <h5>Gambar Template</h5>
                 <canvas width="64" height="64" id='outputTemplate'></canvas>
             </div>
-            <div class="col-sm-3">
+            <div hidden class="col-sm-3">
                 <h5>Gambar Template normal</h5>
                 <canvas width="64" height="64" id='template_normal'></canvas>
             </div>
-            <div class="col-sm-3">
+            <div hidden class="col-sm-3">
                 <h5>Gambar Template thinning</h5>
                 <canvas width="64" height="64" id='template_thin'></canvas>
             </div>
@@ -110,7 +115,7 @@
                 <h5>Gambar Contoh</h5>
                 <canvas width="64" height="64" id='outputContoh'></canvas>
             </div>
-            <div class="col-sm-3">
+            <div hidden class="col-sm-3">
                 <h5>Gambar Resize</h5>
                 <canvas width="64" height="64" id='outputCanvas'></canvas>
             </div>
@@ -119,12 +124,16 @@
                 <canvas width="64" height="64" id='outputCanvas2'></canvas>
             </div>
             <div class="col-sm-3">
+                <h5>Gambar Tanpa Tepi</h5>
+                <canvas width="64" height="64" id='outputCanvas4'></canvas>
+            </div>
+            <div class="col-sm-3">
                 <h5>Gambar Skletoning</h5>
                 <canvas width="64" height="64" id='outputCanvas3'></canvas>
             </div>
             <div hidden class="col-sm-3">
-                <h5>Gambar Tanpa Tepi</h5>
-                <canvas width="64" height="64" id='outputCanvas4'></canvas>
+                <h5>Gambar Skletoning2</h5>
+                <canvas width="64" height="64" id='outputKhusus'></canvas>
             </div>
         </div>
         <center>
@@ -164,7 +173,7 @@
                     <!-- <div class="container">
                         <img onclick="btn_s()"class="close_modal" src="{{asset('assets/icon/close_btn.png')}}" data-dismiss="modal" alt="">&times;</img>
                     </div> -->
-                    <div class="container">
+                    <div style="position:relative;">
                         <div class="input_skor">
                         <div id="display"></div>
                             <form  action="/score/store" method="post" id="form-skor">
@@ -344,8 +353,12 @@
         //ambil data template dari canvas
         var kanvas_template = document.getElementById('template_normal');
         var kanvas = document.getElementById('outputCanvas2');
+        var kanvas2 = document.getElementById('outputCanvas2');
+        var kanvas3 = document.getElementById('outputCanvas4');
+
         //ambil data 2d template
-        var ctx3 = kanvas.getContext('2d');
+        var ctx = kanvas2.getContext('2d');
+        var blobKanvas = ctx.getImageData(0,0,64,64);
        //ambil data pixel array template
         var kanvasData = ctx3.getImageData(0,0,64,64);
         //proses resize
@@ -362,12 +375,14 @@
         //normalisasai warna 
         colorImage(cv.imread('outputCanvas'), dst);
         //thinning gambar
-        thinningImage(kanvas); //zhen suen
+        tepi(kanvas2);
+        thinningImage(kanvas3);
+        thinning_khusus(kanvas2);
         //thinningImage2(kanvas); //steinford  
         //normalisasi warna template
-        //colorTemplate(cv.imread('outputTemplate'),dst);
+        colorTemplate(cv.imread('outputTemplate'),dst);
         //thinning template
-        //templateThinning(kanvas_template);
+        templateThinning2(kanvas_template);
         check_path();
    
     }
@@ -466,54 +481,179 @@
     // periksa
     function periksa(){
    
-    var batasAtas=0;
-    var batasAtas_=0; 
+    var batasAtas=0; 
+    var threshold_error=0;
+    var threshold_pixel = 0;
+    var threshold_pixel2 = 0;
+    var threshold_pixel_khusus = 0;
+    var status_khusus =0;
     var nilai=0;
+    var status=0;
+    var char= document.getElementById('masuk').value;
  
 
     var kanvas2 = document.getElementById('outputCanvas3');
-    var kanvas3 = document.getElementById('outputTemplate'); 
+    var kanvas3 = document.getElementById('outputTemplate');
+    var kanvas4 = document.getElementById('outputCanvas4');
+    var check_char = document.getElementById('outputKhusus');
+    var check_khusus = document.getElementById('outputCanvas2'); 
 
 
     var ctx = kanvas2.getContext('2d');
     var ctx2 = kanvas3.getContext('2d');
+    var ctx3 = kanvas4.getContext('2d');
+    var ctx_char = check_char.getContext('2d');
+    var ctx_khusus = check_khusus.getContext('2d');
     
-    imgData = ctx.getImageData(0,0,64,64); //data gambar tulisan
-  
-    templateData = ctx2.getImageData(0,0,64,64); //data gambar template
+    var imgData = ctx.getImageData(0,0,64,64);
+    var templateData = ctx2.getImageData(0,0,64,64);
+    var canvas2 = ctx_char.getImageData(0,0,64,64);
+    var canvas4 = ctx3.getImageData(0,0,64,64);
+    var khusus = ctx_khusus.getImageData(0,0,64,64);
 
     
-    for(var i = 0; i<imgData.data.length; i+=4){
-    	if(templateData.data[i]==0){
-            batasAtas =  batasAtas + (1-Math.round((templateData.data[i]/255)));
-            batasAtas_ = Math.round(batasAtas*x);
+        for (var i=0; i<canvas4.data.length; i+=4){
+            if(canvas4.data[i]==0){
+                threshold_pixel = threshold_pixel + (1-Math.round((canvas4.data[i]/255)));
+            }
+            if(canvas2.data[i]==0){
+                threshold_pixel2 = threshold_pixel2 + (1-Math.round((canvas2.data[i]/255)));
+            }
+            if(khusus.data[i]==0){
+                threshold_pixel_khusus = threshold_pixel_khusus + (1-Math.round((khusus.data[i]/255)));
+            }
+            if(char=="u"){
+                if(threshold_pixel2<=100){
+                    status=1;
+                }else if (threshold_pixel>=900){
+                    status=1;
+                }else{
+                    status=0;
+                }
+            }else if(char=="t"){
+                if(threshold_pixel2<=70){
+                    status=1;
+                }else{
+                    status=0;
+                }
+            }else if(char=="p"){
+                if(threshold_pixel2<=150){
+                    status=1;
+                }else{
+                    status=0;
+                }
+            }else if(char=="r"){
+                if(threshold_pixel2<=150){
+                    status=1;
+                }else{
+                    status=0;
+                }
+            }else if(char=="n"){
+                if(threshold_pixel2<=140){
+                    status=1;
+                }else{
+                    status=0;
+                }
+            }else if(char=="k"){
+                if(threshold_pixel2<=140){
+                    status=1;
+                }else{
+                    status=0;
+                }
+            }
+            else if(char=="i"){
+                status_khusus=1;
+                if(threshold_pixel_khusus<=100){
+                    status=1;
+                }else{
+                    status=0;
+                }
+            }
+            else if(char=="h"){
+                if(threshold_pixel2<=120){
+                    status=1;
+                }else{
+                    status=0;
+                }
+            }
+            else if(char=="a"){
+                if(threshold_pixel2<=120){
+                    status=1;
+                }else{
+                    status=0;
+                }
+            }
+            else if(char=="j"){
+                status_khusus=1;
+                if(threshold_pixel_khusus<=150){
+                    status=1;
+                }else{
+                    status=0;
+                }
+            } 
+            else{
+                status=0;
+            }
+            if(char!=="i"){
+                if(threshold_pixel>=900){
+                    status=1;
+                }
+            }
+        }
+        //looping array pixel gambar
+        for(var i = 0; i<imgData.data.length; i+=4){
+            //pemberian threshold
+            if(templateData.data[i]==0){
+                batasAtas =  batasAtas + (1-Math.round((templateData.data[i]/255)));
+                threshold_error = Math.round(batasAtas*x);
+            }
+            if(status!=1 && status_khusus!=1){
+                //template matching
+                //nilai = nilai + Math.pow(((1-Math.round(templateData.data[i]/255)) - (1-Math.round(imgData.data[i]/255))),2); //tm_sqdiff
+                nilai = nilai + (1-Math.round(templateData.data[i]/255)) * (1-Math.round(imgData.data[i]/255)); //TM_CCORR
+            }else if(status!=1 && status_khusus==1){
+                nilai = nilai + (1-Math.round(templateData.data[i]/255)) * (1-Math.round(canvas2.data[i]/255)); //TM_CCORR
+            }
+                
+        }
+   
+        //console.log(char);
+        //console.log(status);
+        //console.log(status_khusus);
+        //console.log(threshold_pixel_khusus);
+        //console.log(threshold_pixel2);
+        //console.log(threshold_pixel);
+        //console.log(batasAtas);
+        console.log(threshold_error);
+        console.log(nilai);
 
-    	}
-    	//nilai = nilai + ((1-Math.round(templateData.data[i]/255)) * (1-Math.round(imgData.data[i]/255)));
-    	//nilai = nilai + Math.pow(((1-Math.round(templateData.data[i]/255)) - (1-Math.round(imgData.data[i]/255))),2);
-        nilai = nilai + (1-Math.round(templateData.data[i]/255)) * (1-Math.round(imgData.data[i]/255));
-    }
-
-    console.log(batasAtas_);
-    console.log(batasAtas);
-    console.log(nilai);
     //if(nilai>=(batasAtas*80/100)){
-    if(nilai>=batasAtas_){
-        sound_benar();
-        point=point+10;
-        soal++;
-        document.getElementById("scoreinput").value = point;
-        $("#pop_benar").fadeIn();
-        $("#pop_benar").fadeOut('slow');
-        hapus();
-    }
-    else{
+    if(status!=1){
+        if(nilai>=threshold_error){
+            sound_benar();
+            point=point+10;
+            soal++;
+            document.getElementById("scoreinput").value = point;
+            $("#pop_benar").fadeIn();
+            $("#pop_benar").fadeOut('slow');
+            hapus();
+        }
+        else{
+            sound_salah();
+            liveleft--;
+            // alert("Salah");
+            $("#pop_salah").fadeIn();
+            $("#pop_salah").fadeOut('slow');
+            //hapus();
+        }
+        status=0;
+        status_khusus=0;
+    }else{
         sound_salah();
         liveleft--;
         // alert("Salah");
         $("#pop_salah").fadeIn();
-        $("#pop_salah").fadeOut('slow');
-        hapus();
+        $("#pop_salah").fadeOut('slow');       
     }
     if(soal==10){
         $('#myModal_skor').modal({backdrop: 'static', keyboard: false})  
@@ -525,46 +665,79 @@
         document.getElementById("srcImage3").src = "../../template/contoh_besar/"+input+".jpg";
         draw_contoh();
         switch_threshold();
-        
 	}
 
     function switch_threshold (){
         //input = document.getElementById("masuk").value;
         switch(input){
-            case "a" :
-            case "c" :
-            case "d" :
-            case "o" :
-            case "q" :
-            case "x" :
+    
             case "z" :
-            case "e" :
-                x = 30/100;
+                x = 48/100;
+                break;
+            case "d" :
+                x = 46/100;
+                break;
+            case "c" :
+            case "q" :
+                x = 45/100;
+                break;
+            case "w" :
+                x = 43.9/100;
+                break;
+            case "a" :
+            case "x" :
+            case "g" :
+            case "m" :
+                x = 40/100;
                 break;
             case "s" :
-            case "t" :
-            case "v" :
-            case "y" :
-                x = 25/100;
+                x = 38/100;
+                break;
+            case "e" :
+                x = 36/100;
+                break;
+                // x = 35/100;
+                // break;
+            case "b" :
+                x = 34/100;
                 break;
             case "p" :
-                x = 22
+                x = 33/100;
                 break;
-            case "f" :
-            case "g" :
-            case "h" :
-            case "k" :
-            case "u" :
             case "r" :
-                x = 20/100;
+                x = 32.5/100;
+                break;
+            case "n" :
+                x = 31/100;
+                break;
+            case "o" :
+            case "f" :
+                x = 30/100;
+                break;
+            case "v" :
+            case "u" :
+                 x = 26/100;
+                break;
+                // x = 25/100;
+                // break;
+            case "k" :
+                x  = 23/100;
+                break;
+            case "y" :
+            case "h" :
+                x = 22/100;
+                break;
+            case "t" :
+                x = 21/100;
+                break;
+            case "i" :
+                x = 19/100;
                 break;
             case "l" :
-            case "m" :
-            case "n" :
-                x = 18/100;
+                x = 16/100;
                 break;
-            case "b" :
-                x = 15/100;
+            case "j" :
+                x = 4/100;
                 break;
             default :
             x = 30/100;
@@ -619,6 +792,10 @@
 
     function hapus(){
         var c = document.getElementById("gambar");c.width = c.width;
+        var d = document.getElementById("outputCanvas");d.width = d.width;
+        var e = document.getElementById("outputCanvas2");e.width = e.width;
+        var f = document.getElementById("outputCanvas3");f.width = f.width;
+        var g = document.getElementById("outputCanvas4");g.width = g.width;
         // var ctx = c.getContext("2d");
         // ctx.clearRect(0, 0, canvas.width, canvas.height);
     }

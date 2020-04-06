@@ -35,10 +35,10 @@
             <a href="/menu" onclick="btn_s()"><img class="icn2" src="{{asset('assets/icon/back.png')}}" alt="" style="position:fixed;"></a>
 
             <div class="container-fluid" style="background :url(../assets/icon/bgnav.png);  position:fixed; z-index:-1; height:13%;"></div>
-            <div class="top_right">
+            <!-- <div class="top_right">
                 <a href="#" id="btn_ubah"onclick=""><img class=" btn_bantuan" src="{{asset('assets/icon/btn_bantuan.png')}}" alt=""></a>
                 <a href="#" onclick="" ><img class=" btn_bantuan" src="{{asset('assets/icon/btn_helpper.png')}}" alt=""></a>
-            </div>     
+            </div>      -->
             <div>
                 <center>
                     <img class="icn_logo" src="{{asset('assets/icon/logo_h_b.png')}}" alt=""></h3>
@@ -422,10 +422,10 @@
     function periksa(){
         //inisialisasi nilai threshold
         var batasAtas=0; 
-        var batasAtas_=0;
-        var nilai_canvas = 0;
-        var nilai_canvas2 = 0;
-        var nilai_khusus = 0;
+        var threshold_error=0;
+        var threshold_pixel = 0;
+        var threshold_pixel2 = 0;
+        var threshold_pixel_khusus = 0;
         var status_khusus =0;
         //inisaslisasi nilai
         var nilai=0;
@@ -455,48 +455,48 @@
         //countBlob();
         for (var i=0; i<canvas4.data.length; i+=4){
             if(canvas4.data[i]==0){
-                nilai_canvas = nilai_canvas + (1-Math.round((canvas4.data[i]/255)));
+                threshold_pixel = threshold_pixel + (1-Math.round((canvas4.data[i]/255)));
             }
             if(canvas2.data[i]==0){
-                nilai_canvas2 = nilai_canvas2 + (1-Math.round((canvas2.data[i]/255)));
+                threshold_pixel2 = threshold_pixel2 + (1-Math.round((canvas2.data[i]/255)));
             }
             if(khusus.data[i]==0){
-                nilai_khusus = nilai_khusus + (1-Math.round((khusus.data[i]/255)));
+                threshold_pixel_khusus = threshold_pixel_khusus + (1-Math.round((khusus.data[i]/255)));
             }
             if(char=="u"){
-                if(nilai_canvas2<=100){
+                if(threshold_pixel2<=100){
                     status=1;
-                }else if (nilai_canvas>=900){
+                }else if (threshold_pixel>=900){
                     status=1;
                 }else{
                     status=0;
                 }
             }else if(char=="t"){
-                if(nilai_canvas2<=70){
+                if(threshold_pixel2<=70){
                     status=1;
                 }else{
                     status=0;
                 }
             }else if(char=="p"){
-                if(nilai_canvas2<=150){
+                if(threshold_pixel2<=150){
                     status=1;
                 }else{
                     status=0;
                 }
             }else if(char=="r"){
-                if(nilai_canvas2<=150){
+                if(threshold_pixel2<=150){
                     status=1;
                 }else{
                     status=0;
                 }
             }else if(char=="n"){
-                if(nilai_canvas2<=140){
+                if(threshold_pixel2<=140){
                     status=1;
                 }else{
                     status=0;
                 }
             }else if(char=="k"){
-                if(nilai_canvas2<=140){
+                if(threshold_pixel2<=140){
                     status=1;
                 }else{
                     status=0;
@@ -504,14 +504,21 @@
             }
             else if(char=="i"){
                 status_khusus=1;
-                if(nilai_khusus<=100){
+                if(threshold_pixel_khusus<=100){
                     status=1;
                 }else{
                     status=0;
                 }
             }
             else if(char=="h"){
-                if(nilai_canvas2<=120){
+                if(threshold_pixel2<=120){
+                    status=1;
+                }else{
+                    status=0;
+                }
+            }
+            else if(char=="a"){
+                if(threshold_pixel2<=120){
                     status=1;
                 }else{
                     status=0;
@@ -519,7 +526,7 @@
             }
             else if(char=="j"){
                 status_khusus=1;
-                if(nilai_khusus<=150){
+                if(threshold_pixel_khusus<=150){
                     status=1;
                 }else{
                     status=0;
@@ -529,7 +536,7 @@
                 status=0;
             }
             if(char!=="i"){
-                if(nilai_canvas>=900){
+                if(threshold_pixel>=900){
                     status=1;
                 }
             }
@@ -539,7 +546,7 @@
             //pemberian threshold
             if(templateData.data[i]==0){
                 batasAtas =  batasAtas + (1-Math.round((templateData.data[i]/255)));
-                batasAtas_ = Math.round(batasAtas*x);
+                threshold_error = Math.round(batasAtas*x);
             }
             if(status!=1 && status_khusus!=1){
                 //template matching
@@ -553,17 +560,17 @@
    
         //console.log(char);
         //console.log(status);
-        console.log(status_khusus);
-        console.log(nilai_khusus);
-        console.log(nilai_canvas2);
-        console.log(nilai_canvas);
+        //console.log(status_khusus);
+        //console.log(threshold_pixel_khusus);
+        //console.log(threshold_pixel2);
+        //console.log(threshold_pixel);
         //console.log(batasAtas);
-        console.log(batasAtas_);
+        console.log(threshold_error);
         console.log(nilai);
 
         //kondisi benar dan salah
         if(status!=1){
-            if(nilai>=batasAtas_){
+            if(nilai>=threshold_error){
                 sound_benar();
                 $("#pop_benar").fadeIn();
                 $("#pop_benar").fadeOut('slow');
@@ -632,7 +639,6 @@
             case "d" :
                 x = 46/100;
                 break;
-            case "a" :
             case "c" :
             case "q" :
                 x = 45/100;
@@ -640,6 +646,7 @@
             case "w" :
                 x = 43.9/100;
                 break;
+            case "a" :
             case "x" :
             case "g" :
             case "m" :

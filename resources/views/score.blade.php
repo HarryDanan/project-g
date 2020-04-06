@@ -35,7 +35,7 @@
       </div>
       <div class="container table-skor">
         <table class="table">
-          <thead style="color:white;font-size:30px;">
+          <thead class="header_table">
             <tr>
                 <td scope="col">NO</td>
                 <td scope="col">NAMA</td>
@@ -44,7 +44,7 @@
 
             </tr>
           </thead>
-          <tbody style="color :white;font-size:30px;">
+          <tbody class="header_table">
             @foreach($score as $s)
             <tr>
                 <td>{{$s->id}}</td>

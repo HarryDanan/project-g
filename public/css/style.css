@@ -397,6 +397,16 @@ z-index: 1;
   height: 100%;
   overflow: hidden; */
 }
+.bg_menu_tutorial {
+  background: url(../assets/icon/bg_tutorial.png) no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  /* margin: 0; 
+  height: 100%;
+  overflow: hidden; */
+}
 
 
 
@@ -450,10 +460,16 @@ z-index: 1;
 
 .input_skor{
   z-index:2;
-  position: fixed;
+  /* position: fixed;
   text-align: center;
   padding-left: 20%;
-  padding-top: 18%;
+  padding-top: 18%; */
+  position: absolute;
+  left: 35%;
+  top: 50%;
+  /* width: 100%; */
+  text-align: center;
+  font-size: 18px;
 }
 
 .skor_modal{
@@ -565,6 +581,14 @@ div.modal-content{
   text-align: center;
   z-index:4;
 }
+#thumbnail.icn_menu{
+  width: 30%;
+  height: 30%;
+}
+.header_table{
+  color:white;
+  font-size:30px;
+}
 @-moz-document url-prefix() {
    @media only screen and (min-width : 668px) and (max-width: 846px){
     /* For mobile phones: */
@@ -626,11 +650,16 @@ div.modal-content{
     }
     .input_skor{
       z-index:2;
-      position: fixed;
+      /* position: fixed;
       text-align: center;
       padding-left: 15%;
-      padding-top: 12%;
+      padding-top: 12%; */
       font-size: 2px;
+      position: absolute;
+      left: 27%;
+      top: 25%;
+      /* width: 100%; */
+      text-align: center;
     }
     .score{
       font-size: 10px;
@@ -671,6 +700,13 @@ div.modal-content{
     .pop_bs{
       height: 13%;
       width: 13%; 
+    }
+    #thumbnail.icn_menu{
+      width: 30%;
+      height: 30%;
+    }
+    .header_table{
+      font-size: 10px;
     }
    }
     /* For mobile phones: */
@@ -733,11 +769,16 @@ div.modal-content{
       }
       .input_skor{
         z-index:2;
-        position: fixed;
+        /* position: fixed;
         text-align: center;
         padding-left: 18%;
-        padding-top: 12%;
+        padding-top: 12%; */
         font-size: 2px;
+        position: absolute;
+        left: 27%;
+        top: 25%;
+        /* width: 100%; */
+        text-align: center;
       }
       .score{
         font-size: 10px;
@@ -778,6 +819,13 @@ div.modal-content{
       .pop_bs{
         height: 13%;
         width: 13%; 
+      }
+      #thumbnail.icn_menu{
+        width: 30%;
+        height: 30%;
+      }
+      .header_table{
+        font-size: 10px;
       }
     
 }

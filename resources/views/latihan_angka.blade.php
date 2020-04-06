@@ -61,7 +61,7 @@
         </div>
         <br><br>
         
-        <div class="bottom_left">
+        <div >
             <div>
                 <img class="bubble" src="{{asset('assets/icon/bubble.png')}}" alt="">
                     <img class="icn_ayo" src="{{asset('assets/icon/ayo.png')}}" alt=""><br>
@@ -103,7 +103,7 @@
         </div>
         </center>
 
-        <div hidden class="row">
+        <div class="row">
             <div class="col-sm-3">
                 <h5>Gambar Template</h5>
                 <canvas width="64" height="64" id='outputTemplate'></canvas>
@@ -407,10 +407,10 @@
     function periksa(){
         //inisialisasi nilai threshold
         var batasAtas=0; 
-        var batasAtas_=0;
-        var threshold = 0;
-        var threshold2 = 0;
-        var threshold_khusus =0;
+        var threshold_error=0;
+        var threshold_pixel = 0;
+        var threshold_pixel2 = 0;
+        var threshold_pixel_khusus =0;
         //inisaslisasi nilai
         var nilai=0;
         var status=0;
@@ -434,43 +434,53 @@
         var templateData = ctx2.getImageData(0,0,64,64);
         var canvas2 = ctx_char.getImageData(0,0,64,64);
         var canvas4 = ctx3.getImageData(0,0,64,64);
-        var khusus = ctx3.getImageData(0,0,64,64);
+        var khusus = ctx_khusus.getImageData(0,0,64,64);
         //template_thinData = ctx3.getImageData(0,0,64,64);
         //countBlob();
         for (var i=0; i<canvas4.data.length; i+=4){
             if(canvas4.data[i]==0){
-                threshold = threshold + (1-Math.round((canvas4.data[i]/255)));
+                threshold_pixel = threshold_pixel + (1-Math.round((canvas4.data[i]/255)));
             }
             if(canvas2.data[i]==0){
-                threshold2 = threshold2 + (1-Math.round((canvas2.data[i]/255)));
+                threshold_pixel2 = threshold_pixel2 + (1-Math.round((canvas2.data[i]/255)));
+            }
+            if(khusus.data[i]==0){
+                threshold_pixel_khusus = threshold_pixel_khusus + (1-Math.round((khusus.data[i]/255)));
             }
             if(char=="3"){
-                if(threshold2<=150){
+                if(threshold_pixel2<=150){
                     status=1;
                 }else{
                     status=0;
                 }
             }else if(char=="5"){
-                if(threshold2<=150){
+                if(threshold_pixel2<=150){
                     status=1;
                 }else{
                     status=0;
                 }
             }else if(char=="7"){
-                if(threshold2<=100){
+                if(threshold_pixel2<=100){
                     status=1;
                 }else{
                     status=0;
                 }
             }else if(char=="8"){
-                if(threshold2<=180){
+                if(threshold_pixel2<=180){
                     status=1;
                 }else{
                     status=0;
                 }
             }
             else if(char=="9"){
-                if(threshold2<=180){
+                if(threshold_pixel2<=180){
+                    status=1;
+                }else{
+                    status=0;
+                }
+            }
+            else if(char=="1"){
+                if(threshold_pixel_khusus<=180){
                     status=1;
                 }else{
                     status=0;
@@ -479,16 +489,16 @@
             else{
                 status=0;
             }
-            if(threshold>=900){
+            if(threshold_pixel>=900){
                 status=1;
             }
         }
         //looping array pixel gambar
         for(var i = 0; i<imgData.data.length; i+=4){
-            //pemberian threshold
+            //pemberian threshold_error
             if(templateData.data[i]==0){
                 batasAtas =  batasAtas + (1-Math.round((templateData.data[i]/255)));
-                batasAtas_ = Math.round(batasAtas*x);
+                threshold_error = Math.round(batasAtas*x);
             }
             if(status!=1){
                 //template matching
@@ -500,17 +510,17 @@
    
         //console.log(char);
         //console.log(status);
-        // console.log(status_khusus);
-        //console.log(threshold_khusus);
-        //console.log(threshold2);
-        //console.log(threshold);
+        //console.log(status_khusus);
+        //console.log(threshold_pixel_khusus);
+        //console.log(threshold_pixel2);
+        //console.log(threshold_pixel);
         //console.log(batasAtas);
-        console.log(batasAtas_);
+        console.log(threshold_error);
         console.log(nilai);
 
         //kondisi benar dan salah
         if(status!=1){
-            if(nilai>=batasAtas_){
+            if(nilai>=threshold_error){
                 sound_benar();
                 $("#pop_benar").fadeIn();
                 $("#pop_benar").fadeOut('slow');
@@ -594,11 +604,12 @@
             case "3" :
                 x = 25/100;
                 break;
+            case "1" :
+                x = 19/100;
+                break;
             case "7" :
                 x = 18/100;
                 break;
-            case "1" :
-                 x = 1.6/100;
             break;
             default :
                 x = 30/100;

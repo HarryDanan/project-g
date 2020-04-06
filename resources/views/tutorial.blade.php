@@ -22,7 +22,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
     <script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
   </head>
-  <body class="bg2">
+  <body class="bg_menu_tutorial">
       <!-- Demo stuff-->
     <div class="loader-wrapper" style="z-index: 99">
         <span class="loader"><span class="loader-inner"></span></span>
@@ -36,10 +36,10 @@
 
     <div class="container" style="padding-top:10%;">
       <center>
-      <div class="card-group">
+      <!-- <div class="card-group">
         <div class="card">
           <a width="1280" height="720" data-fancybox href="hhttps://www.youtube.com/watch?v=BykRCC_kdgY;autoplay=1&amp;rel=0&amp;showinfo=0">
-            <img src="{{asset('assets/thumbnail/thumbnail_angka_2.png')}}" class="card-img-top img-fluid">
+            <img src="{{asset('assets/thumbnail/thumbnail_angka_2V2.png')}}" class="card-img-top img-fluid">
           </a>
           <div class="card-body">
             <h5 class="card-title">Belajar Angka</h5>
@@ -47,7 +47,7 @@
         </div>
         <div class="card">
           <a width="1280" height="720" data-fancybox href="https://www.youtube.com/watch?v=-Yh0WqCFmzs">
-            <img src="{{asset('assets/thumbnail/thumbnail_huruf_2.png')}}" class="card-img-top img-fluid">
+            <img src="{{asset('assets/thumbnail/thumbnail_huruf_2V2.png')}}" class="card-img-top img-fluid">
           </a>
           <div class="card-body">
             <h5 class="card-title">Belajar Huruf</h5>
@@ -55,13 +55,28 @@
         </div>
         <div class="card">
           <a width="1280" height="720" data-fancybox href="https://www.youtube.com/watch?v=aFvhRyIuBNQ&t=24s">
-            <img src="{{asset('assets/thumbnail/thumbnail_huruf2_2.png')}}" class="card-img-top img-fluid">
+            <img src="{{asset('assets/thumbnail/thumbnail_huruf2_2V2.png')}}" class="card-img-top img-fluid">
           </a>
           <div class="card-body">
             <h5 class="card-title">Belajar Huruf 2</h5>
           </div>
         </div>
+      </div> -->
+      <div class="container-fluid">
+          <a width="1280" height="720" data-fancybox href="hhttps://www.youtube.com/watch?v=BykRCC_kdgY;autoplay=1&amp;rel=0&amp;showinfo=0">
+            <img src="{{asset('assets/thumbnail/thumbnail_angka_2V2.png')}}" class="icn_menu" id="thumbnail">
+          </a>
+
+          <a width="1280" height="720" data-fancybox href="https://www.youtube.com/watch?v=-Yh0WqCFmzs">
+            <img src="{{asset('assets/thumbnail/thumbnail_huruf_2V2.png')}}" class="icn_menu" id="thumbnail">
+          </a>
+      
+          <a width="1280" height="720" data-fancybox href="https://www.youtube.com/watch?v=aFvhRyIuBNQ&t=24s">
+            <img src="{{asset('assets/thumbnail/thumbnail_huruf2_2V2.png')}}" class="icn_menu" id="thumbnail">
+          </a>
+        
       </div>
+      
       </center>
     </div>
 

@@ -62,7 +62,7 @@
         </div>
         <br><br>
         
-        <div class="bottom_left">
+        <div >
             <div>
                 <img class="bubble" src="{{asset('assets/icon/bubble.png')}}" alt="">
                     <img class="icn_ayo" src="{{asset('assets/icon/ayo.png')}}" alt=""><br>
@@ -113,7 +113,7 @@
         
 
         <center>
-        <div  class = "grp_periksa">
+        <div class="grp_periksa">
             <a id="check" onclick="btn_s();check_kanvas()"><img class="icn" src="{{asset('assets/icon/btn_periksa.png')}}" alt=""></a>
             <a onclick="btn_s();hapus()"><img class="icn" src="{{asset('assets/icon/btn_hapus.png')}}" alt=""></a>
             
@@ -424,10 +424,10 @@
     function periksa(){
         //inisialisasi nilai threshold
         var batasAtas=0; 
-        var batasAtas_=0;
-        var threshold = 0;
-        var threshold2 = 0;
-        var threshold_khusus = 0;
+        var threshold_error=0;
+        var threshold_pixel = 0;
+        var threshold_pixel2 = 0;
+        var threshold_pixel_khusus = 0;
         var status_khusus =0;
         //inisaslisasi nilai
         var nilai=0;
@@ -457,102 +457,102 @@
         //countBlob();
         for (var i=0; i<canvas4.data.length; i+=4){
             if(canvas4.data[i]==0){
-                threshold = threshold + (1-Math.round((canvas4.data[i]/255)));
+                threshold_pixel = threshold_pixel + (1-Math.round((canvas4.data[i]/255)));
             }
             if(canvas2.data[i]==0){
-                threshold2 = threshold2 + (1-Math.round((canvas2.data[i]/255)));
+                threshold_pixel2 = threshold_pixel2 + (1-Math.round((canvas2.data[i]/255)));
             }
             if(khusus.data[i]==0){
-                threshold_khusus = threshold_khusus + (1-Math.round((khusus.data[i]/255)));
+                threshold_pixel_khusus = threshold_pixel_khusus + (1-Math.round((khusus.data[i]/255)));
             }
             if(char=="f"){
-                if(threshold2<=250){
+                if(threshold_pixel2<=250){
                     status=1;
                 }else{
                     status=0;
                 }
             }else if(char=="g"){
-                if(threshold2<=400){
+                if(threshold_pixel2<=400){
                     status=1;
                 }else{
                     status=0;
                 }
             }
             else if(char=="h"){
-                if(threshold2<=315){
+                if(threshold_pixel2<=315){
                     status=1;
                 }else{
                     status=0;
                 }
             }else if(char=="k"){
-                if(threshold2<=300){
+                if(threshold_pixel2<=300){
                     status=1;
                 }else{
                     status=0;
                 }
             }else if(char=="n"){
-                if(threshold2<=300){
+                if(threshold_pixel2<=300){
                     status=1;
                 }else{
                     status=0;
                 }
             }else if(char=="q"){
-                if(threshold2<=300){
+                if(threshold_pixel2<=300){
                     status=1;
                 }else{
                     status=0;
                 }
             }else if(char=="r"){
-                if(threshold2<=200){
+                if(threshold_pixel2<=200){
                     status=1;
                 }else{
                     status=0;
                 }
             }
             else if(char=="y"){
-                if(threshold2<=150){
+                if(threshold_pixel2<=150){
                     status=1;
                 }else{
                     status=0;
                 }
             }
             else if(char=="z"){
-                if(threshold2<=200){
+                if(threshold_pixel2<=200){
                     status=1;
                 }else{
                     status=0;
                 }
             }
             else if(char=="v"){
-                if(threshold2<=150){
+                if(threshold_pixel2<=150){
                     status=1;
                 }else{
                     status=0;
                 }
             }
             else if(char=="u"){
-                if(threshold2<=350){
+                if(threshold_pixel2<=350){
                     status=1;
                 }else{
                     status=0;
                 }
             }
             else if(char=="t"){
-                if(threshold2<=100){
+                if(threshold_pixel2<=100){
                     status=1;
                 }else{
                     status=0;
                 }
             }
             else if(char=="i"){
-                if(threshold>=1500){
+                if(threshold_pixel>=1500){
                     status=1;
                 }else{
                     status=0;
                 }
             }
             else if(char=="l"){
-                if(threshold_khusus<=150){
+                if(threshold_pixel_khusus<=150){
                     status=1;
                 }else{
                     status=0;
@@ -560,7 +560,7 @@
             }
             else if(char=="j"){
                 status_khusus=1;
-                if(threshold_khusus<=140){
+                if(threshold_pixel_khusus<=140){
                     status=1;
                 }else{
                     status=0;
@@ -571,7 +571,7 @@
             }
             if(char!=="i"){
                 if(char!=="l"){
-                        if(threshold>=900){
+                        if(threshold_pixel>=900){
                             status=1;
                         }
                 }
@@ -580,10 +580,10 @@
         }
         //looping array pixel gambar
         for(var i = 0; i<imgData.data.length; i+=4){
-            //pemberian threshold
+            //pemberian threshold error
             if(templateData.data[i]==0){
                 batasAtas =  batasAtas + (1-Math.round((templateData.data[i]/255)));
-                batasAtas_ = Math.round(batasAtas*x);
+                threshold_error = Math.round(batasAtas*x);
             }
             
             if(status!=1 && status_khusus!=1){
@@ -598,16 +598,16 @@
         //console.log(char);
         //console.log(status);
         //console.log(status_khusus);
-        //console.log(threshold_khusus);
-        //console.log(threshold2);
-        //console.log(threshold);
+        //console.log(threshold_pixel_khusus);
+        //console.log(threshold_pixel2);
+        //console.log(threshold_pixel);
         //console.log(batasAtas);
-        console.log(batasAtas_);
+        console.log(threshold_error);
         console.log(nilai);
 
         //kondisi benar dan salah
         if(status!=1){
-            if(nilai>=batasAtas_){
+            if(nilai>=threshold_error){
                 //sound_benar();
                 $("#pop_benar").fadeIn();
                 $("#pop_benar").fadeOut('slow');
