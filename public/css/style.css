@@ -566,6 +566,10 @@ div.modal-content{
   color : red; 
   padding-left:22%
 }
+#time.score{
+  color : red; 
+  padding-left:22%
+}
 #livecount.score{
   color : white; padding-left:2.2%
 }

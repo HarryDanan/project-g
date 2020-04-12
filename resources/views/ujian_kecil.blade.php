@@ -822,13 +822,16 @@
 
             display.textContent = minutes + ":" + seconds;
 
-            if (--timer < 0) {
-                timer = duration;
+            if(timer!=0){
+        	    --timer;
+            }else{
+                clearTimeout(timer);
                 $('#myModal_waktu').modal({backdrop: 'static', keyboard: false})  
                 $("#myModal_waktu").modal('show');
             }
         }, 1000);
     }
+
 
 
     //score 
