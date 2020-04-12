@@ -591,6 +591,7 @@ div.modal-content{
 }
 @-moz-document url-prefix() {
    @media only screen and (min-width : 668px) and (max-width: 846px){
+    /* default 8 */
     /* For mobile phones: */
 
     /* max-width : 812 */
@@ -619,7 +620,7 @@ div.modal-content{
       width: 40%;
     }
     .papan_template_ujian{
-      width: 40%;
+      width: 10%;
     }
     .isi_bubble {
       bottom: 43%;
@@ -792,6 +793,9 @@ div.modal-content{
         padding-left:10%
       }
       #countdown.score{ 
+        padding-left:23%
+      }
+      #time.score{ 
         padding-left:23%
       }
     

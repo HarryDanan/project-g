@@ -103,7 +103,7 @@
         </div>
         </center>
 
-        <div class="row">
+        <div hidden class="row">
             <div class="col-sm-3">
                 <h5>Gambar Template</h5>
                 <canvas width="64" height="64" id='outputTemplate'></canvas>

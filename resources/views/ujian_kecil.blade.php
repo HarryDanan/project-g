@@ -36,9 +36,10 @@
             <div class="container-fluid" style="background :url(../assets/icon/bgnav.png);  position:fixed; z-index:-1; height:13%;"></div>     
             
             <div class="menua">
-                <a href="" class ="score" id="livecount" style="color : white; padding-top:2.2%; padding-left:2.2%"></a>
-                <a href="" class ="score" id="score" style="color : #00bfff; padding-top:2.2%; padding-left:10%"></a>
-                <a href="" class ="score" id="countdown" style="color : red; padding-top:2.2%; padding-left:22%"></a>
+                <a href="" class ="score" id="livecount" style=""></a>
+                <a href="" class ="score" id="score" style=""></a>
+                {{-- <a href="" class ="score" id="countdown" style=""></a> --}}
+                <a href="" class ="score" id="time">05:00</a>
 
                 <a href="" ><img class=" icn_darah" src="{{asset('assets/icon/darah.png')}}" alt=""></a>
                 <a href="" ><img class=" icn_sw" src="{{asset('assets/icon/icon_skor.png')}}" alt=""></a>
@@ -794,20 +795,39 @@
     }
 
     // waktu
-    var elem = document.getElementById('countdown');
-    var timerId = setInterval(countdown, 10);
-    function countdown() {
-        if (timeLeft == -1) {
-            clearTimeout(timerId);
-            // alert("Waktu Habis");
-            // call_modal_waktu();
-            $('#myModal_waktu').modal({backdrop: 'static', keyboard: false})  
-            $("#myModal_waktu").modal('show');
+    // var elem = document.getElementById('countdown');
+    // var timerId = setInterval(countdown, 100);
+    // function countdown() {
+    //     if (timeLeft == -1) {
+    //         clearTimeout(timerId);
+    //         // alert("Waktu Habis");
+    //         // call_modal_waktu();
+    //         $('#myModal_waktu').modal({backdrop: 'static', keyboard: false})  
+    //         $("#myModal_waktu").modal('show');
             
-        } else {
-            elem.innerHTML = timeLeft;
-            timeLeft--;
-        }
+    //     } else {
+    //         elem.innerHTML = timeLeft;
+    //         timeLeft--;
+    //     }
+    // }
+
+    function startTimer(duration, display) {
+        var timer = duration, minutes, seconds;
+        setInterval(function () {
+            minutes = parseInt(timer / 60, 10);
+            seconds = parseInt(timer % 60, 10);
+
+            minutes = minutes < 10 ? "0" + minutes : minutes;
+            seconds = seconds < 10 ? "0" + seconds : seconds;
+
+            display.textContent = minutes + ":" + seconds;
+
+            if (--timer < 0) {
+                timer = duration;
+                $('#myModal_waktu').modal({backdrop: 'static', keyboard: false})  
+                $("#myModal_waktu").modal('show');
+            }
+        }, 1000);
     }
 
 
