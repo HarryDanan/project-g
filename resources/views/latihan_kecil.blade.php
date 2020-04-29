@@ -35,10 +35,10 @@
             <a href="/menu" onclick="btn_s()"><img class="icn2" src="{{asset('assets/icon/back.png')}}" alt="" style="position:fixed;"></a>
 
             <div class="container-fluid" style="background :url(../assets/icon/bgnav.png);  position:fixed; z-index:-1; height:13%;"></div>
-            <div class="top_right">
+            <!-- <div class="top_right">
                 <a href="#" id="btn_ubah"onclick=""><img class=" btn_bantuan" src="{{asset('assets/icon/btn_bantuan.png')}}" alt=""></a>
                 <a href="#" onclick="" ><img class=" btn_bantuan" src="{{asset('assets/icon/btn_helpper.png')}}" alt=""></a>
-            </div>     
+            </div>      -->
             <div>
                 <center>
                     <img class="icn_logo" src="{{asset('assets/icon/logo_h_b.png')}}" alt=""></h3>

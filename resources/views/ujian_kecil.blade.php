@@ -31,7 +31,7 @@
 
         <div>
 
-            <a href="/menu" onclick="btn_s()"><img class="icn2" src="{{asset('assets/icon/back.png')}}" alt="" style="position:fixed;"></a>
+            <a href="/menu_ujian" onclick="btn_s()"><img class="icn2" src="{{asset('assets/icon/back.png')}}" alt="" style="position:fixed;"></a>
 
             <div class="container-fluid" style="background :url(../assets/icon/bgnav.png);  position:fixed; z-index:-1; height:13%;"></div>     
             
@@ -45,10 +45,10 @@
                 <a href="" ><img class=" icn_sw" src="{{asset('assets/icon/icon_skor.png')}}" alt=""></a>
                 <a href="" ><img class=" icn_sw" src="{{asset('assets/icon/icon_waktu.png')}}" alt=""></a>
             </div>
-            <div class="top_right">
+            <!-- <div class="top_right">
                 <a href="#" id="btn_ubah"onclick="btn_s()"><img class=" btn_bantuan" src="{{asset('assets/icon/btn_bantuan.png')}}" alt=""></a>
                 <a href="$" ><img class=" btn_bantuan" src="{{asset('assets/icon/btn_helpper.png')}}" alt=""></a>
-            </div>    
+            </div>     -->
             <div>
                 <center>
                     <img class="icn_logo" src="{{asset('assets/icon/logo_h_b.png')}}" alt=""></h3>
@@ -66,8 +66,8 @@
 
         <div class="d-flex justify-content-center">
             <img class="papan" src="{{asset('assets/icon/papan.png')}}" alt="">
-            <canvas id="gambar" width="192" height="192" style=" top :40%; position:absolute; border:2px solid #000000;z-index:2"></canvas>
-            <img id="srcImage3" src="" width="190" height="190" style="z-index:1;position :absolute;top:40.5%;display:none;opacity: 0.5;">
+            <canvas class="kanvas_template"id="gambar" width="192" height="192" ></canvas>
+            <img class="kanvas_contoh"id="srcImage3" src="" width="190" height="190" >
         </div>
         <br><br>
 
@@ -78,21 +78,21 @@
                     <div class="isi_bubble">
                         <center>
                         <div>
-                            <img id="srcImage2" src="" width="64" height="64">
+                            <img class="papan_template" id="srcImage2" src="" style="padding-bottom:35%">
                         </div>
                         </center>
                     </div>
             </div>
             
             <br>
-           
+
         </div>
         <div>
             <img class="icn_anak" src="{{asset('assets/icon/anak.png')}}" alt=""></h3>
         </div>
 
         <center>
-        <div  class="grp_periksa">
+        <div class="grp_periksa">
             <a id="check" onclick="btn_s()"><img class="icn" src="{{asset('assets/icon/btn_periksa.png')}}" alt=""></a>
             <a onclick="btn_s();hapus()"><img class="icn" src="{{asset('assets/icon/btn_hapus.png')}}" alt=""></a>
             <img src="" alt="">
@@ -160,7 +160,7 @@
                     
                 </div>
                 <div class="container" style="text-align:center">
-                     <a href="/menu" onclick="btn_s()" data-target="#myModal_skor" data-toggle="modal" data-dismiss="modal" ><img  style ="width:45%;" src="{{asset('assets/icon/btn_lihat_skor.png')}}" alt=""></a>
+                     <a href="/menu" onclick="btn_s()" data-target="#myModal_skor" data-toggle="modal" data-dismiss="modal" ><img  class="btn_pop_up" src="{{asset('assets/icon/btn_lihat_skor.png')}}" alt=""></a>
                 </div>
             </div>
         </div>
@@ -171,9 +171,9 @@
             <div class="modal-dialog modal-lg modal-dialog-centered">
                 <!-- Modal content-->
                 <div class="modal-content">
-                    <div class="container">
+                    <!-- <div class="container">
                         <img onclick="btn_s()"class="close_modal" src="{{asset('assets/icon/close_btn.png')}}" data-dismiss="modal" alt="">&times;</img>
-                    </div>
+                    </div> -->
                     <div style="position:relative;">
                         <div class="input_skor">
                         <div id="display"></div>
@@ -181,15 +181,15 @@
                                 {{ csrf_field() }}
                                 <h1 class='skorbox' id='skorbox'></h1>
                                 <input class="form-control" type="text" name="nilai"id="scoreinput" disabled hidden><br>
-                                <input class="form-control" type="text" name="tipe"id="tipe" value="Huruf kecil" disabled hidden><br>
+                                <input class="form-control" type="text" name="tipe"id="tipe" value="Huruf Kecil" disabled hidden><br>
                                 <input class="form-control" type="text" name="nama" style="text-align:center;"placeholder="Nama"><br>
                             </form>
                         </div>
                         <img class="skor_modal"  src="{{asset('assets/icon/skor_modal.png')}}" alt="">
                     </div>
                     <div class="grp_btn_skor" style="padding-left:10%;">
-                        <a href="/menu_ujian" id="submit" onclick="btn_s()"><img class="btn_pop_up" src="{{asset('assets/icon/btn_ulang.png')}}" alt=""></a>
-                        <a href="/" onclick="btn_s()"><img style ="width:45%;" src="{{asset('assets/icon/btn_keluar.png')}}" alt=""></a>
+                        <a href="/ujian_kecil" id="submit" onclick="btn_s()"><img class="btn_pop_up" src="{{asset('assets/icon/btn_ulang.png')}}" alt=""></a>
+                        <a href="/menu_ujian" onclick="btn_s()"><img class="btn_pop_up" src="{{asset('assets/icon/btn_keluar.png')}}" alt=""></a>
                     </div>
                 </div>
             </div>
@@ -197,45 +197,45 @@
         <!-- modal carousel -->
 
         <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-lg modal-dialog-centered">
-            <div class="modal-content">
-                <div id="demo" class="carousel slide" data-interval="false" data-ride="carousel">
-    
-                <!-- Indicators -->
-                <ul class="carousel-indicators">
-                    <li data-target="#demo" data-slide-to="0" class="active"></li>
-                    <li data-target="#demo" data-slide-to="1"></li>
-                    <li data-target="#demo" data-slide-to="2"></li>
-                </ul>
-                <center>
-                <!-- The slideshow -->
-                    <div class="carousel-inner">
-                    <div class="carousel-item active">
-                        <img src="{{asset('assets/icon/back.png')}}" alt="Los Angeles">
+                <div class="modal-dialog modal-lg modal-dialog-centered">
+                <div class="modal-content">
+                    <div id="demo" class="carousel slide" data-interval="false" data-ride="carousel">
+        
+                    <!-- Indicators -->
+                    <ul class="carousel-indicators">
+                        <li data-target="#demo" data-slide-to="0" class="active"></li>
+                        <li data-target="#demo" data-slide-to="1"></li>
+                        <li data-target="#demo" data-slide-to="2"></li>
+                    </ul>
+                    <center>
+                    <!-- The slideshow -->
+                        <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <img src="{{asset('assets/icon/back.png')}}" alt="Los Angeles">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="{{asset('assets/icon/back.png')}}" alt="Chicago">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="{{asset('assets/icon/back.png')}}" alt="New York"><br>
+                            <a href="/latihan" onclick="btn_s()"><img  class="icn" src="{{asset('assets/icon/btn_mulai.png')}}" alt=""></a>
+                        </div>
+                        </div>
+        
+                        <!-- Left and right controls -->
+                        <a class="carousel-control-prev" href="#demo" data-slide="prev">
+                        <img style="width:25%;" src="{{asset('assets/icon/btn_back.png')}}">
+                        </a>
+                        <a class="carousel-control-next" href="#demo" data-slide="next">
+                        <img style="width:25%;"src="{{asset('assets/icon/btn_next.png')}}">
+                        </a>
+                    </center>
                     </div>
-                    <div class="carousel-item">
-                        <img src="{{asset('assets/icon/back.png')}}" alt="Chicago">
-                    </div>
-                    <div class="carousel-item">
-                        <img src="{{asset('assets/icon/back.png')}}" alt="New York"><br>
-                        <a href="/latihan" onclick="btn_s()"><img  class="icn" src="{{asset('assets/icon/btn_mulai.png')}}" alt=""></a>
-                    </div>
-                    </div>
-    
-                    <!-- Left and right controls -->
-                    <a class="carousel-control-prev" href="#demo" data-slide="prev">
-                    <img style="width:25%;"src="{{asset('assets/icon/btn_back.png')}}">
-                    </a>
-                    <a class="carousel-control-next" href="#demo" data-slide="next">
-                    <img style="width:25%;"src="{{asset('assets/icon/btn_next.png')}}">
-                    </a>
-                </center>
+                </div>
                 </div>
             </div>
-            </div>
-        </div>
-
-        {{-- end modal carousel --}}
+    
+        
 </body>
 
      
@@ -258,7 +258,7 @@
     var sound = document.getElementById('btn-s');
     var sound_b = document.getElementById('btn-benar');
     var sound_s = document.getElementById('btn-salah');
-    document.getElementById("tipe").value = "Huruf kecil";
+    document.getElementById("tipe").value = "Huruf Kecil";
 
     // sound end
 
@@ -356,12 +356,12 @@
         var kanvas = document.getElementById('outputCanvas2');
         var kanvas2 = document.getElementById('outputCanvas2');
         var kanvas3 = document.getElementById('outputCanvas4');
+
         //ambil data 2d template
-        var ctx3 = kanvas.getContext('2d');
         var ctx = kanvas2.getContext('2d');
-       //ambil data pixel array template
-        var kanvasData = ctx3.getImageData(0,0,64,64);
         var blobKanvas = ctx.getImageData(0,0,64,64);
+       //ambil data pixel array template
+        //var kanvasData = ctx3.getImageData(0,0,64,64);
         //proses resize
         //ambil data gambar dari canvas
         let src = cv.imread(document.getElementById("gambar"));
@@ -383,7 +383,7 @@
         //normalisasi warna template
         colorTemplate(cv.imread('outputTemplate'),dst);
         //thinning template
-        templateThinning(kanvas_template);
+        templateThinning2(kanvas_template);
         check_path();
    
     }
@@ -488,16 +488,17 @@
     var threshold_pixel2 = 0;
     var threshold_pixel_khusus = 0;
     var status_khusus =0;
-     //inisaslisasi nilai
     var nilai=0;
     var status=0;
-    var char= document.getElementById('masuk').value;
+    //var char= document.getElementById('masuk').value;
+ 
 
     var kanvas2 = document.getElementById('outputCanvas3');
-    var kanvas3 = document.getElementById('outputTemplate'); 
+    var kanvas3 = document.getElementById('outputTemplate');
     var kanvas4 = document.getElementById('outputCanvas4');
     var check_char = document.getElementById('outputKhusus');
-    var check_khusus = document.getElementById('outputCanvas2');
+    var check_khusus = document.getElementById('outputCanvas2'); 
+
 
     var ctx = kanvas2.getContext('2d');
     var ctx2 = kanvas3.getContext('2d');
@@ -507,8 +508,8 @@
     
     var imgData = ctx.getImageData(0,0,64,64);
     var templateData = ctx2.getImageData(0,0,64,64);
-    var canvas4 = ctx3.getImageData(0,0,64,64);
     var canvas2 = ctx_char.getImageData(0,0,64,64);
+    var canvas4 = ctx3.getImageData(0,0,64,64);
     var khusus = ctx_khusus.getImageData(0,0,64,64);
 
     
@@ -522,100 +523,100 @@
             if(khusus.data[i]==0){
                 threshold_pixel_khusus = threshold_pixel_khusus + (1-Math.round((khusus.data[i]/255)));
             }
-            if(char=="f"){
+            if(input=="f"){
                 if(threshold_pixel2<=250){
                     status=1;
                 }else{
                     status=0;
                 }
-            }else if(char=="g"){
+            }else if(input=="g"){
                 if(threshold_pixel2<=400){
                     status=1;
                 }else{
                     status=0;
                 }
             }
-            else if(char=="h"){
+            else if(input=="h"){
                 if(threshold_pixel2<=315){
                     status=1;
                 }else{
                     status=0;
                 }
-            }else if(char=="k"){
+            }else if(input=="k"){
                 if(threshold_pixel2<=300){
                     status=1;
                 }else{
                     status=0;
                 }
-            }else if(char=="n"){
+            }else if(input=="n"){
                 if(threshold_pixel2<=300){
                     status=1;
                 }else{
                     status=0;
                 }
-            }else if(char=="q"){
+            }else if(input=="q"){
                 if(threshold_pixel2<=300){
                     status=1;
                 }else{
                     status=0;
                 }
-            }else if(char=="r"){
+            }else if(input=="r"){
                 if(threshold_pixel2<=200){
                     status=1;
                 }else{
                     status=0;
                 }
             }
-            else if(char=="y"){
+            else if(input=="y"){
                 if(threshold_pixel2<=150){
                     status=1;
                 }else{
                     status=0;
                 }
             }
-            else if(char=="z"){
+            else if(input=="z"){
                 if(threshold_pixel2<=200){
                     status=1;
                 }else{
                     status=0;
                 }
             }
-            else if(char=="v"){
+            else if(input=="v"){
                 if(threshold_pixel2<=150){
                     status=1;
                 }else{
                     status=0;
                 }
             }
-            else if(char=="u"){
+            else if(input=="u"){
                 if(threshold_pixel2<=350){
                     status=1;
                 }else{
                     status=0;
                 }
             }
-            else if(char=="t"){
+            else if(input=="t"){
                 if(threshold_pixel2<=100){
                     status=1;
                 }else{
                     status=0;
                 }
             }
-            else if(char=="i"){
+            else if(input=="i"){
                 if(threshold_pixel>=1500){
                     status=1;
                 }else{
                     status=0;
                 }
             }
-            else if(char=="l"){
+            else if(input=="l"){
                 if(threshold_pixel_khusus<=150){
                     status=1;
                 }else{
                     status=0;
                 }
             }
-            else if(char=="j"){
+            else if(input=="j"){
                 status_khusus=1;
                 if(threshold_pixel_khusus<=140){
                     status=1;
@@ -626,8 +627,8 @@
             else{
                 status=0;
             }
-            if(char!=="i"){
-                if(char!=="l"){
+            if(input!=="i"){
+                if(input!=="l"){
                         if(threshold_pixel>=900){
                             status=1;
                         }
@@ -637,7 +638,7 @@
         }
         //looping array pixel gambar
         for(var i = 0; i<imgData.data.length; i+=4){
-            //pemberian threshold
+            //pemberian threshold error
             if(templateData.data[i]==0){
                 batasAtas =  batasAtas + (1-Math.round((templateData.data[i]/255)));
                 threshold_error = Math.round(batasAtas*x);
@@ -652,7 +653,8 @@
             }
                 
         }
-        //console.log(char);
+   
+        //console.log(input);
         //console.log(status);
         //console.log(status_khusus);
         //console.log(threshold_pixel_khusus);
@@ -661,7 +663,8 @@
         //console.log(batasAtas);
         console.log(threshold_error);
         console.log(nilai);
-    //if(nilai>=(batasAtas*80/100)){a
+
+    //if(nilai>=(batasAtas*80/100)){
     if(status!=1){
         if(nilai>=threshold_error){
             sound_benar();
@@ -678,7 +681,7 @@
             // alert("Salah");
             $("#pop_salah").fadeIn();
             $("#pop_salah").fadeOut('slow');
-            //hapus();
+            hapus();
         }
         status=0;
         status_khusus=0;
@@ -687,7 +690,7 @@
         liveleft--;
         // alert("Salah");
         $("#pop_salah").fadeIn();
-        $("#pop_salah").fadeOut('slow');
+        $("#pop_salah").fadeOut('slow');       
     }
     if(soal==10){
         $('#myModal_skor').modal({backdrop: 'static', keyboard: false})  
@@ -699,7 +702,6 @@
         document.getElementById("srcImage3").src = "../../template/contoh_kecil/"+input+".jpg";
         draw_contoh();
         switch_threshold();
-        
 	}
 
     function switch_threshold (){
@@ -796,7 +798,7 @@
 
     // waktu
     // var elem = document.getElementById('countdown');
-    // var timerId = setInterval(countdown, 100);
+    // var timerId = setInterval(countdown, 10);
     // function countdown() {
     //     if (timeLeft == -1) {
     //         clearTimeout(timerId);
@@ -832,6 +834,11 @@
         }, 1000);
     }
 
+    window.onload = function () {
+        var fiveMinutes = 60 * 5,
+            display = document.querySelector('#time');
+        startTimer(fiveMinutes, display);
+    };
 
 
     //score 

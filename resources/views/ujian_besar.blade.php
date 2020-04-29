@@ -31,7 +31,7 @@
 
         <div>
 
-            <a href="/menu" onclick="btn_s()"><img class="icn2" src="{{asset('assets/icon/back.png')}}" alt="" style="position:fixed;"></a>
+            <a href="/menu_ujian" onclick="btn_s()"><img class="icn2" src="{{asset('assets/icon/back.png')}}" alt="" style="position:fixed;"></a>
 
             <div class="container-fluid" style="background :url(../assets/icon/bgnav.png);  position:fixed; z-index:-1; height:13%;"></div>     
             
@@ -188,8 +188,8 @@
                         <img class="skor_modal"  src="{{asset('assets/icon/skor_modal.png')}}" alt="">
                     </div>
                     <div class="grp_btn_skor" style="padding-left:10%;">
-                        <a href="/menu_ujian" id="submit" onclick="btn_s()"><img class="btn_pop_up" src="{{asset('assets/icon/btn_ulang.png')}}" alt=""></a>
-                        <a href="/" onclick="btn_s()"><img class="btn_pop_up" src="{{asset('assets/icon/btn_keluar.png')}}" alt=""></a>
+                        <a href="/ujian_besar" id="submit" onclick="btn_s()"><img class="btn_pop_up" src="{{asset('assets/icon/btn_ulang.png')}}" alt=""></a>
+                        <a href="/menu_ujian" onclick="btn_s()"><img class="btn_pop_up" src="{{asset('assets/icon/btn_keluar.png')}}" alt=""></a>
                     </div>
                 </div>
             </div>
@@ -361,7 +361,7 @@
         var ctx = kanvas2.getContext('2d');
         var blobKanvas = ctx.getImageData(0,0,64,64);
        //ambil data pixel array template
-        var kanvasData = ctx3.getImageData(0,0,64,64);
+        //var kanvasData = ctx3.getImageData(0,0,64,64);
         //proses resize
         //ambil data gambar dari canvas
         let src = cv.imread(document.getElementById("gambar"));
@@ -490,7 +490,7 @@
     var status_khusus =0;
     var nilai=0;
     var status=0;
-    var char= document.getElementById('masuk').value;
+    //var char= document.getElementById('masuk').value;
  
 
     var kanvas2 = document.getElementById('outputCanvas3');
@@ -523,7 +523,7 @@
             if(khusus.data[i]==0){
                 threshold_pixel_khusus = threshold_pixel_khusus + (1-Math.round((khusus.data[i]/255)));
             }
-            if(char=="u"){
+            if(input=="u"){
                 if(threshold_pixel2<=100){
                     status=1;
                 }else if (threshold_pixel>=900){
@@ -531,38 +531,38 @@
                 }else{
                     status=0;
                 }
-            }else if(char=="t"){
+            }else if(input=="t"){
                 if(threshold_pixel2<=70){
                     status=1;
                 }else{
                     status=0;
                 }
-            }else if(char=="p"){
+            }else if(input=="p"){
                 if(threshold_pixel2<=150){
                     status=1;
                 }else{
                     status=0;
                 }
-            }else if(char=="r"){
+            }else if(input=="r"){
                 if(threshold_pixel2<=150){
                     status=1;
                 }else{
                     status=0;
                 }
-            }else if(char=="n"){
+            }else if(input=="n"){
                 if(threshold_pixel2<=140){
                     status=1;
                 }else{
                     status=0;
                 }
-            }else if(char=="k"){
+            }else if(input=="k"){
                 if(threshold_pixel2<=140){
                     status=1;
                 }else{
                     status=0;
                 }
             }
-            else if(char=="i"){
+            else if(input=="i"){
                 status_khusus=1;
                 if(threshold_pixel_khusus<=100){
                     status=1;
@@ -570,21 +570,21 @@
                     status=0;
                 }
             }
-            else if(char=="h"){
+            else if(input=="h"){
                 if(threshold_pixel2<=120){
                     status=1;
                 }else{
                     status=0;
                 }
             }
-            else if(char=="a"){
+            else if(input=="a"){
                 if(threshold_pixel2<=120){
                     status=1;
                 }else{
                     status=0;
                 }
             }
-            else if(char=="j"){
+            else if(input=="j"){
                 status_khusus=1;
                 if(threshold_pixel_khusus<=150){
                     status=1;
@@ -595,7 +595,7 @@
             else{
                 status=0;
             }
-            if(char!=="i"){
+            if(input!=="i"){
                 if(threshold_pixel>=900){
                     status=1;
                 }
@@ -645,7 +645,7 @@
             // alert("Salah");
             $("#pop_salah").fadeIn();
             $("#pop_salah").fadeOut('slow');
-            //hapus();
+            hapus();
         }
         status=0;
         status_khusus=0;
@@ -794,11 +794,6 @@
 
             display.textContent = minutes + ":" + seconds;
 
-            if (--timer < 0) {
-                timer = duration;
-                $('#myModal_waktu').modal({backdrop: 'static', keyboard: false})  
-                $("#myModal_waktu").modal('show');
-            }
             if(timer!=0){
         	    --timer;
             }else{

@@ -31,7 +31,7 @@
 
         <div>
 
-            <a href="/menu" onclick="btn_s()"><img class="icn2" src="{{asset('assets/icon/back.png')}}" alt="" style="position:fixed;"></a>
+            <a href="/menu_ujian" onclick="btn_s()"><img class="icn2" src="{{asset('assets/icon/back.png')}}" alt="" style="position:fixed;"></a>
 
             <div class="container-fluid" style="background :url(../assets/icon/bgnav.png);  position:fixed; z-index:-1; height:13%;"></div>     
             
@@ -45,10 +45,10 @@
                 <a href="" ><img class=" icn_sw" src="{{asset('assets/icon/icon_skor.png')}}" alt=""></a>
                 <a href="" ><img class=" icn_sw" src="{{asset('assets/icon/icon_waktu.png')}}" alt=""></a>
             </div>
-            <div class="top_right">
+            <!-- <div class="top_right">
                 <a href="#" id="btn_ubah"onclick="btn_s()"><img class=" btn_bantuan" src="{{asset('assets/icon/btn_bantuan.png')}}" alt=""></a>
                 <a href="$" ><img class=" btn_bantuan" src="{{asset('assets/icon/btn_helpper.png')}}" alt=""></a>
-            </div>    
+            </div>     -->
             <div>
                 <center>
                     <img class="icn_logo" src="{{asset('assets/icon/logo_h_b.png')}}" alt=""></h3>
@@ -63,10 +63,11 @@
                 <img  id="pop_contoh" style="display:none; position:fixed" class="pop_bs" src="{{asset('assets/icon/pop_contoh.png')}}" alt="">
             </div>
         </div>
+
         <div class="d-flex justify-content-center">
             <img class="papan" src="{{asset('assets/icon/papan.png')}}" alt="">
-            <canvas id="gambar" width="192" height="192" style=" top :40%; position:absolute; border:2px solid #000000;z-index:2"></canvas>
-            <img id="srcImage3" src="" width="190" height="190" style="z-index:1;position :absolute;top:40.5%;display:none;opacity: 0.5;">
+            <canvas class="kanvas_template"id="gambar" width="192" height="192" ></canvas>
+            <img class="kanvas_contoh"id="srcImage3" src="" width="190" height="190" >
         </div>
         <br><br>
 
@@ -77,7 +78,7 @@
                     <div class="isi_bubble">
                         <center>
                         <div>
-                            <img id="srcImage2" src="" width="64" height="64">
+                            <img class="papan_template" id="srcImage2" src="" style="padding-bottom:35%">
                         </div>
                         </center>
                     </div>
@@ -91,9 +92,10 @@
         </div>
 
         <center>
-        <div  class="grp_periksa">
+        <div class="grp_periksa">
             <a id="check" onclick="btn_s()"><img class="icn" src="{{asset('assets/icon/btn_periksa.png')}}" alt=""></a>
             <a onclick="btn_s();hapus()"><img class="icn" src="{{asset('assets/icon/btn_hapus.png')}}" alt=""></a>
+            <img src="" alt="">
         </div>
         </center>
 
@@ -169,9 +171,9 @@
             <div class="modal-dialog modal-lg modal-dialog-centered">
                 <!-- Modal content-->
                 <div class="modal-content">
-                    <div class="container">
+                    <!-- <div class="container">
                         <img onclick="btn_s()"class="close_modal" src="{{asset('assets/icon/close_btn.png')}}" data-dismiss="modal" alt="">&times;</img>
-                    </div>
+                    </div> -->
                     <div style="position:relative;">
                         <div class="input_skor">
                         <div id="display"></div>
@@ -185,9 +187,9 @@
                         </div>
                         <img class="skor_modal"  src="{{asset('assets/icon/skor_modal.png')}}" alt="">
                     </div>
-                    <div class="grp_btn_skor">
-                        <a href="/menu_ujian" id="submit" onclick="btn_s()"><img  class="btn_pop_up" src="{{asset('assets/icon/btn_ulang.png')}}" alt=""></a>
-                        <a href="/" onclick="btn_s()"><img class="btn_pop_up" src="{{asset('assets/icon/btn_keluar.png')}}" alt=""></a>
+                    <div class="grp_btn_skor" style="padding-left:10%;">
+                        <a href="/ujian_angka" id="submit" onclick="btn_s()"><img class="btn_pop_up" src="{{asset('assets/icon/btn_ulang.png')}}" alt=""></a>
+                        <a href="/menu_ujian" onclick="btn_s()"><img class="btn_pop_up" src="{{asset('assets/icon/btn_keluar.png')}}" alt=""></a>
                     </div>
                 </div>
             </div>
@@ -195,45 +197,45 @@
         <!-- modal carousel -->
 
         <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-lg modal-dialog-centered">
-            <div class="modal-content">
-                <div id="demo" class="carousel slide" data-interval="false" data-ride="carousel">
-    
-                <!-- Indicators -->
-                <ul class="carousel-indicators">
-                    <li data-target="#demo" data-slide-to="0" class="active"></li>
-                    <li data-target="#demo" data-slide-to="1"></li>
-                    <li data-target="#demo" data-slide-to="2"></li>
-                </ul>
-                <center>
-                <!-- The slideshow -->
-                    <div class="carousel-inner">
-                    <div class="carousel-item active">
-                        <img src="{{asset('assets/icon/back.png')}}" alt="Los Angeles">
+                <div class="modal-dialog modal-lg modal-dialog-centered">
+                <div class="modal-content">
+                    <div id="demo" class="carousel slide" data-interval="false" data-ride="carousel">
+        
+                    <!-- Indicators -->
+                    <ul class="carousel-indicators">
+                        <li data-target="#demo" data-slide-to="0" class="active"></li>
+                        <li data-target="#demo" data-slide-to="1"></li>
+                        <li data-target="#demo" data-slide-to="2"></li>
+                    </ul>
+                    <center>
+                    <!-- The slideshow -->
+                        <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <img src="{{asset('assets/icon/back.png')}}" alt="Los Angeles">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="{{asset('assets/icon/back.png')}}" alt="Chicago">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="{{asset('assets/icon/back.png')}}" alt="New York"><br>
+                            <a href="/latihan" onclick="btn_s()"><img  class="icn" src="{{asset('assets/icon/btn_mulai.png')}}" alt=""></a>
+                        </div>
+                        </div>
+        
+                        <!-- Left and right controls -->
+                        <a class="carousel-control-prev" href="#demo" data-slide="prev">
+                        <img style="width:25%;" src="{{asset('assets/icon/btn_back.png')}}">
+                        </a>
+                        <a class="carousel-control-next" href="#demo" data-slide="next">
+                        <img style="width:25%;"src="{{asset('assets/icon/btn_next.png')}}">
+                        </a>
+                    </center>
                     </div>
-                    <div class="carousel-item">
-                        <img src="{{asset('assets/icon/back.png')}}" alt="Chicago">
-                    </div>
-                    <div class="carousel-item">
-                        <img src="{{asset('assets/icon/back.png')}}" alt="New York"><br>
-                        <a href="/latihan" onclick="btn_s()"><img  class="icn" src="{{asset('assets/icon/btn_mulai.png')}}" alt=""></a>
-                    </div>
-                    </div>
-    
-                    <!-- Left and right controls -->
-                    <a class="carousel-control-prev" href="#demo" data-slide="prev">
-                    <img style="width:25%;"src="{{asset('assets/icon/btn_back.png')}}">
-                    </a>
-                    <a class="carousel-control-next" href="#demo" data-slide="next">
-                    <img style="width:25%;"src="{{asset('assets/icon/btn_next.png')}}">
-                    </a>
-                </center>
+                </div>
                 </div>
             </div>
-            </div>
-        </div>
-
     
+        
 </body>
 
      
@@ -282,8 +284,8 @@
 
     // var score =0;
     // var input = document.getElementById("masuk").value;
-    var huruf = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"];
-    var input = huruf[Math.floor(Math.random() * 26)];
+    var huruf = ["0","1","2","3","4","5","6","7","8","9"];
+    var input = huruf[Math.floor(Math.random() * 10)];
     var soal = 0;
     var timeLeft = 120; //setting timer
     var liveleft = 3; //setting jumlah nyawa
@@ -354,12 +356,12 @@
         var kanvas = document.getElementById('outputCanvas2');
         var kanvas2 = document.getElementById('outputCanvas2');
         var kanvas3 = document.getElementById('outputCanvas4');
+
         //ambil data 2d template
-        var ctx3 = kanvas.getContext('2d');   
         var ctx = kanvas2.getContext('2d');
-       //ambil data pixel array template
-        var kanvasData = ctx3.getImageData(0,0,64,64);
         var blobKanvas = ctx.getImageData(0,0,64,64);
+       //ambil data pixel array template
+        //var kanvasData = ctx3.getImageData(0,0,64,64);
         //proses resize
         //ambil data gambar dari canvas
         let src = cv.imread(document.getElementById("gambar"));
@@ -381,7 +383,7 @@
         //normalisasi warna template
         colorTemplate(cv.imread('outputTemplate'),dst);
         //thinning template
-        templateThinning(kanvas_template);
+        templateThinning2(kanvas_template);
         check_path();
    
     }
@@ -484,30 +486,31 @@
     var threshold_error=0;
     var threshold_pixel = 0;
     var threshold_pixel2 = 0;
-    var threshold_pixel_khusus =0;
-    //inisaslisasi nilai
+    var threshold_pixel_khusus = 0;
+    var status_khusus =0;
     var nilai=0;
     var status=0;
-    var char= document.getElementById('masuk').value;
+    //var char= document.getElementById('masuk').value;
+ 
 
     var kanvas2 = document.getElementById('outputCanvas3');
-    var kanvas3 = document.getElementById('outputTemplate'); 
+    var kanvas3 = document.getElementById('outputTemplate');
     var kanvas4 = document.getElementById('outputCanvas4');
     var check_char = document.getElementById('outputKhusus');
-    var check_khusus = document.getElementById('outputCanvas2');
+    var check_khusus = document.getElementById('outputCanvas2'); 
 
-    //ambil data 2d gambar
+
     var ctx = kanvas2.getContext('2d');
     var ctx2 = kanvas3.getContext('2d');
     var ctx3 = kanvas4.getContext('2d');
     var ctx_char = check_char.getContext('2d');
     var ctx_khusus = check_khusus.getContext('2d');
-    //ambil data pixel array gambar
+    
     var imgData = ctx.getImageData(0,0,64,64);
     var templateData = ctx2.getImageData(0,0,64,64);
     var canvas2 = ctx_char.getImageData(0,0,64,64);
     var canvas4 = ctx3.getImageData(0,0,64,64);
-    var khusus = ctx3.getImageData(0,0,64,64);
+    var khusus = ctx_khusus.getImageData(0,0,64,64);
 
     
     for (var i=0; i<canvas4.data.length; i+=4){
@@ -517,33 +520,43 @@
             if(canvas2.data[i]==0){
                 threshold_pixel2 = threshold_pixel2 + (1-Math.round((canvas2.data[i]/255)));
             }
-            if(char=="3"){
+            if(khusus.data[i]==0){
+                threshold_pixel_khusus = threshold_pixel_khusus + (1-Math.round((khusus.data[i]/255)));
+            }
+            if(input=="3"){
                 if(threshold_pixel2<=150){
                     status=1;
                 }else{
                     status=0;
                 }
-            }else if(char=="5"){
+            }else if(input=="5"){
                 if(threshold_pixel2<=150){
                     status=1;
                 }else{
                     status=0;
                 }
-            }else if(char=="7"){
+            }else if(input=="7"){
                 if(threshold_pixel2<=100){
                     status=1;
                 }else{
                     status=0;
                 }
-            }else if(char=="8"){
+            }else if(input=="8"){
                 if(threshold_pixel2<=180){
                     status=1;
                 }else{
                     status=0;
                 }
             }
-            else if(char=="9"){
+            else if(input=="9"){
                 if(threshold_pixel2<=180){
+                    status=1;
+                }else{
+                    status=0;
+                }
+            }
+            else if(input=="1"){
+                if(threshold_pixel_khusus<=180){
                     status=1;
                 }else{
                     status=0;
@@ -558,7 +571,7 @@
         }
         //looping array pixel gambar
         for(var i = 0; i<imgData.data.length; i+=4){
-            //pemberian threshold
+            //pemberian threshold_error
             if(templateData.data[i]==0){
                 batasAtas =  batasAtas + (1-Math.round((templateData.data[i]/255)));
                 threshold_error = Math.round(batasAtas*x);
@@ -570,16 +583,17 @@
             }
                 
         }
-   
-        //console.log(char);
+           
+        //console.log(input);
         //console.log(status);
-        // console.log(status_khusus);
+        //console.log(status_khusus);
         //console.log(threshold_pixel_khusus);
         //console.log(threshold_pixel2);
         //console.log(threshold_pixel);
         //console.log(batasAtas);
         console.log(threshold_error);
         console.log(nilai);
+
     //if(nilai>=(batasAtas*80/100)){
     if(status!=1){
         if(nilai>=threshold_error){
@@ -597,27 +611,27 @@
             // alert("Salah");
             $("#pop_salah").fadeIn();
             $("#pop_salah").fadeOut('slow');
-            //hapus();
+            hapus();
         }
         status=0;
+        status_khusus=0;
     }else{
         sound_salah();
         liveleft--;
         // alert("Salah");
         $("#pop_salah").fadeIn();
-        $("#pop_salah").fadeOut('slow');
+        $("#pop_salah").fadeOut('slow');       
     }
     if(soal==10){
         $('#myModal_skor').modal({backdrop: 'static', keyboard: false})  
         $("#myModal_skor").modal('show');
     }
-        input = huruf[Math.floor(Math.random() * 26)];
+        input = huruf[Math.floor(Math.random() * 10)];
         document.getElementById("srcImage2").src = "../../template/angka/"+input+".jpg";
         draw_template();
         document.getElementById("srcImage3").src = "../../template/contoh_angka/"+input+".jpg";
         draw_contoh();
         switch_threshold();
-        
 	}
 
     function switch_threshold (){
@@ -652,6 +666,7 @@
             case "7" :
                 x = 18/100;
                 break;
+            break;
             default :
                 x = 30/100;
             break;
@@ -706,17 +721,28 @@
 
             display.textContent = minutes + ":" + seconds;
 
-            if(timer!=0){
+            if(timer!=0 ){
         	    --timer;
-            }else{
+            }else {
                 clearTimeout(timer);
                 $('#myModal_waktu').modal({backdrop: 'static', keyboard: false})  
                 $("#myModal_waktu").modal('show');
+            
             }
+       
         }, 1000);
     }
 
+    window.onload = function () {
+        var fiveMinutes = 60 * 5,
+            display = document.querySelector('#time');
+        startTimer(fiveMinutes, display);
+    };
 
+    function stop_timer(waktu) {
+        var waktu_ = waktu;
+        clearTimeout(waktu_);
+    }
 
 
     //score 
